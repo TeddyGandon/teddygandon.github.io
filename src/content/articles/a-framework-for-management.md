@@ -1,32 +1,48 @@
 ---
 title: A framework for management
 date: 2026-05-20
-excerpt: Six things — leadership, people management, coaching, conflict resolution, hiring, and agile — that turned out to be one framework, not six separate skills.
+excerpt: Managers must evolve from reactive problem-solvers into system architects, designing clear frameworks for scope, workflows, methods, metrics, and tools that reduce friction, reclaim time, and enable teams to scale sustainably.
 tags: [management, framework, leadership]
 ---
 
-For a long time I thought of these as separate skills, each with its own book and its own advice. It took a while to notice they only work as a set. Drop one and the others start to strain.
+Managers must evolve from reactive problem-solvers into system architects, designing clear frameworks for scope, workflows, methods, metrics, and tools that reduce friction, reclaim time, and enable teams to scale sustainably.
 
-## Leadership and people management aren't the same thing
+**Here's why.**
 
-Leadership is direction — the "why" and "where" that lets a team make good calls without you in the room. People management is the daily mechanics of getting there: the 1:1s, the feedback, the small course-corrections. A team with direction but no management drifts into good intentions and missed dates. A team with management but no direction executes precisely on the wrong thing. Neither substitutes for the other, and most of the friction I've seen in teams traces back to treating them as interchangeable.
+## From ad-hoc management to framework-first leadership
 
-## Coaching is the leverage move
+In engineering, frameworks are the backbone of everything we build. No one would attempt to design a scalable application without a clear architecture, defined interfaces, and robust testing. Yet when it comes to management, many leaders still rely on intuition, sporadic check-ins, and endless meetings. This mismatch has always struck me as odd. Why do we treat code with rigor but leadership with improvisation?
 
-Fixing a problem for someone is fast and feels productive. It's also a debt — the same problem comes back, still unsolved in the person who'll face it again next month. Coaching is slower and looks less impressive in the moment: a question instead of an answer, a nudge toward the next diagnostic step instead of the fix. The payoff shows up later, as a team that needs you less over time instead of more.
+Over the last four years at Believe, and through collaborations with outsourced teams, I've worked to close this gap. I've developed and refined a management framework that treats leadership with the same precision as engineering. The result has been transformative: effective meetings, less friction, and a healthier pace for teams. In this article, I'll share the principles behind this framework, the evidence supporting it, and why I believe managers must evolve from "bottleneck solvers" into "system architects."
 
-## Conflict resolution is a timing problem more than a technique problem
+## Defining scope: eliminating ambiguity
 
-Most disagreements I've mediated weren't unsolvable — they were unaddressed for too long. By the time a conflict is visible enough to require "resolution," it has usually calcified: positions have hardened, and people are defending a stance rather than solving a problem. The actual skill is closer to noticing the friction early, in the boring stand-up disagreement or the terse Slack thread, before it needs a name.
+One of the most common sources of tension in teams is unclear scope. Who owns what? Where does one person's responsibility end and another's begin? Research on role clarity shows that ambiguity is directly linked to lower job satisfaction and higher turnover (1). By explicitly defining scope, managers reduce overlap and prevent the subtle but corrosive friction of "stepping on toes." In what I crafted, scope definitions are documented, visible, and revisited regularly. This simple discipline has eliminated countless misunderstandings.
 
-## Hiring is where the framework starts, not where it ends
+## Workflows: standardizing the path from idea to production
 
-A framework for managing a team doesn't matter much if the team was built without one. I look for the same things every time: can this person reason clearly under uncertainty, and will they raise a hard truth instead of sitting on it. Everything downstream — coaching, conflict resolution, even leadership — is easier with people who already do those things for themselves.
+In software, workflows are codified through CI/CD pipelines, version control, and deployment strategies. In management, workflows often remain informal. A study by McKinsey found that standardized workflows increase productivity by up to 30% in cross-functional teams (2). By designing clear workflows for how ideas move from conception to delivery, I've ensured that teams spend less time negotiating process and more time executing. This has been particularly valuable in multicultural environments, where assumptions about "how things get done" can vary widely.
 
-## Agile/Scrum is the rhythm, not the religion
+## Methods: defining the "how" behind execution
 
-Ceremonies aren't the point. What matters is the underlying habit they're supposed to encode: plan in short, checkable increments, and inspect honestly at the end of each one. I've run this loosely and I've run it by the book, depending on the team — the ceremony flexes, the habit of checking reality against the plan doesn't.
+Methods are the practices that guide execution. Agile, Scrum, Kanban, these are frameworks in themselves, but they often need tailoring to the specific culture and constraints of a team. Yet, agile adoption by teams succeed when methods are adapted rather than blindly applied (3). We made the choice to have clear methods, documented, and adjusted based on retrospectives. This ensures consistency without rigidity.
 
-## Why it's one framework
+We also adopted Lewin's change management model (a very simple, but yet robust model with 3 steps: Unfreeze, Change, and Refreeze). Just like software crafting, we crafted our management framework by iterating and asserting.
 
-Take any of these away and the others compensate badly. Leadership without hiring discipline means directing people who can't execute independently. Coaching without conflict resolution means growing individuals inside a team that's quietly fraying. Agile without people management is a ritual with no one actually managing the humans running it. None of these six are exotic on their own — the framework is just refusing to let any one of them cover for a gap in the others.
+## Management tools: keeping the engine running
+
+Just as engineers rely on IDEs, debuggers, and monitoring systems, managers need tools to keep their frameworks operational. Atlassian's Jira, Confluence, and monitoring dashboards have been invaluable in my practice. But tools are only effective when embedded in a coherent system. A fragmented toolset creates noise; an integrated one creates clarity: adoption without integration leads to wasted effort (4). My framework ensures that tools serve the system, not the other way around.
+
+## The outcomes: time, friction, pace, and equity
+
+The shift from ad-hoc management to framework-first leadership has produced measurable outcomes. I've reclaimed two-thirds of the time previously lost to meetings. Teams operate with zero friction, as scope overlaps have disappeared. Workflows prevent overload, protecting against burnout. And metrics applied consistently across squads have created equity at scale. These outcomes are not anecdotal, they are supported by research linking structured management to higher engagement and lower attrition (5).
+
+The role of a manager is evolving. In the past, managers were expected to solve problems as they arose, acting as bottleneck solvers. Today, scaling organizations require managers to be system architects, designing frameworks that prevent problems before they occur. Just as engineers build resilient systems, managers must build resilient teams. The precision we apply to code must be mirrored in leadership. Only then can organizations scale sustainably, equitably, and without burning out their people.
+
+## Sources
+
+- (1) [Kahn et al., 1964, Role Theory](https://psycnet.apa.org/record/1965-08866-000)
+- (2) [McKinsey, 2020](https://www.mckinsey.de/~/media/McKinsey/Business%20Functions/Operations/Our%20Insights/From%20lean%20to%20lasting%20Making%20operational%20improvements%20stick/From%20lean%20to%20lasting%20Making%20operational%20improvements%20stick.pdf)
+- (3) [VersionOne State of Agile Report, 2022](https://digital.ai/press-releases/2022-state-of-agile-report-organizations-embrace-agile-innovation-in-lobs-amid-uncertain-business-climate-but-shortfall-in-leadership-can-limit-its-success/)
+- (4) [Harvard Business Review, 2021](https://hbr.org/2020/08/why-do-your-employees-resist-new-tech)
+- (5) [Gallup, 2022, State of the Workplace](https://www.gallup.com/workplace/349484/state-of-the-global-workplace-2022.aspx)
