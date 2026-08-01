@@ -27,7 +27,7 @@ const latestArticle = computed(() => getArticles()[0]);
           <h1 class="title hero-title is-1 mt-2" v-reveal>Teddy Gandon</h1>
           <p class="hero-lede mt-4" v-reveal>
             Twenty years of engineering, specialized in multicultural management. I build teams that
-            ship calmly and deliberately — across languages, time zones, and working styles.
+            ship calmly and deliberately across languages, time zones, and working styles.
           </p>
 
           <div class="mt-5 hero-actions" v-reveal>
