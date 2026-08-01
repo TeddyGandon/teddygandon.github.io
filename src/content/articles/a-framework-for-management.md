@@ -1,6 +1,6 @@
 ---
 title: A framework for management
-date: 2026-07-20
+date: 2026-05-20
 excerpt: Six things — leadership, people management, coaching, conflict resolution, hiring, and agile — that turned out to be one framework, not six separate skills.
 tags: [management, framework, leadership]
 ---
