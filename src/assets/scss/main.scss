@@ -627,6 +627,27 @@ a {
   border-radius: 8px;
 }
 
+.prose table {
+	display: table;
+  border-spacing: 2px;
+  border-collapse: separate;
+  box-sizing: border-box;
+  text-indent: 0;
+  text-align: left;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.prose tr {
+	border-bottom: 1px solid vars.$teal-soft;
+}
+
+.prose th,
+.prose td {
+	border: 1px solid vars.$teal-soft;
+  padding: .5rem;
+}
+
 // ---------------------------------------------------------------------------
 // Scroll reveal
 // ---------------------------------------------------------------------------
