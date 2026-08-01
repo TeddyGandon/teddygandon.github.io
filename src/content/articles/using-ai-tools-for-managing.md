@@ -5,7 +5,7 @@ excerpt: AI is genuinely useful for management work, but only once you stop feed
 tags: [ai, management, tools]
 ---
 
-Every manager I know is now using some form of AI, and almost every one of them is disappointed with it in the same way: the output sounds plausible, reads well, and is subtly wrong about the thing that actually mattered in the room. Surpringly enough, it's not a model problem but usually **an input problem**. The teams I've seen get real leverage from AI treat it the way we treat any system with weak defaults: they control what goes in, and they scope what it's allowed to do. Two disciplines, both familiar from engineering, both usually skipped when the same person puts on their "manager" hat.
+Every manager I know is now using some form of AI, and almost every one of them is disappointed with it in the same way: the output sounds plausible, reads well, and is subtly wrong about the thing that actually mattered in the room. Surprisingly enough, it's not a model problem but usually **an input problem**. The teams I've seen get real leverage from AI treat it the way we treat any system with weak defaults: they control what goes in, and they scope what it's allowed to do. Two disciplines, both familiar from engineering, both usually skipped when the same person puts on their "manager" hat.
 
 ## Feeding it the right artifacts
 
