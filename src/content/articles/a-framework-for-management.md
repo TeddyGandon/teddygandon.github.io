@@ -41,7 +41,7 @@ The role of a manager is evolving. In the past, managers were expected to solve 
 
 ## What it looks like
 
-*I am not able to share completly the framework due to obvious NDA-related reasons. But what I can share with you are the main parts of it!*
+If you want to craft a framework, here's what to consider:
 
 | Part                | Description                                                                                               |
 | ------------------- | --------------------------------------------------------------------------------------------------------- |
