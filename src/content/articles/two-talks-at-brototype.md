@@ -18,3 +18,6 @@ As I spoke to the engineers in Kochi, I felt a deep sense of continuity. The spa
 Leaving Brototype, I carried with me a renewed conviction. The future of engineering will be built by those who embrace problems, who welcome feedback, and who never stop learning. My role, and the role of every experienced engineer, is to nurture that spirit. For those who come after, the path is clear: keep solving, keep listening, and keep growing. The spark lives on when we pass it forward.
 
 For those who come after ✨
+
+| ![image](/brototype-talks-3.jpg) | ![image](/brototype-talks-4.jpg) |
+| ------------------- | --------------------------------------------------------------------------------------------------------- |
