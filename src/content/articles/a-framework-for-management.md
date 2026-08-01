@@ -39,7 +39,7 @@ The shift from ad-hoc management to framework-first leadership has produced meas
 
 The role of a manager is evolving. In the past, managers were expected to solve problems as they arose, acting as bottleneck solvers. Today, scaling organizations require managers to be system architects, designing frameworks that prevent problems before they occur. Just as engineers build resilient systems, managers must build resilient teams. The precision we apply to code must be mirrored in leadership. Only then can organizations scale sustainably, equitably, and without burning out their people.
 
-## What i looks like
+## What it looks like
 
 *I am not able to share completly the framework due to obvious NDA-related reasons. But what I can share with you are the main parts of it!*
 
