@@ -13,6 +13,8 @@ function slugFromPath(path) {
   return path.split('/').pop().replace(/\.md$/, '');
 }
 
+const today = new Date().toISOString().slice(0, 10);
+
 const articles = Object.entries(modules)
   .map(([path, raw]) => {
     const { data, content } = parseFrontmatter(raw);
@@ -28,8 +30,13 @@ const articles = Object.entries(modules)
   })
   .sort((a, b) => (a.date < b.date ? 1 : -1));
 
+// Scheduled posts (date in the future, relative to the visitor's clock)
+// are excluded from both the list and direct slug lookup until then.
+const scheduledArticles = articles
+  .filter((article) => article.date <= today)
+
 export function getArticles() {
-  return articles;
+  return scheduledArticles;
 }
 
 export function getArticleBySlug(slug) {
