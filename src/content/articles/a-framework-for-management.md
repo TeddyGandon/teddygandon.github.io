@@ -1,6 +1,6 @@
 ---
 title: A framework for management
-date: 2026-05-20
+date: 2026-08-01
 excerpt: Managers must evolve from reactive problem-solvers into system architects, designing clear frameworks for scope, workflows, methods, metrics, and tools that reduce friction, reclaim time, and enable teams to scale sustainably.
 tags: [management, framework, leadership]
 ---
