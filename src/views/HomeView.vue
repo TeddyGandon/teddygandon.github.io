@@ -1,0 +1,104 @@
+<script setup>
+import { computed } from 'vue';
+import { RouterLink } from 'vue-router';
+import { softSkills } from '../data/experience';
+import { getArticles } from '../utils/articles';
+import { formatDate } from '../utils/format';
+
+const stats = [
+  { value: '20+', label: 'Years of engineering' },
+  { value: '5', label: 'Roles, one throughline' },
+  { value: '4', label: 'Companies' },
+];
+
+const latestArticle = computed(() => getArticles()[0]);
+</script>
+
+<template>
+<div>
+  <section class="hero-wrap section pt-6">
+    <span class="hero-glow hero-glow--gold" aria-hidden="true"></span>
+    <span class="hero-glow hero-glow--teal" aria-hidden="true"></span>
+
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="hero-eyebrow" v-reveal>Engineering Manager</p>
+          <h1 class="title hero-title is-1 mt-2" v-reveal>Teddy Gandon</h1>
+          <p class="hero-lede mt-4" v-reveal>
+            Twenty years of engineering, specialized in multicultural management. I build teams that
+            ship calmly and deliberately — across languages, time zones, and working styles.
+          </p>
+
+          <div class="mt-5 hero-actions" v-reveal>
+            <RouterLink to="/experience" class="button is-primary is-outlined mr-3">
+              View experience
+            </RouterLink>
+            <RouterLink to="/articles" class="button is-ghost has-text-grey-light"> Read articles </RouterLink>
+          </div>
+        </div>
+
+        <div class="hero-medallion-wrap" v-reveal>
+          <div class="hero-medallion" aria-hidden="true"><span>TG</span></div>
+          <p class="hero-medallion__caption">
+            Believe France<br />
+            Engineering Manager
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section stat-section py-6">
+    <div class="container">
+      <div class="stat-grid">
+        <div v-for="stat in stats" :key="stat.label" class="stat-item" v-reveal>
+          <p class="stat-item__value">{{ stat.value }}</p>
+          <p class="stat-item__label">{{ stat.label }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container-narrow">
+      <p class="section-heading" v-reveal>What I bring</p>
+      <div v-reveal>
+        <span v-for="skill in softSkills" :key="skill" class="skill-pill">{{ skill }}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container-narrow">
+      <div class="callout-card" v-reveal>
+        <p class="section-heading">Currently</p>
+        <p class="hero-lede">
+          Engineering Manager at <strong class="has-text-white">Believe France</strong>, since 2022 —
+          after five years at Jellyfish France (formerly Tradelab), and a startup CTO chapter before
+          that.
+        </p>
+        <RouterLink to="/experience" class="button is-text has-text-grey-light mt-3">
+          See the full path →
+        </RouterLink>
+      </div>
+    </div>
+  </section>
+
+  <section v-if="latestArticle" class="section">
+    <div class="container container-narrow">
+      <p class="section-heading" v-reveal>Latest writing</p>
+      <RouterLink
+        :to="{ name: 'article', params: { slug: latestArticle.slug } }"
+        class="featured-article"
+        v-reveal
+      >
+        <p class="article-card__date">{{ formatDate(latestArticle.date) }}</p>
+        <h3 class="featured-article__title">{{ latestArticle.title }}</h3>
+        <p class="article-card__excerpt">{{ latestArticle.excerpt }}</p>
+        <span class="featured-article__cta">Read the article →</span>
+      </RouterLink>
+    </div>
+  </section>
+</div>
+</template>

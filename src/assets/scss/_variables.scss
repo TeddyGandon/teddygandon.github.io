@@ -1,0 +1,33 @@
+// Calm, quiet, editorial dark theme — the site's raw palette and motion tokens.
+// Bulma 1.x builds its "dark" scheme from a single warm hue/saturation pair plus an
+// accent color; the exact ink/paper hex values below are layered on top in main.scss
+// for the custom components (timeline, skill meters, article cards, nav, footer)
+// that sit outside Bulma's own elements.
+
+// Palette ---------------------------------------------------------------
+$ink: #121216; // page background, near-black rather than pure black
+$ink-raised: #1a1a21; // cards, panels — one step up from the page
+$ink-line: #2a2a30; // hairline borders/dividers
+$paper: #e9e2d3; // primary text — warm off-white, easy on dark
+$paper-muted: #9a9686; // secondary text, captions, meta
+$gold: #cdbd98; // quiet accent — muted brass, never a bright highlight
+$gold-soft: rgba(205, 189, 152, 0.12);
+$gold-glow: rgba(205, 189, 152, 0.22);
+$teal: #7fa39a; // second accent — muted sage teal, used sparingly for depth on the homepage
+$teal-soft: rgba(127, 163, 154, 0.14);
+$teal-glow: rgba(127, 163, 154, 0.22);
+
+// Bulma engine inputs (fed into `@use "bulma/sass" with (...)`) ----------
+$bulma-scheme-h: 36deg; // warm neutral hue so Bulma's own dark ramp reads sepia, not blue-grey
+$bulma-scheme-s: 8%; // low saturation — calm, not colorful
+$bulma-accent: $gold;
+$bulma-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+$radius-small: 4px;
+$radius: 8px;
+$radius-medium: 12px;
+$radius-large: 20px;
+
+// Motion ------------------------------------------------------------------
+$speed-slow: 320ms;
+$speed-slower: 560ms;
+$easing-calm: cubic-bezier(0.22, 1, 0.36, 1); // gentle deceleration, no bounce
