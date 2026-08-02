@@ -62,8 +62,8 @@ const latestArticle = computed(() => getArticles()[0]);
 
   <section class="section">
     <div class="container container-narrow">
-      <p class="section-heading" v-reveal>What I bring</p>
-      <div v-reveal>
+      <p class="section-heading has-text-centered" v-reveal>What I bring</p>
+      <div class="has-text-centered" v-reveal>
         <span v-for="skill in softSkills" :key="skill" class="skill-pill">{{ skill }}</span>
       </div>
     </div>
