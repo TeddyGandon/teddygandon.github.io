@@ -12,7 +12,7 @@ const stats = [
   { value: '4', label: 'Companies' },
 ];
 
-const latestArticle = computed(() => getArticles()[0]);
+const latestArticles = computed(() => getArticles().slice(0, 3));
 const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
 </script>
 
@@ -87,18 +87,25 @@ const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
     </div>
   </section>
 
-  <section v-if="latestArticle" class="section">
+  <section v-if="latestArticles.length" class="section">
     <div class="container container-narrow">
       <p class="section-heading" v-reveal>Latest writing</p>
-      <RouterLink
-        :to="{ name: 'article', params: { slug: latestArticle.slug } }"
-        class="featured-article"
-        v-reveal
-      >
-        <p class="article-card__date">{{ formatDate(latestArticle.date) }}</p>
-        <h3 class="featured-article__title">{{ latestArticle.title }}</h3>
-        <p class="article-card__excerpt">{{ latestArticle.excerpt }}</p>
-        <span class="featured-article__cta">Read the article →</span>
+      <div class="card-grid">
+        <RouterLink
+          v-for="article in latestArticles"
+          :key="article.slug"
+          :to="{ name: 'article', params: { slug: article.slug } }"
+          class="featured-article"
+          v-reveal
+        >
+          <p class="article-card__date">{{ formatDate(article.date) }}</p>
+          <h3 class="featured-article__title">{{ article.title }}</h3>
+          <p class="article-card__excerpt">{{ article.excerpt }}</p>
+          <span class="featured-article__cta">Read the article →</span>
+        </RouterLink>
+      </div>
+      <RouterLink to="/articles" class="button is-text has-text-grey-light mt-3">
+        See all articles →
       </RouterLink>
     </div>
   </section>
@@ -106,7 +113,7 @@ const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
   <section v-if="recentLinkedInPosts.length" class="section">
     <div class="container container-narrow">
       <p class="section-heading" v-reveal>Latest on LinkedIn</p>
-      <div class="linkedin-grid">
+      <div class="card-grid">
         <a
           v-for="post in recentLinkedInPosts"
           :key="post.url"
