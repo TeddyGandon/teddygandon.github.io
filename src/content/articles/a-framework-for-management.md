@@ -19,13 +19,13 @@ Over the last four years at Believe, and through collaborations with outsourced 
 
 One of the most common sources of tension in teams is unclear scope. Who owns what? Where does one person's responsibility end and another's begin? Research on role clarity shows that ambiguity is directly linked to lower job satisfaction and higher turnover (1). By explicitly defining scope, managers reduce overlap and prevent the subtle but corrosive friction of "stepping on toes." In what I crafted, scope definitions are documented, visible, and revisited regularly. This simple discipline has eliminated countless misunderstandings.
 
-## Workflows: standardizing the path from idea to production
+## Workflows & methods: standardizing the path from idea to production
 
-In software, workflows are codified through CI/CD pipelines, version control, and deployment strategies. In management, workflows often remain informal. A study by McKinsey found that standardized workflows increase productivity by up to 30% in cross-functional teams (2). By designing clear workflows for how ideas move from conception to delivery, I've ensured that teams spend less time negotiating process and more time executing. This has been particularly valuable in multicultural environments, where assumptions about "how things get done" can vary widely.
-
-## Methods: defining the "how" behind execution
+In software, workflows are codified through CI/CD pipelines, version control, and deployment strategies. In management, workflows often remain informal. Standardized workflows increase productivity in cross-functional teams (2). By designing clear workflows for how ideas move from conception to delivery, I've ensured that teams spend less time negotiating process and more time executing. This has been particularly valuable in multicultural environments, where assumptions about "how things get done" can vary widely.
 
 Methods are the practices that guide execution. Agile, Scrum, Kanban, these are frameworks in themselves, but they often need tailoring to the specific culture and constraints of a team. Yet, agile adoption by teams succeed when methods are adapted rather than blindly applied (3). We made the choice to have clear methods, documented, and adjusted based on retrospectives. This ensures consistency without rigidity.
+
+But yet, methods and workflows are not perfect. They will never be. That's why we trained ourselves to embrace change.
 
 ## Introduce a change habit
 
