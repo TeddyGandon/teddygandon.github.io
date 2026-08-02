@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { softSkills } from '../data/experience';
+import { linkedinPosts } from '../data/linkedin';
 import { getArticles } from '../utils/articles';
 import { formatDate } from '../utils/format';
 
@@ -12,6 +13,7 @@ const stats = [
 ];
 
 const latestArticle = computed(() => getArticles()[0]);
+const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
 </script>
 
 <template>
@@ -98,6 +100,44 @@ const latestArticle = computed(() => getArticles()[0]);
         <p class="article-card__excerpt">{{ latestArticle.excerpt }}</p>
         <span class="featured-article__cta">Read the article →</span>
       </RouterLink>
+    </div>
+  </section>
+
+  <section v-if="recentLinkedInPosts.length" class="section">
+    <div class="container container-narrow">
+      <p class="section-heading" v-reveal>Latest on LinkedIn</p>
+      <div class="linkedin-grid">
+        <a
+          v-for="post in recentLinkedInPosts"
+          :key="post.url"
+          :href="post.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="featured-article linkedin-card"
+          v-reveal
+        >
+          <img
+            v-if="post.image"
+            :src="post.image"
+            alt="Photo from the LinkedIn post"
+            loading="lazy"
+            class="linkedin-card__image"
+          />
+          <div class="linkedin-card__body">
+            <p class="article-card__date">{{ formatDate(post.date) }}</p>
+            <p class="article-card__excerpt">{{ post.text }}</p>
+            <span class="featured-article__cta">View on LinkedIn →</span>
+          </div>
+        </a>
+      </div>
+      <a
+        href="https://www.linkedin.com/in/teddygandon/recent-activity/all/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="button is-text has-text-grey-light mt-3"
+      >
+        See all posts on LinkedIn →
+      </a>
     </div>
   </section>
 </div>

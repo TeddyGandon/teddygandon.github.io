@@ -525,6 +525,45 @@ a {
   margin-top: 1rem;
 }
 
+.linkedin-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (min-width: 769px) {
+  .linkedin-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
+.linkedin-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.linkedin-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  max-height: 140px;
+  object-fit: cover;
+  background: vars.$ink;
+}
+
+.linkedin-card__body {
+  padding: 1.5rem 1.75rem 1.75rem;
+}
+
+.linkedin-card .article-card__excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 // ---------------------------------------------------------------------------
 // Article cards & prose
 // ---------------------------------------------------------------------------
