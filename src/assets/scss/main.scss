@@ -576,7 +576,7 @@ a {
 .prose h1,
 .prose h2,
 .prose h3 {
-  color: vars.$paper;
+  color: var(--bulma-text-strong);
   font-weight: 500;
   margin: 2rem 0 1rem;
 }
