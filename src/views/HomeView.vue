@@ -62,6 +62,7 @@ const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
     </div>
   </section>
 
+  <!--
   <section class="section">
     <div class="container container-narrow">
       <p class="section-heading has-text-centered" v-reveal>What I bring</p>
@@ -86,6 +87,7 @@ const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
       </div>
     </div>
   </section>
+  -->
 
   <section v-if="latestArticles.length" class="section">
     <div class="container container-narrow">
