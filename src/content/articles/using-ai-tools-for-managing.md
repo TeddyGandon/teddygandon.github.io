@@ -23,24 +23,6 @@ The second discipline is about scope, and it's the one I see teams get wrong mor
 
 What's worked for me instead is a set of narrow, single-task skills: one for surfacing patterns across a specific team's incident history, one for drafting a specific kind of async update, one for checking a delivery plan against a specific set of failure modes I've been burned by before. Each does one job well because it isn't also trying to do four others. The practical guidance on agent skills lands on roughly the same number: past two or three skills loaded onto one task, you get cognitive overhead and conflicting instructions instead of added capability, and skills built for one workflow actively mislead the model when applied to another (3). There is no skill that is a silver bullet across hiring, incident response, and roadmap planning at once and building one that tries is how you end up with an assistant that's mediocre at everything instead of sharp at anything.
 
-Here's one of my skill:
-
-```
-- Read and analyze the latest production meeting notes from the configured Confluence page.
-- Identify and summarize squad progress updates, capturing key milestones, blockers, and achievements.
-- Surface important topics that require executive attention, such as escalations, cross-team dependencies, or strategic decisions.
-- Flag warnings and risks, including delays, unresolved blockers, or patterns of concern across meetings.
-- Generate a structured executive report with the following sections:
-  - Section 1 - Squad Progress: Summary of each squad's progress, including milestones and blockers.
-  - Section 2 - Squad Velocity: Summary of each squad's velocity.
-  - Section 3 - Squad Velocity: Bugs and SLA breach.
-  - Section 4 - Important Topics: Key topics that need executive attention or follow-up.
-  - Section 5 - Warnings & Risks: Any risks, delays, or concerns that require immediate action.
-  - Section 6 - My actions: Actions that are assigned to me.
-- When asked for the latest report, always retrieve the most recent meeting notes before generating the report.
-- Present the report in a clear, executive-friendly format. If asked a detailed report, ignore the executive-friendly and present the report in a detailed format.
-```
-
 ## What this actually buys you...
 
 None of this makes AI a replacement for judgment and **it was never going to be**. What it buys is time back on the parts of the job that were always mechanical: turning notes into something shareable, drafting the first version of an update, spotting a pattern across a dozen tickets you'd otherwise have to reread by hand. The discipline is the same one we already apply to software: control your inputs, scope your tools narrowly, and don't trust a system with more responsibility than it's earned.
