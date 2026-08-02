@@ -50,13 +50,11 @@ None of this makes AI a replacement for judgment and **it was never going to be*
 As my responsabilities are growing and my scope is getting larger, I just needed something: time. Investing time in creating skills and refining them was in fact a time saver. But not only; the context switching is real when you are managing several squads and nothing is more energy-intensive than the context switching.
 
 Nowadays, I am using them for:
-- Surfacing the problems
+- Surfacing the problems by grouping sources
 - Comparing states to track down progresses
 - Identifying the successes of my teams (and **celebrating it!**)
-- Creating an executive short report to the reporting line with no effort
-- Reducing the lag between the source and my brain
-
-Yet, I need to tackle one big challenge: the lag. As my agents are eating reports, those reports are already 
+- Creating a short report to the reporting line with no effort
+- Reducing the lag between the sources and my brain
 
 ## Sources
 
