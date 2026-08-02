@@ -27,7 +27,23 @@ In software, workflows are codified through CI/CD pipelines, version control, an
 
 Methods are the practices that guide execution. Agile, Scrum, Kanban, these are frameworks in themselves, but they often need tailoring to the specific culture and constraints of a team. Yet, agile adoption by teams succeed when methods are adapted rather than blindly applied (3). We made the choice to have clear methods, documented, and adjusted based on retrospectives. This ensures consistency without rigidity.
 
-We also adopted Lewin's change management model (a very simple, but yet robust model with 3 steps: Unfreeze, Change, and Refreeze). Just like software crafting, we crafted our management framework by iterating and asserting.
+## Introduce a change habit
+
+Shifting a team from ad-hoc habits to a structured framework doesn’t happen simply because you published a new Confluence page. In software development, you would never migrate to a new architecture without a clear deployment strategy. In management, you cannot migrate to new behaviors without a change management strategy. This is why we adopted Kurt Lewin’s change management model. Though created decades ago, its three-step approach (Unfreeze, Change, Refreeze) serves as the perfect deployment pipeline for behavioral shifts.
+
+- Unfreeze: before implementing new methods, we must break down existing, informal habits. This involves openly acknowledging why the current ad-hoc approach is no longer scaling and securing the team's buy-in. Just like deprecating a legacy system, you have to prepare the environment before introducing the new architecture.
+- Change: this is the iteration phase. We don't force a rigid, finalized process from day one. Instead, we roll out the new methods, test them, and adjust them based on sprint retrospectives. It acts as a beta rollout, ensuring the framework adapts to the team's specific culture and constraints rather than fighting against them.
+- Refreeze: once the adapted methods prove effective, we solidify them. We update the documentation, embed the practices into our tooling, and establish them as the new baseline.
+
+Just like software crafting, we built our management framework by iterating and asserting. Lewin’s model ensures that the transition to framework-first leadership is deliberate, sustainable, and embraced by the team, rather than imposed blindly from the top down.
+
+## Measuring the system health
+
+In software, optimizing the wrong variable leads to inefficient systems; in management, it leads to burnout and misalignment. It is tempting to track meaningless KPIs (I am watching you, "number of commits" or "tickets closed") but these offer no real insight into a team's actual effectiveness. Take lead time, for example. Rather than merely tracking how long a task takes to move from "To Do" to "Done," a more holistic approach measures the lead time between specific intermediate states. By measuring these granular transitions, managers can pinpoint the hidden complexity at every step and identify exact bottlenecks before they derail a project.
+
+Similarly, velocity must be fundamentally reframed. In ad-hoc management, velocity is often weaponized as a pure productivity target. In a system architecture mindset, velocity is a health tracking metric, same as the memory consumption of your app. If a team’s velocity drops, a reactive manager treats the drop as the problem to be solved. A system architect understands that losing velocity is merely a symptom. The drop is a warning light on the dashboard pointing to an underlying issue, whether that is mounting technical debt, unclear scope, or operational friction.
+
+Finally, quantitative data must be paired with qualitative reality. This is why I integrate qualitative models like the Spotify Health Check. Crucially, these health checks measure perception, not performance. Why does this matter? Because perception always influences performance. How a team feels about their tooling, codebase health, or mission clarity dictates how effectively they will execute. Measuring raw performance without understanding the team’s perception of their environment is not just incomplete, it is actively counterproductive.
 
 ## Management tools: keeping the engine running
 
@@ -49,8 +65,8 @@ If you want to craft a framework, here's what to consider:
 | Roles & scopes      | Detailled view of roles and scopes in each of those roles                                                 |
 | Activities          | The rituals activities that brings us to excellence (seminars, etc.)                                      |
 | Meetings framwork   | An extensive list of all the meetings describing the pace, the time, duration, requirements and durations |
+| Metrics             | Reveal all the metrics you are collecting for full transparency, **and how you are using them**           |
 | Compliance strategy | Describes how and when the compliance is integrated to what the team is crafting                          |
-
 
 ## Sources
 
