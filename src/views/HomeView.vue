@@ -37,6 +37,7 @@ const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
               View experience
             </RouterLink>
             <RouterLink to="/articles" class="button is-ghost has-text-grey-light"> Read articles </RouterLink>
+            <RouterLink to="/contact" class="button is-ghost has-text-grey-light"> Get in touch </RouterLink>
           </div>
         </div>
 
@@ -147,16 +148,6 @@ const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
       >
         See all posts on LinkedIn →
       </a>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container container-narrow">
-      <div class="callout-card has-text-centered" v-reveal>
-        <p class="section-heading">Let's talk</p>
-        <p class="hero-lede">Open to new roles, talks, and conversations about multicultural engineering teams.</p>
-        <RouterLink to="/contact" class="button is-primary is-outlined mt-3"> Get in touch </RouterLink>
-      </div>
     </div>
   </section>
 </div>
