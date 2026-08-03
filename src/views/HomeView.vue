@@ -149,5 +149,15 @@ const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
       </a>
     </div>
   </section>
+
+  <section class="section">
+    <div class="container container-narrow">
+      <div class="callout-card has-text-centered" v-reveal>
+        <p class="section-heading">Let's talk</p>
+        <p class="hero-lede">Open to new roles, talks, and conversations about multicultural engineering teams.</p>
+        <RouterLink to="/contact" class="button is-primary is-outlined mt-3"> Get in touch </RouterLink>
+      </div>
+    </div>
+  </section>
 </div>
 </template>

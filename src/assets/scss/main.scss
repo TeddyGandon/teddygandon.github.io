@@ -79,9 +79,11 @@ a {
 // Navbar
 // ---------------------------------------------------------------------------
 .site-nav {
+  position: relative;
   padding: 1.75rem 1.5rem;
   border-bottom: 1px solid transparent;
   transition: border-color vars.$speed-slower vars.$easing-calm;
+  z-index: 10;
 }
 
 .site-nav__brand {
@@ -121,6 +123,77 @@ a {
 .site-nav__links a.is-active::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+.site-nav__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.site-nav__burger span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: vars.$paper-muted;
+  transition:
+    transform vars.$speed-slow vars.$easing-calm,
+    opacity vars.$speed-slow vars.$easing-calm;
+}
+
+.site-nav__burger.is-active span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.site-nav__burger.is-active span:nth-child(2) {
+  opacity: 0;
+}
+
+.site-nav__burger.is-active span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media screen and (max-width: 768px) {
+  .site-nav__burger {
+    display: flex;
+  }
+
+  .site-nav__links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 0 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    background: vars.$ink;
+    border-bottom: 1px solid transparent;
+    transition:
+      max-height vars.$speed-slower vars.$easing-calm,
+      border-color vars.$speed-slower vars.$easing-calm;
+  }
+
+  .site-nav__links.is-active {
+    max-height: 320px;
+    border-color: vars.$ink-line;
+  }
+
+  .site-nav__links a {
+    margin-left: 0;
+    padding: 0.75rem 0;
+    width: 100%;
+  }
 }
 
 // ---------------------------------------------------------------------------
