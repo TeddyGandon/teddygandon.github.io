@@ -19,6 +19,10 @@ const mailto = computed(() => `mailto:${email.value}`);
         Whether it's about a role, a talk, or just comparing notes on multicultural engineering teams —
         reach out. I read everything that lands here.
       </p>
+      <p class="hero-lede has-text-grey-light is-size-6 mt-2" v-reveal>
+        Always quietly open to a good conversation about Engineering Manager / Director-level roles
+        around distributed, multicultural teams — no rush, just say hello.
+      </p>
 
       <div class="mt-6 callout-card" v-reveal>
         <p class="section-heading">Email</p>
@@ -31,6 +35,8 @@ const mailto = computed(() => `mailto:${email.value}`);
         </a>
         <span aria-hidden="true">·</span>
         <a href="https://github.com/teddygandon" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span aria-hidden="true">·</span>
+        <a href="/teddy-gandon-cv.pdf" download>Download CV</a>
       </div>
     </div>
   </section>
