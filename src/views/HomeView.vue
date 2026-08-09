@@ -7,7 +7,7 @@ import { getArticles } from '../utils/articles';
 import { formatDate } from '../utils/format';
 
 const stats = [
-  { value: '20+', label: 'Years of engineering' },
+  { value: '20', label: 'Years of engineering' },
   { value: '5', label: 'Roles, one throughline' },
   { value: '4', label: 'Companies' },
 ];
