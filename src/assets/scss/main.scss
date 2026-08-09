@@ -602,6 +602,32 @@ a {
   margin-top: 1rem;
 }
 
+.info-card__name {
+  color: vars.$paper;
+  font-weight: 500;
+}
+
+.info-card__meta {
+  color: vars.$gold;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin: 0.15rem 0 0.75rem;
+}
+
+.info-card__desc {
+  color: vars.$paper-muted;
+  line-height: 1.7;
+}
+
+.info-card__note {
+  color: vars.$paper-muted;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid vars.$ink-line;
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
