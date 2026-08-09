@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { getArticleBySlug } from '../utils/articles';
 import { formatDate } from '../utils/format';
+import { flags } from '../data/flags';
 
 const props = defineProps({
   slug: { type: String, required: true },
@@ -21,7 +22,17 @@ const article = computed(() => getArticleBySlug(props.slug));
       <template v-if="article">
         <p class="article-card__date mt-5">{{ formatDate(article.date) }}</p>
         <h1 class="title hero-title is-3 mt-2">{{ article.title }}</h1>
-        <div v-if="article.tags.length" class="mb-5">
+        <div v-if="flags.displayArticlesTags && article.tags.length" class="mb-5">
+          <RouterLink
+            v-for="tag in article.tags"
+            :key="tag"
+            :to="{ name: 'articles', query: { tag } }"
+            class="tag is-dark mr-2"
+          >
+            {{ tag }}
+          </RouterLink>
+        </div>
+        <div v-if="!flags.displayArticlesTags && article.tags.length" class="mb-5">
           <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ tag }}</span>
         </div>
         <div class="prose mt-5" v-html="article.html" />

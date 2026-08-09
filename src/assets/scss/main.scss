@@ -770,6 +770,19 @@ a {
   margin-top: 0.75rem;
 }
 
+.article-tags-filter .tag,
+.article-card__tags .tag {
+  margin-bottom: 0.5rem;
+  transition:
+    color vars.$speed-slow vars.$easing-calm,
+    background-color vars.$speed-slow vars.$easing-calm;
+}
+
+.article-tags-filter .tag.is-active {
+  background-color: vars.$gold;
+  color: vars.$ink !important;
+}
+
 .prose {
   color: vars.$paper;
   line-height: 1.8;
