@@ -35,6 +35,10 @@ const articles = Object.entries(modules)
 const scheduledArticles = articles
   .filter((article) => article.date <= today)
 
+export function getAllArticles() {
+  return articles;
+}
+
 export function getArticles() {
   return scheduledArticles;
 }

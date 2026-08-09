@@ -3,8 +3,9 @@ import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { softSkills } from '../data/experience';
 import { linkedinPosts } from '../data/linkedin';
-import { getArticles } from '../utils/articles';
+import { getArticles, getAllArticles } from '../utils/articles';
 import { formatDate } from '../utils/format';
+import { flags } from '../data/flags';
 
 const stats = [
   { value: '20', label: 'Years of engineering' },
@@ -12,7 +13,9 @@ const stats = [
   { value: '4', label: 'Companies' },
 ];
 
-const latestArticles = computed(() => getArticles().slice(0, 3));
+const latestArticles = flags.displayAllArticles ?
+  computed(() => getAllArticles().slice(0, 3)) :
+  computed(() => getArticles().slice(0, 3));
 const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
 </script>
 
@@ -31,18 +34,17 @@ const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
             Twenty years of engineering, specialized in multicultural management. I build teams that
             ship calmly and deliberately across languages, time zones, and working styles.
           </p>
-          <!--
-          <p class="hero-lede is-size-6 mt-2" v-reveal>
+          <p class="hero-lede is-size-6 mt-2" v-if="flags.displayCertifications" v-reveal>
             <strong class="has-text-paper-muted">Certified PSM I &amp; Google Cloud Digital Leader.</strong>
           </p>
-          -->
 
           <div class="mt-5 hero-actions" v-reveal>
-            <RouterLink to="/experience" class="button is-primary is-outlined mr-3">
+            <RouterLink to="/experience" class="button is-primary is-outlined mr-3" v-if="!flags.displayCertifications">
               View experience
             </RouterLink>
-            <RouterLink to="/articles" class="button is-ghost has-text-grey-light"> Read articles </RouterLink>
-            <RouterLink to="/contact" class="button is-ghost has-text-grey-light"> Get in touch </RouterLink>
+            <RouterLink to="/experience" class="button is-primary is-outlined mr-3" v-if="flags.displayCertifications">
+              View experience & certifications
+            </RouterLink>
           </div>
         </div>
 

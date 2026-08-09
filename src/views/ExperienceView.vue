@@ -2,6 +2,7 @@
 import { experience, softSkills } from '../data/experience';
 import { hardSkills } from '../data/skills';
 import { certifications } from '../data/certifications';
+import { flags } from '../data/flags';
 </script>
 
 <template>
@@ -22,8 +23,7 @@ import { certifications } from '../data/certifications';
     </div>
   </section>
   
-  <!--
-  <section class="section">
+  <section class="section" v-if="flags.displayCertifications">
     <div class="container container-narrow">
       <p class="section-heading" v-reveal>Certifications & Frameworks</p>
       <div class="card-grid">
@@ -43,7 +43,6 @@ import { certifications } from '../data/certifications';
       </div>
     </div>
   </section>
-  -->
 
   <section class="section">
     <div class="container container-narrow">

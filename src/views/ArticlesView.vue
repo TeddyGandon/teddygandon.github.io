@@ -1,9 +1,12 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { getArticles } from '../utils/articles';
+import { getArticles, getAllArticles } from '../utils/articles';
 import { formatDate } from '../utils/format';
+import { flags } from '../data/flags';
 
-const articles = getArticles();
+const articles = flags.displayAllArticles ?
+  getAllArticles() :
+  getArticles();
 </script>
 
 <template>
