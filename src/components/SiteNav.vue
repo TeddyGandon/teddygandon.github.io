@@ -35,6 +35,7 @@ watch(
       <div id="site-nav-links" class="site-nav__links" :class="{ 'is-active': isMenuOpen }">
         <RouterLink to="/" exact-active-class="is-active">Home</RouterLink>
         <RouterLink to="/experience" active-class="is-active">Experience</RouterLink>
+        <RouterLink to="/projects" active-class="is-active">Side projects</RouterLink>
         <RouterLink to="/articles" active-class="is-active">Articles</RouterLink>
         <RouterLink to="/contact" active-class="is-active">Contact</RouterLink>
       </div>
