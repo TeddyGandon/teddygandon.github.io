@@ -1,0 +1,81 @@
+// Halloween theme — witching-hour purple-black, pumpkin orange, and a toxic
+// green glow. Same variable names as the other `_variables-*.scss` files
+// (main.scss consumes them as `vars.$x`), just re-valued for a spooky look.
+// Note: $bulma-family below references a display font that isn't bundled via
+// @fontsource in this project yet — it'll fall back to the serif stack until
+// that package is added, same as the rest of the palette swap.
+
+// Palette ---------------------------------------------------------------
+$ink: #0a0612; // page background, near-black with a deep purple undertone
+$ink-raised: #150d22; // cards, panels — one step up from the page
+$ink-line: #3a2150; // hairline borders/dividers, muted purple
+$paper: #f1e6d8; // primary text — warm bone-white
+$paper-muted: #8a7a9c; // secondary text, captions, meta — muted lavender-grey
+$gold: #ff7518; // primary accent, repurposed as pumpkin orange
+$gold-soft: rgba(255, 117, 24, 0.14);
+$gold-glow: rgba(255, 117, 24, 0.4);
+$teal: #7cfc6a; // second accent, repurposed as toxic/witch-glow green
+$teal-soft: rgba(124, 252, 106, 0.16);
+$teal-glow: rgba(124, 252, 106, 0.45);
+
+// Bulma engine inputs (fed into `@use "bulma/sass" with (...)`) ----------
+$bulma-scheme-h: 280deg; // deep witching-hour purple hue instead of warm sepia
+$bulma-scheme-s: 35%; // eerie but not neon
+$bulma-accent: $gold;
+$bulma-family: 'Creepster', Georgia, 'Times New Roman', serif;
+$radius-small: 3px;
+$radius: 6px;
+$radius-medium: 10px;
+$radius-large: 18px;
+// a little jagged — less rounded than the calm theme, not sharp like cyberpunk
+
+// Motion ------------------------------------------------------------------
+$speed-slow: 420ms; // slower, eerie creep instead of a calm, even pace
+$speed-slower: 700ms;
+$easing-calm: cubic-bezier(0.65, 0, 0.35, 1); // slow creep in, sudden settle
+
+// Ambient effect — thunder flashes ----------------------------------------
+// A fixed, full-viewport pale flash behind all real content (z-index -1, same
+// trick as the site's own body::before), gated entirely by
+// [data-palette='halloween'] so it only renders when this theme is active.
+// mix-blend-mode: screen brightens the scene like distant lightning rather
+// than covering it; a smooth (not stepped) fade keeps it a soft pulse rather
+// than a violent strobe. Uses html::before/::after (not body::before, which
+// main.scss already owns) so this stays self-contained to this file.
+@keyframes halloween-thunder {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+  }
+  92% {
+    opacity: 0.16;
+  }
+  93.5% {
+    opacity: 0.04;
+  }
+  95% {
+    opacity: 0.2;
+  }
+  97% {
+    opacity: 0;
+  }
+}
+
+html[data-palette='halloween']::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: #fff;
+  mix-blend-mode: screen;
+  animation: halloween-thunder 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-palette='halloween']::before {
+    animation: none;
+    opacity: 0;
+  }
+}

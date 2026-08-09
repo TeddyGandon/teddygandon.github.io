@@ -13,9 +13,9 @@ $paper: #e8fbff; // primary text — icy cyan-white, high contrast
 $paper-muted: #7f8fc9; // secondary text, captions, meta — cool steel-blue
 $gold: #ff2ec4; // primary accent, repurposed as hot neon magenta
 $gold-soft: rgba(255, 46, 196, 0.14);
-$gold-glow: rgba(199, 255, 46, 0.877);
+$gold-glow: #231381e8;;
 $teal: #05e2f0; // second accent, repurposed as electric cyan
-$teal-soft: #eff30ee8;
+$teal-soft: #231381e8;
 $teal-glow: rgba(5, 226, 240, 0.45);
 
 // Bulma engine inputs (fed into `@use "bulma/sass" with (...)`) ----------
@@ -33,3 +33,53 @@ $radius-large: 4px;
 $speed-slow: 160ms; // snappier and more reactive than the calm theme
 $speed-slower: 240ms;
 $easing-calm: cubic-bezier(0.83, 0, 0.17, 1); // aggressive snap, not gentle deceleration
+
+// Ambient effect — subtle neon-sign flicker ------------------------------
+// A fixed, full-viewport wash behind all real content (z-index -1, same trick
+// as the site's own body::before), gated entirely by [data-palette='cyberpunk']
+// so it only ever renders when this theme is actually active at runtime.
+// Uses html::before/::after (not body::before, which main.scss already owns)
+// so this stays self-contained to this file.
+@keyframes cyberpunk-flicker {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  8% {
+    opacity: 0.18;
+  }
+  9% {
+    opacity: 0.55;
+  }
+  32% {
+    opacity: 0.4;
+  }
+  33% {
+    opacity: 0.12;
+  }
+  34% {
+    opacity: 0.5;
+  }
+  70% {
+    opacity: 0.45;
+  }
+}
+
+html[data-palette='cyberpunk']::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 40% at 15% 0%, rgba($gold, 0.16), transparent 55%),
+    radial-gradient(ellipse 90% 40% at 85% 100%, rgba($teal, 0.14), transparent 55%);
+  animation: cyberpunk-flicker 5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-palette='cyberpunk']::before {
+    animation: none;
+    opacity: 0.5;
+  }
+}

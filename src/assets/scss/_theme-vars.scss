@@ -1,0 +1,109 @@
+// Runtime-switchable palette overrides, one block per theme name. Toggled by
+// setting <html data-palette="..."> (see src/utils/theme.js) — no rebuild needed.
+// A separate attribute from Bulma's own <html data-theme="dark"> on purpose:
+// Bulma 1.x uses [data-theme=light|dark] itself for its own light/dark scheme
+// vars, so reusing that name for our theme names would break Bulma's dark mode.
+//
+// The four blocks below are wrapped in a mixin rather than emitted directly:
+// :root and [data-palette=x] have equal CSS specificity, so whichever is last
+// in the compiled output wins the cascade, and these overrides need to win
+// over main.scss's `:root` default. Sass requires all `@use` at the top of a
+// file, so the `@use 'theme-vars'` in main.scss can't itself be moved after
+// `:root` — instead main.scss calls `@include theme-vars.palette-overrides;`
+// at the exact point it wants this CSS to land (after `:root`).
+@use 'variables-paper' as paper;
+@use 'variables-cyberpunk' as cyberpunk;
+@use 'variables-christmas' as christmas;
+@use 'variables-halloween' as halloween;
+
+@mixin palette-vars(
+  $ink,
+  $ink-raised,
+  $ink-line,
+  $paper,
+  $paper-muted,
+  $gold,
+  $gold-soft,
+  $gold-glow,
+  $teal,
+  $teal-soft,
+  $teal-glow
+) {
+  --ink: #{$ink};
+  --ink-raised: #{$ink-raised};
+  --ink-line: #{$ink-line};
+  --paper: #{$paper};
+  --paper-muted: #{$paper-muted};
+  --gold: #{$gold};
+  --gold-soft: #{$gold-soft};
+  --gold-glow: #{$gold-glow};
+  --teal: #{$teal};
+  --teal-soft: #{$teal-soft};
+  --teal-glow: #{$teal-glow};
+}
+
+@mixin palette-overrides {
+  [data-palette='paper'] {
+    @include palette-vars(
+      paper.$ink,
+      paper.$ink-raised,
+      paper.$ink-line,
+      paper.$paper,
+      paper.$paper-muted,
+      paper.$gold,
+      paper.$gold-soft,
+      paper.$gold-glow,
+      paper.$teal,
+      paper.$teal-soft,
+      paper.$teal-glow
+    );
+  }
+
+  [data-palette='cyberpunk'] {
+    @include palette-vars(
+      cyberpunk.$ink,
+      cyberpunk.$ink-raised,
+      cyberpunk.$ink-line,
+      cyberpunk.$paper,
+      cyberpunk.$paper-muted,
+      cyberpunk.$gold,
+      cyberpunk.$gold-soft,
+      cyberpunk.$gold-glow,
+      cyberpunk.$teal,
+      cyberpunk.$teal-soft,
+      cyberpunk.$teal-glow
+    );
+  }
+
+  [data-palette='christmas'] {
+    @include palette-vars(
+      christmas.$ink,
+      christmas.$ink-raised,
+      christmas.$ink-line,
+      christmas.$paper,
+      christmas.$paper-muted,
+      christmas.$gold,
+      christmas.$gold-soft,
+      christmas.$gold-glow,
+      christmas.$teal,
+      christmas.$teal-soft,
+      christmas.$teal-glow
+    );
+  }
+
+  [data-palette='halloween'] {
+    @include palette-vars(
+      halloween.$ink,
+      halloween.$ink-raised,
+      halloween.$ink-line,
+      halloween.$paper,
+      halloween.$paper-muted,
+      halloween.$gold,
+      halloween.$gold-soft,
+      halloween.$gold-glow,
+      halloween.$teal,
+      halloween.$teal-soft,
+      halloween.$teal-glow
+    );
+  }
+}
