@@ -28,16 +28,6 @@ const mailto = computed(() => `mailto:${email.value}`);
         <p class="section-heading">Email</p>
         <a :href="mailto" class="hero-lede has-text-white">{{ email }}</a>
       </div>
-
-      <div class="mt-5 site-footer__links has-text-left" v-reveal>
-        <a href="https://www.linkedin.com/in/teddygandon/" target="_blank" rel="noopener noreferrer">
-          LinkedIn
-        </a>
-        <span aria-hidden="true">·</span>
-        <a href="https://github.com/teddygandon" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <span aria-hidden="true">·</span>
-        <a href="/teddy-gandon-cv.pdf" download>Download CV</a>
-      </div>
     </div>
   </section>
 </div>
