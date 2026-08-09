@@ -1,0 +1,35 @@
+// Cyberpunk theme — neon-on-black, angular, reactive. Same variable names as
+// the other `_variables-*.scss` files (main.scss consumes them as `vars.$x`),
+// just re-valued for a night-city aesthetic instead of the calm editorial one.
+// Note: $bulma-family below references a display font that isn't bundled via
+// @fontsource in this project yet — it'll fall back to the sans-serif stack
+// until that package is added, same as the rest of the palette swap.
+
+// Palette ---------------------------------------------------------------
+$ink: #07060d; // page background, near-black with a cold violet undertone
+$ink-raised: #100b1f; // cards, panels — one step up from the page
+$ink-line: #3a2a5c; // hairline borders/dividers, dim violet
+$paper: #e8fbff; // primary text — icy cyan-white, high contrast
+$paper-muted: #7f8fc9; // secondary text, captions, meta — cool steel-blue
+$gold: #ff2ec4; // primary accent, repurposed as hot neon magenta
+$gold-soft: rgba(255, 46, 196, 0.14);
+$gold-glow: rgba(199, 255, 46, 0.877);
+$teal: #05e2f0; // second accent, repurposed as electric cyan
+$teal-soft: #eff30ee8;
+$teal-glow: rgba(5, 226, 240, 0.45);
+
+// Bulma engine inputs (fed into `@use "bulma/sass" with (...)`) ----------
+$bulma-scheme-h: 265deg; // cool violet/blue hue instead of warm sepia
+$bulma-scheme-s: 55%; // punchy and saturated, not calm
+$bulma-accent: $gold;
+$bulma-family: 'Orbitron', 'Rajdhani', 'Segoe UI', sans-serif;
+$radius-small: 0px;
+$radius: 2px;
+$radius-medium: 2px;
+$radius-large: 4px;
+// sharp, angular edges throughout — no soft rounded corners in this theme
+
+// Motion ------------------------------------------------------------------
+$speed-slow: 160ms; // snappier and more reactive than the calm theme
+$speed-slower: 240ms;
+$easing-calm: cubic-bezier(0.83, 0, 0.17, 1); // aggressive snap, not gentle deceleration
