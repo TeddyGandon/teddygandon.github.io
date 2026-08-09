@@ -226,6 +226,22 @@ a {
   font-size: 0.8rem;
 }
 
+.has-text-gold {
+  color: vars.$gold;
+}
+
+.has-text-paper {
+  color: vars.$paper;
+}
+
+.has-text-paper {
+  color: vars.$paper;
+}
+
+.has-text-paper-muted {
+  color: vars.$paper-muted;
+}
+
 .hero-title {
   font-weight: 500;
   line-height: 1.15;
@@ -600,6 +616,32 @@ a {
   color: vars.$gold;
   font-size: 0.9rem;
   margin-top: 1rem;
+}
+
+.cert-card__name {
+  color: vars.$paper;
+  font-weight: 500;
+}
+
+.cert-card__issuer {
+  color: vars.$gold;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin: 0.15rem 0 0.75rem;
+}
+
+.cert-card__desc {
+  color: vars.$paper-muted;
+  line-height: 1.7;
+}
+
+.cert-card__applied {
+  color: vars.$paper-muted;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid vars.$ink-line;
 }
 
 .card-grid {

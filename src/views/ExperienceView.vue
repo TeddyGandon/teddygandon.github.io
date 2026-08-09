@@ -1,6 +1,7 @@
 <script setup>
 import { experience, softSkills } from '../data/experience';
 import { hardSkills } from '../data/skills';
+import { certifications } from '../data/certifications';
 </script>
 
 <template>
@@ -17,6 +18,27 @@ import { hardSkills } from '../data/skills';
           <p class="timeline-item__org">{{ job.org }}</p>
           <p class="timeline-item__desc">{{ job.description }}</p>
         </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="container container-narrow">
+      <p class="section-heading" v-reveal>Certifications & Frameworks</p>
+      <div class="card-grid">
+        <component
+          :is="cert.url ? 'a' : 'div'"
+          v-for="cert in certifications"
+          :key="cert.name"
+          v-bind="cert.url ? { href: cert.url, target: '_blank', rel: 'noopener noreferrer' } : {}"
+          class="featured-article cert-card"
+          v-reveal
+        >
+          <p class="cert-card__name">{{ cert.name }}</p>
+          <p class="cert-card__issuer">{{ cert.issuer }}</p>
+          <p class="cert-card__desc">{{ cert.description }}</p>
+          <p class="cert-card__applied">{{ cert.appliedNote }}</p>
+        </component>
       </div>
     </div>
   </section>

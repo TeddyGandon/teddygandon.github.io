@@ -31,6 +31,9 @@ const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
             Twenty years of engineering, specialized in multicultural management. I build teams that
             ship calmly and deliberately across languages, time zones, and working styles.
           </p>
+          <p class="hero-lede is-size-6 mt-2" v-reveal>
+            <strong class="has-text-paper-muted">Certified PSM I &amp; Google Cloud Digital Leader.</strong>
+          </p>
 
           <div class="mt-5 hero-actions" v-reveal>
             <RouterLink to="/experience" class="button is-primary is-outlined mr-3">
