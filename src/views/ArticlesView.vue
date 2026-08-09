@@ -1,9 +1,10 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, watchEffect } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { getArticles, getAllArticles } from '../utils/articles';
 import { formatDate } from '../utils/format';
 import { flags } from '../data/flags';
+import { setPageMeta } from '../utils/seo';
 
 const route = useRoute();
 const articles = flags.displayAllArticles ? getAllArticles() : getArticles();
@@ -12,6 +13,22 @@ const activeTag = computed(() => route.query.tag ?? null);
 const filteredArticles = computed(() =>
   activeTag.value ? articles.filter((article) => article.tags.includes(activeTag.value)) : articles,
 );
+
+watchEffect(() => {
+  setPageMeta(
+    activeTag.value
+      ? {
+          title: `Articles tagged "${activeTag.value}"`,
+          description: `Articles tagged "${activeTag.value}" — writing by Teddy Gandon, Engineering Manager.`,
+          path: '/articles',
+        }
+      : {
+          title: 'Articles',
+          description: 'Writing on multicultural management, engineering leadership, and frameworks.',
+          path: '/articles',
+        },
+  );
+});
 </script>
 
 <template>

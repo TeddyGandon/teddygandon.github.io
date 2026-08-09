@@ -1,15 +1,24 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, watchEffect } from 'vue';
 import { RouterLink } from 'vue-router';
 import { getArticleBySlug } from '../utils/articles';
 import { formatDate } from '../utils/format';
 import { flags } from '../data/flags';
+import { setPageMeta } from '../utils/seo';
 
 const props = defineProps({
   slug: { type: String, required: true },
 });
 
 const article = computed(() => getArticleBySlug(props.slug));
+
+watchEffect(() => {
+  setPageMeta(
+    article.value
+      ? { title: article.value.title, description: article.value.excerpt, path: `/articles/${props.slug}` }
+      : { title: 'Article not found', path: `/articles/${props.slug}` },
+  );
+});
 </script>
 
 <template>

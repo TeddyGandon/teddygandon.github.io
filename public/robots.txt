@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://teddygandon.github.io/sitemap.xml
