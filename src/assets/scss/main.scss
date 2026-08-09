@@ -226,6 +226,22 @@ a {
   font-size: 0.8rem;
 }
 
+.has-text-gold {
+  color: vars.$gold;
+}
+
+.has-text-paper {
+  color: vars.$paper;
+}
+
+.has-text-paper {
+  color: vars.$paper;
+}
+
+.has-text-paper-muted {
+  color: vars.$paper-muted;
+}
+
 .hero-title {
   font-weight: 500;
   line-height: 1.15;
@@ -602,6 +618,7 @@ a {
   margin-top: 1rem;
 }
 
+// Shared by certification cards and side-project cards: name / meta / desc / note.
 .info-card__name {
   color: vars.$paper;
   font-weight: 500;
