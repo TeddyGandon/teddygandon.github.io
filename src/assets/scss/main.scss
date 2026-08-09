@@ -29,9 +29,22 @@ html {
 }
 
 body {
-  background: vars.$ink;
   color: vars.$paper;
   min-height: 100vh;
+}
+
+// Fixed to the viewport (not the document) so the wash stays put regardless
+// of page height — otherwise a short page and a long one stretch/reposition
+// these gradients differently since percentages resolve against body's own box.
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 140% 60% at 20% -10%, rgba(vars.$gold, 0.15), transparent 60%),
+    radial-gradient(ellipse 140% 60% at 80% 30%, rgba(vars.$teal, 0.15), transparent 55%);
 }
 
 ::selection {
@@ -79,11 +92,13 @@ a {
 // Navbar
 // ---------------------------------------------------------------------------
 .site-nav {
-  position: relative;
+  position: sticky;
+  top: 0;
   padding: 1.75rem 1.5rem;
-  border-bottom: 1px solid transparent;
+  background: vars.$ink;
+  border-bottom: 1px solid vars.$ink-line;
   transition: border-color vars.$speed-slower vars.$easing-calm;
-  z-index: 10;
+  z-index: 30;
 }
 
 .site-nav__brand {
@@ -260,6 +275,7 @@ a {
   position: relative;
   overflow: hidden;
   padding-top: 2rem;
+  background: rgba(vars.$ink, 0.5);
 }
 
 .hero-glow {
@@ -270,6 +286,7 @@ a {
   z-index: 0;
 }
 
+/*
 .hero-glow--gold {
   width: 480px;
   height: 480px;
@@ -287,6 +304,7 @@ a {
   background: radial-gradient(circle, vars.$teal-glow 0%, transparent 70%);
   animation: drift-teal 10s ease-in-out infinite alternate;
 }
+*/
 
 @keyframes drift-gold {
   0% {
