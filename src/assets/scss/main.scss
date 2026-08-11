@@ -597,21 +597,34 @@ a {
 // Skills
 // ---------------------------------------------------------------------------
 .skill-pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  background: var(--ink-raised);
   border: 1px solid var(--ink-line);
-  color: var(--paper-muted);
-  padding: 0.4rem 1rem;
+  color: var(--paper);
+  font-weight: 500;
+  padding: 0.45rem 1.1rem;
   border-radius: 999px;
   font-size: 0.9rem;
   margin: 0 0.5rem 0.5rem 0;
   transition:
     border-color vars.$speed-slow vars.$easing-calm,
-    color vars.$speed-slow vars.$easing-calm;
+    transform vars.$speed-slow vars.$easing-calm;
+}
+
+.skill-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-right: 0.55rem;
+  flex-shrink: 0;
 }
 
 .skill-pill:hover {
   border-color: var(--gold);
-  color: var(--paper);
+  transform: translateY(-2px);
 }
 
 .skill-group + .skill-group {
