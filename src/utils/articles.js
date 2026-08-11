@@ -26,8 +26,10 @@ const articles = Object.entries(modules)
       excerpt: data.excerpt ?? '',
       tags: Array.isArray(data.tags) ? data.tags : [],
       html: md.render(content),
+      status: data.status ?? 'published',
     };
   })
+  .filter((p) => p.status === 'published')
   .sort((a, b) => (a.date < b.date ? 1 : -1));
 
 // Scheduled posts (date in the future, relative to the visitor's clock)
