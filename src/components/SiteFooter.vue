@@ -10,7 +10,6 @@ function applyAutoTheme() {
 
 const now = new Date();
 const autoTheme = getAutoTheme(now.value);
-console.log({autoTheme});
 </script>
 
 <template>
