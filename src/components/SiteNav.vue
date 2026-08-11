@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
-import { theme, getAutoTheme } from '../utils/theme';
 
 const isMenuOpen = ref(false);
 const route = useRoute();
@@ -12,13 +11,6 @@ watch(
     isMenuOpen.value = false;
   },
 );
-
-function applyAutoTheme() {
-  theme.value = getAutoTheme(now.value).value;
-}
-
-const now = ref(new Date());
-const autoTheme = computed(() => getAutoTheme(now.value));
 </script>
 
 <template>
@@ -46,16 +38,6 @@ const autoTheme = computed(() => getAutoTheme(now.value));
         <RouterLink to="/articles" active-class="is-active">Articles</RouterLink>
         <RouterLink to="/projects" active-class="is-active">Side projects</RouterLink>
         <RouterLink to="/contact" active-class="is-active">Contact</RouterLink>
-        <button
-          type="button"
-          class="site-nav__auto-theme"
-          :title="`Switch to the ${autoTheme.value} theme`"
-          :aria-label="`Switch to the ${autoTheme.value} theme`"
-          v-if="autoTheme && displayChangingTheme"
-          @click="applyAutoTheme"
-        >
-          {{ autoTheme.emoji }}
-        </button>
       </div>
     </div>
   </nav>
