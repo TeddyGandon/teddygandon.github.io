@@ -68,8 +68,8 @@ body::before {
   // rgb(from ...) composes a fresh alpha from a custom property at paint time —
   // plain rgba(var(--gold), 0.15) doesn't work since rgba() wants channels, not a whole color.
   background:
-    radial-gradient(ellipse 140% 60% at 20% -10%, rgb(from var(--gold) r g b / 0.15), transparent 60%),
-    radial-gradient(ellipse 140% 60% at 80% 30%, rgb(from var(--teal) r g b / 0.15), transparent 55%);
+    radial-gradient(ellipse 140% 100% at 20% -10%, rgb(from var(--gold) r g b / 0.15), transparent 60%),
+    radial-gradient(ellipse 140% 120% at 80% 30%, rgb(from var(--teal) r g b / 0.15), transparent 55%);
 }
 
 ::selection {
@@ -93,6 +93,37 @@ body::before {
 
 a {
   transition: color vars.$speed-slow vars.$easing-calm;
+}
+
+// ---------------------------------------------------------------------------
+// Buttons
+// ---------------------------------------------------------------------------
+// Bulma bakes $primary/$link into its own --bulma-link-h/-s/-l custom
+// properties at compile time (from whichever _variables-*.scss `vars`
+// aliases), so a runtime [data-palette] switch never reaches them — every
+// other accent on the site reads var(--gold) directly and follows the theme,
+// but a plain .is-primary button wouldn't without this override.
+.button.is-primary {
+  background-color: var(--gold) !important;
+  border-color: var(--gold) !important;
+  color: var(--ink) !important;
+}
+
+.button.is-primary:hover,
+.button.is-primary:focus {
+  filter: brightness(1.08);
+}
+
+.button.is-primary.is-outlined {
+  background-color: transparent !important;
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+}
+
+.button.is-primary.is-outlined:hover,
+.button.is-primary.is-outlined:focus {
+  background-color: var(--gold) !important;
+  color: var(--ink) !important;
 }
 
 // ---------------------------------------------------------------------------
