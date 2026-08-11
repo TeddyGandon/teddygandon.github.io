@@ -41,7 +41,3 @@ The throughline with everything else I've written about management is the same: 
 
 - (1) Erin Meyer, [*The Culture Map*](https://erinmeyer.com/books/the-culture-map/): the disagreement/directness framework referenced above.
 - (2) Geert Hofstede, [Hofstede Insights - Country Comparison](https://geerthofstede.com/country-comparison-bar-charts/): power-distance and individualism dimensions, useful shorthand for the hierarchy point.
-
----
-
-*Edited on 2026-08-08: added a callback from the hierarchy chapter to the silence chapter, a note on when a 1:1 is warranted in the async chapter, and the "amazing" example alongside silence.*
