@@ -1,0 +1,81 @@
+// Amiga theme — black/grey/white monochrome CRT terminal, boxy 80s chrome.
+// Same variable names as the other `_variables-*.scss` files (main.scss
+// consumes them as `vars.$x`), just re-valued for a retro-OS aesthetic.
+// Note: $bulma-family below references a display font that isn't bundled via
+// @fontsource in this project yet — it'll fall back to the monospace stack
+// until that package is added, same as the rest of the palette swap.
+
+// Palette ---------------------------------------------------------------
+$ink: #050505; // page background, near-pure black CRT backdrop
+$ink-raised: #161616; // cards, panels — one step up from the page
+$ink-line: #383838; // hairline borders/dividers, mid grey
+$paper: #fff; // primary text — phosphor-white, no color tint
+$paper-muted: #8a8a8a; // secondary text, captions, meta — mid grey
+$gold: #fff; // primary accent, repurposed as bright phosphor-white glow
+$gold-soft: #fff;
+$gold-glow: rgba(242, 242, 242, 0.3);
+$teal: #a8a8a8; // second accent, repurposed as dimmer light grey
+$teal-soft: #a8a8a8;
+$teal-glow: #a8a8a8;
+
+// Bulma engine inputs (fed into `@use "bulma/sass" with (...)`) ----------
+$bulma-scheme-h: 0deg; // no hue at all — true greyscale
+$bulma-scheme-s: 0%; // zero saturation, monochrome terminal
+$bulma-accent: $gold;
+$bulma-family: 'VT323', 'Courier New', monospace; // old CRT-terminal typeface
+$radius-small: 0px;
+$radius: 0px;
+$radius-medium: 0px;
+$radius-large: 0px;
+// square corners everywhere — no rounding, like 80s OS window chrome
+
+// Motion ------------------------------------------------------------------
+$speed-slow: 90ms; // near-instant, like an OS with no transition budget at all
+$speed-slower: 140ms;
+$easing-calm: steps(3, end); // stepped, not smooth — a blocky CRT-era snap instead of an ease
+
+// Ambient effect — cathodic (CRT) filter ------------------------------------
+// A fixed, full-viewport overlay ON TOP of all real content (unlike the other
+// themes' ambient effects, which sit behind content at z-index -1): a real
+// CRT filter has to cut across everything on screen, text included, or it
+// doesn't read as "looking at a monitor." pointer-events: none keeps it from
+// blocking clicks; mix-blend-mode keeps text underneath legible. Scanlines
+// and vignette are static (the "filter" itself); only the flicker animates.
+// Gated entirely by [data-palette='amiga'] so it only renders when this
+// theme is active. Uses html::after so this stays self-contained to this file.
+@keyframes amiga-crt-flicker {
+  0%,
+  100% {
+    opacity: 0.88;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+html[data-palette='amiga']::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 3px),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.9) 100%);
+  mix-blend-mode: multiply;
+  animation: amiga-crt-flicker 0.4s steps(6, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-palette='amiga']::after {
+    animation: none;
+    opacity: 0.9;
+  }
+}
+
+// Real photos (LinkedIn cards, article images) keep their actual pixels
+// regardless of the CSS custom properties above — a filter is the only way
+// to make them read as monochrome too, matching the rest of this theme.
+html[data-palette='amiga'] img {
+  filter: grayscale(1) contrast(1.1);
+}

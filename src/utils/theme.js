@@ -6,13 +6,16 @@
 import { ref, watch } from 'vue';
 
 export const THEMES = [
-  { value: 'paper' },
-  { value: 'cyberpunk' },
-  { value: 'christmas' },
-  { value: 'halloween' },
+  'paper',
+  'cyberpunk',
+  'christmas',
+  'halloween',
+  'amiga',
 ];
 
-export const theme = ref(THEMES[0].value);
+export const DEFAULT_THEME = THEMES[0];
+
+export const theme = ref(DEFAULT_THEME);
 
 watch(
   theme,
@@ -21,20 +24,3 @@ watch(
   },
   { immediate: true },
 );
-
-// Time/date-based suggestion for the nav's emoji quick-toggle. Seasonal
-// months take priority over the nightly window since they're the rarer case.
-const NIGHT_START_HOUR = 23;
-const NIGHT_END_HOUR = 4;
-const HALLOWEEN_MONTH = 9; // October — Date#getMonth() is 0-indexed
-const CHRISTMAS_MONTH = 11; // December
-
-export function getAutoTheme(now = new Date()) {
-  const month = now.getMonth();
-  const hour = now.getHours();
-
-  if (month === HALLOWEEN_MONTH) return { value: 'halloween', emoji: '🎃' };
-  if (month === CHRISTMAS_MONTH) return { value: 'christmas', emoji: '🎄' };
-  if (hour >= NIGHT_START_HOUR || hour < NIGHT_END_HOUR) return { value: 'cyberpunk', emoji: '🌆' };
-  return null;
-}
