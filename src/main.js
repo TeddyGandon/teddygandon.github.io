@@ -9,6 +9,10 @@ import '@fontsource/eb-garamond/600.css';
 import '@fontsource/eb-garamond/600-italic.css';
 import '@fontsource/eb-garamond/700.css';
 
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
+import '@fortawesome/fontawesome-free/css/brands.min.css';
+import '@fortawesome/fontawesome-free/css/solid.min.css';
+
 import './assets/scss/main.scss';
 
 import App from './App.vue';
