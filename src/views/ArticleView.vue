@@ -45,9 +45,6 @@ watchEffect(() => {
           <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ tag }}</span>
         </div>
         <div class="prose mt-5" v-html="article.html" />
-        <div class="mt-5">
-          <i class="has-text-grey-light" style="font-size: 0.9rem">The views expressed here are entirely my own and do not reflect the views of my employer.</i>
-        </div>
       </template>
 
       <template v-else>

@@ -46,6 +46,8 @@ function getEasterEggTheme() {
           {{ getEasterEggTheme().emoji }}
         </a>
     </div>
-    <p class="mt-4" style="font-size: 0.85rem">© {{ year }} Teddy Gandon</p>
+    <p class="mt-4">
+      <i class="has-text-grey-light" style="font-size: 0.9rem">The views expressed here are entirely my own and do not reflect the views of my employer.</i>
+    </p>
   </footer>
 </template>
