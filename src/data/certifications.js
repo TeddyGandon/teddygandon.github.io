@@ -8,11 +8,12 @@ export const certifications = [
     url: '#',
     description: 'Agile & distributed team governance, sprint mechanics, and async operational workflows.',
     appliedNote:
-      'Applied directly to how I run sprints across time zones: async standups, written retros, and a Definition of Done that survives translation.',
+      'Applied directly to how I run sprints across time zones: async standups, written retros, and a DoD that survives translation.',
   },
+  /*
   {
     name: 'Google Cloud Digital Leader (CDL)',
-    issuer: 'Google Cloud',
+    issuer: 'Google / Coursera',
     url: '#',
     description: 'Cloud architecture fundamentals, FinOps, and enterprise AI/GCP ecosystem leadership.',
     appliedNote:
@@ -26,4 +27,5 @@ export const certifications = [
     appliedNote:
       'Formalizes the multi-stakeholder governance and risk tracking behind delivery spread across three continents.',
   },
+  */
 ];

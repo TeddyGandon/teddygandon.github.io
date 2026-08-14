@@ -25,7 +25,7 @@ import { flags } from '../data/flags';
   
   <section class="section" v-if="flags.displayCertifications">
     <div class="container container-narrow">
-      <p class="section-heading" v-reveal>Certifications & Frameworks</p>
+      <p class="section-heading" v-reveal>Certifications</p>
       <div class="card-grid">
         <component
           :is="cert.url ? 'a' : 'div'"
