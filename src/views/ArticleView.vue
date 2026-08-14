@@ -4,7 +4,8 @@ import { RouterLink } from 'vue-router';
 import { getArticleBySlug } from '../utils/articles';
 import { formatDate } from '../utils/format';
 import { flags } from '../data/flags';
-import { setPageMeta, SITE_URL } from '../utils/seo';
+import { setPageMeta } from '../utils/seo';
+import { SITE_URL } from "../constants";
 
 const props = defineProps({
   slug: { type: String, required: true },
