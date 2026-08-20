@@ -6,7 +6,7 @@ export const linkedinPosts = [
     date: '2026-07-20',
     text: `Who says tackling tech debt and security compliance can't be fun? 🚀 We just wrapped up our 3-day Summer Activities with all of our engineering squads!`,
     url: 'https://www.linkedin.com/posts/teddygandon_engineeringleadership-interculturalmanagement-share-7491095179622371328-ibKk/',
-    image: './1780570158087.jpeg',
+    image: './1786016246035.jpeg',
   },
   {
     date: '2026-07-20',
@@ -18,7 +18,7 @@ export const linkedinPosts = [
     date: '2026-07-05',
     text: `🎤 I just conducted two talks at Brototype, hashtag#Kochi, India about problems solving methods and feedback loop! Brototype is a bootcamp built on hands-on, peer-driven learning, designed to develop job-ready engineers through real-world practice and strong mentorship.`,
     url: 'https://www.linkedin.com/posts/teddygandon_kochi-kochitech-mentorship-activity-7468262931688751105-aLbe',
-    image: './1786016246035.jpeg',
+    image: './1780570158087.jpeg',
   },
   {
     date: '2026-05-29',
