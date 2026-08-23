@@ -36,7 +36,7 @@ import { flags } from '../data/flags';
           v-reveal
         >
           <p class="cert-card__name">{{ cert.name }}</p>
-          <p class="cert-card__issuer">{{ cert.issuer }}</p>
+          <p class="cert-card__issuer">{{ cert.issuer }}, {{ cert.date }}</p>
           <p class="cert-card__desc">{{ cert.description }}</p>
           <p class="cert-card__applied">{{ cert.appliedNote }}</p>
         </component>
