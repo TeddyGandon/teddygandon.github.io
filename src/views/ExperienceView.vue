@@ -1,8 +1,14 @@
 <script setup>
+import { computed } from 'vue';
 import { experience, softSkills } from '../data/experience';
 import { hardSkills } from '../data/skills';
 import { certifications } from '../data/certifications';
 import { flags } from '../data/flags';
+import { parseMonthYear } from '../utils/format';
+
+const sortedCertifications = computed(() =>
+  [...certifications].sort((a, b) => parseMonthYear(b.date) - parseMonthYear(a.date)),
+);
 </script>
 
 <template>
@@ -29,7 +35,7 @@ import { flags } from '../data/flags';
       <div class="card-grid">
         <component
           :is="cert.url ? 'a' : 'div'"
-          v-for="cert in certifications"
+          v-for="cert in sortedCertifications"
           :key="cert.name"
           v-bind="cert.url ? { href: cert.url, target: '_blank', rel: 'noopener noreferrer' } : {}"
           class="featured-article cert-card"
