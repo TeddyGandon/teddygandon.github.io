@@ -1,6 +1,6 @@
 ---
 title: Your proofs are not their proof
-date: 2026-10-05
+date: 2026-09-14
 excerpt: Every team I've led has tested me before trusting me, and the test never announces itself. The test always changes, but its goal never is.
 tags: [culture, leadership]
 ---

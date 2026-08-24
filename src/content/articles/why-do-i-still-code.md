@@ -1,6 +1,6 @@
 ---
 title: Why do I still code?
-date: 2026-10-26
+date: 2026-10-05
 excerpt: Engineering managers get asked constantly whether they should still code. My answer is yes, not to prove anything, but because operational context is what makes good management decisions possible, and writing code is still how I build and keep that context.
 tags: [management, coding, leadership]
 ---

@@ -1,6 +1,6 @@
 ---
 title: Using AI tools for managing
-date: 2026-09-14
+date: 2026-10-26
 excerpt: AI is genuinely useful for management work, but only once you stop feeding it generic prompts and start feeding it the same discipline you'd apply to a codebase. Curated artifacts, and narrow, single-purpose skills instead of one do-everything assistant.
 tags: [ai, management, tools]
 ---
