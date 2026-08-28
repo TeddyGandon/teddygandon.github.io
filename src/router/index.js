@@ -71,6 +71,12 @@ const router = createRouter({
 });
 
 router.afterEach((to) => {
+  sirup.persistantSession(
+    'teddygandon.github.io',
+    navigator.platform
+  ).then(
+    () => { sirup.event('viewPage', 'navigation', to.fullPath); }
+  );
   if (to.name === 'article') return; // ArticleView owns its own meta once the article loads
   setPageMeta({ title: to.meta.title, description: to.meta.description, path: to.path });
 });

@@ -7,6 +7,22 @@
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#121216" />
     <meta name="robots" content="index, follow" />
+    <!--
+      Applies a stored palette choice before first paint, so a returning
+      visitor doesn't see a flash of the default theme. data-palette is our
+      own attribute, separate from Bulma's data-theme="dark" above (Bulma 1.x
+      owns that one for its own light/dark scheme vars) — see _theme-vars.scss
+      and src/utils/theme.js, which take over reactively once Vue mounts.
+    -->
+    <script type="text/javascript">
+      (function () {
+        try {
+          var stored = localStorage.getItem('palette');
+          if (stored) document.documentElement.setAttribute('data-palette', stored);
+        } catch (e) {}
+      })();
+    </script>
+    <script src="https://solid-pancake.thefirstspine.fr/sirup.js"></script>
     <link rel="canonical" href="https://teddygandon.github.io/" id="meta-canonical" />
 
     <meta
