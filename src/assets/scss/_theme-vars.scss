@@ -15,6 +15,7 @@
 @use 'variables-cyberpunk' as cyberpunk;
 @use 'variables-christmas' as christmas;
 @use 'variables-halloween' as halloween;
+@use 'variables-amiga' as amiga;
 
 @mixin palette-vars(
   $ink,
@@ -104,6 +105,22 @@
       halloween.$teal,
       halloween.$teal-soft,
       halloween.$teal-glow
+    );
+  }
+
+  [data-palette='amiga'] {
+    @include palette-vars(
+      amiga.$ink,
+      amiga.$ink-raised,
+      amiga.$ink-line,
+      amiga.$paper,
+      amiga.$paper-muted,
+      amiga.$gold,
+      amiga.$gold-soft,
+      amiga.$gold-glow,
+      amiga.$teal,
+      amiga.$teal-soft,
+      amiga.$teal-glow
     );
   }
 }
