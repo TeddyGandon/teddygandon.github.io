@@ -5,5 +5,5 @@ export const flags = {
   displayCertifications: false,
   displayNewRole: false,
   displayArticlesTags: true,
-  displayChangingTheme: true,
+  displayChangingTheme: false,
 };
