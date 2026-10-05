@@ -1,7 +1,9 @@
+import { flags } from "./flags";
+
 // Experience timeline, most recent first. Rendered by ExperienceView / TimelineItem.
 export const experience = [
   {
-    period: '2022 // Today',
+    period: '2022 // 2026',
     role: 'Engineering Manager',
     org: 'Believe France',
     description:
@@ -34,6 +36,16 @@ export const experience = [
     description: 'Built web and Flash/Flex applications, the starting point of a twenty-year engineering path.',
   },
 ];
+
+if (flags.displayNewRole) {
+  experience.unshift({
+    period: '2026 // Today',
+    role: 'Head Of BTech Alliance',
+    org: 'Believe France',
+    description:
+      'Leading the BTech Alliance, an outsourcing framework, taking the lead on all outsourced engineering teams globally.',
+  });
+}
 
 // Soft skills, presented as a flat set of pills, no ranking implied.
 export const softSkills = [
