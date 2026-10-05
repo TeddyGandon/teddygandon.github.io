@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/generate-sitemap.js",
-    "preview": "vite preview"
+    "build": "node scripts/load-external-sources.js && vite build && node scripts/generate-sitemap.js",
+    "preview": "vite preview",
+    "load-external-sources": "node scripts/load-external-sources.js"
   },
   "dependencies": {
     "@fontsource/eb-garamond": "^5.3.0",
