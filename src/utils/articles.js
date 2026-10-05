@@ -1,5 +1,6 @@
 import MarkdownIt from 'markdown-it';
 import { parseFrontmatter } from './frontmatter';
+import { estimateReadingTime } from './format';
 
 // Every .md file under content/articles/ becomes an article. Filename (minus
 // extension) is the slug, so `writing-calmly.md` renders at /articles/writing-calmly.
@@ -19,13 +20,15 @@ const articles = Object.entries(modules)
   .map(([path, raw]) => {
     const { data, content } = parseFrontmatter(raw);
     const slug = slugFromPath(path);
+    const html = md.render(content);
     return {
       slug,
       title: data.title ?? slug,
       date: data.date ?? '',
       excerpt: data.excerpt ?? '',
       tags: Array.isArray(data.tags) ? data.tags : [],
-      html: md.render(content),
+      html,
+      readingTime: estimateReadingTime(html),
       status: data.status ?? 'published',
     };
   })

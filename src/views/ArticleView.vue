@@ -57,7 +57,9 @@ watchEffect(() => {
       </RouterLink>
 
       <template v-if="article">
-        <p class="article-card__date mt-5">{{ formatDate(article.date) }}</p>
+        <p class="article-card__date mt-5">
+          {{ formatDate(article.date) }} <span aria-hidden="true">·</span> {{ article.readingTime }}
+        </p>
         <h1 class="title hero-title is-3 mt-2">{{ article.title }}</h1>
         <div v-if="flags.displayArticlesTags && article.tags.length" class="mb-5">
           <RouterLink

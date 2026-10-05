@@ -13,6 +13,8 @@ const activeTag = computed(() => route.query.tag ?? null);
 const filteredArticles = computed(() =>
   activeTag.value ? articles.filter((article) => article.tags.includes(activeTag.value)) : articles,
 );
+const featuredArticle = computed(() => filteredArticles.value[0] ?? null);
+const restArticles = computed(() => filteredArticles.value.slice(1));
 
 watchEffect(() => {
   setPageMeta(
@@ -36,6 +38,10 @@ watchEffect(() => {
     <div class="container container-narrow">
       <p class="hero-eyebrow" v-reveal>Writing</p>
       <h1 class="title hero-title is-3 mt-2" v-reveal>Articles</h1>
+      <p v-if="articles.length" class="hero-lede is-size-6 mt-2" v-reveal>
+        {{ articles.length }} {{ articles.length === 1 ? 'piece' : 'pieces' }} on multicultural management,
+        engineering leadership, and the frameworks I keep coming back to.
+      </p>
 
       <div v-if="flags.displayArticlesTags && allTags.length" class="article-tags-filter mt-5" v-reveal>
         <RouterLink :to="{ name: 'articles' }" class="tag is-dark mr-2" :class="{ 'is-active': !activeTag }">
@@ -58,31 +64,43 @@ watchEffect(() => {
         <template v-else>Nothing published yet — check back soon.</template>
       </p>
 
-      <div v-else class="mt-6">
-        <article v-for="article in filteredArticles" :key="article.slug" class="article-card" v-reveal>
-          <p class="article-card__date">{{ formatDate(article.date) }}</p>
-          <h2 class="article-card__title">
-            <RouterLink :to="{ name: 'article', params: { slug: article.slug } }">
-              {{ article.title }}
-            </RouterLink>
-          </h2>
-          <p class="article-card__excerpt">{{ article.excerpt }}</p>
-          <div v-if="flags.displayArticlesTags && article.tags.length" class="article-card__tags">
-            <RouterLink
-              v-for="tag in article.tags"
-              :key="tag"
-              :to="{ name: 'articles', query: { tag } }"
-              class="tag is-dark mr-2"
-              :class="{ 'is-active': activeTag === tag }"
-            >
-              {{ tag }}
-            </RouterLink>
+      <template v-else>
+        <RouterLink
+          :to="{ name: 'article', params: { slug: featuredArticle.slug } }"
+          class="article-feature mt-6"
+          v-reveal
+        >
+          <span class="article-feature__badge">{{ activeTag ? 'Top match' : 'Latest' }}</span>
+          <p class="article-card__date">
+            {{ formatDate(featuredArticle.date) }} <span aria-hidden="true">·</span> {{ featuredArticle.readingTime }}
+          </p>
+          <h2 class="article-feature__title">{{ featuredArticle.title }}</h2>
+          <p class="article-feature__excerpt">{{ featuredArticle.excerpt }}</p>
+          <div v-if="featuredArticle.tags.length" class="article-card__tags">
+            <span v-for="tag in featuredArticle.tags" :key="tag" class="tag is-dark mr-2">{{ tag }}</span>
           </div>
-          <div v-if="!flags.displayArticlesTags && article.tags.length" class="article-card__tags">
-            <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ tag }}</span>
-          </div>
-        </article>
-      </div>
+          <span class="featured-article__cta">Read the article →</span>
+        </RouterLink>
+
+        <div v-if="restArticles.length" class="card-grid mt-6">
+          <RouterLink
+            v-for="article in restArticles"
+            :key="article.slug"
+            :to="{ name: 'article', params: { slug: article.slug } }"
+            class="featured-article"
+            v-reveal
+          >
+            <p class="article-card__date">
+              {{ formatDate(article.date) }} <span aria-hidden="true">·</span> {{ article.readingTime }}
+            </p>
+            <h3 class="featured-article__title">{{ article.title }}</h3>
+            <p class="article-card__excerpt">{{ article.excerpt }}</p>
+            <div v-if="article.tags.length" class="article-card__tags">
+              <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ tag }}</span>
+            </div>
+          </RouterLink>
+        </div>
+      </template>
     </div>
   </section>
 </template>

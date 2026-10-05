@@ -776,45 +776,253 @@ a {
   }
 }
 
-.linkedin-card {
-  padding: 0;
+// Horizontal, avatar-led feed for embedded social posts (LinkedIn) — reads
+// as an actual social feed rather than another set of article cards.
+.social-feed {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.social-feed::-webkit-scrollbar {
+  height: 6px;
+}
+
+.social-feed::-webkit-scrollbar-thumb {
+  background: var(--ink-line);
+  border-radius: 3px;
+}
+
+.social-post {
+  flex: 0 0 330px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: vars.$radius-medium;
+  padding: 1.5rem;
+  transition: border-color vars.$speed-slow vars.$easing-calm;
+}
+
+.social-post:hover {
+  border-color: var(--gold);
+}
+
+.social-post__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.social-post__badge {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 1px solid var(--ink-line);
+  color: var(--gold);
+  font-size: 0.95rem;
+}
+
+.social-post__meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.social-post__name {
+  color: var(--paper);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.social-post__date {
+  color: var(--paper-muted);
+  font-size: 0.8rem;
+}
+
+.social-post__text {
+  color: var(--paper-muted);
+  font-style: italic;
+  line-height: 1.6;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.linkedin-card__image {
+.social-post__image {
   display: block;
   width: 100%;
-  aspect-ratio: 21 / 9;
-  max-height: 140px;
+  margin-top: 1rem;
+  border-radius: vars.$radius;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
   background: var(--ink);
 }
 
-.linkedin-card__body {
-  padding: 1.5rem 1.75rem 1.75rem;
+// Reaction bar mirroring LinkedIn's: overlapping icon chips for the top
+// reaction types + total, comment count pushed to the right.
+.social-post__reactions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--ink-line);
+  color: var(--paper-muted);
+  font-size: 0.8rem;
 }
 
-.linkedin-card .article-card__excerpt {
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
-  -webkit-box-orient: vertical;
+.social-post__reaction-summary,
+.social-post__comments {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.social-post__reaction-icons {
+  display: inline-flex;
+}
+
+.social-post__reaction-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 1px solid var(--ink-line);
+  color: var(--gold);
+  font-size: 0.6rem;
+
+  & + & {
+    margin-left: -0.35rem;
+  }
+
+  &:nth-child(even) {
+    color: var(--teal);
+  }
+}
+
+.social-post__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--gold);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+// Compact press-style list for publications aggregated from other outlets
+// (Medium, LeadDev, ...) — deliberately text-first and row-based rather than
+// a photo card grid, so it reads as distinct from the LinkedIn feed above.
+.publication-list {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  border-top: 1px solid var(--ink-line);
+}
+
+.publication-row {
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.publication-row__link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 1.25rem;
+  padding: 1.25rem 0.25rem;
+  transition:
+    background-color vars.$speed-slow vars.$easing-calm,
+    padding-left vars.$speed-slow vars.$easing-calm;
+}
+
+.publication-row__link:hover {
+  padding-left: 0.75rem;
+  background: var(--ink-raised);
+}
+
+.publication-row__link:hover .publication-row__arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.publication-row__source {
+  flex: none;
+  min-width: 5rem;
+  color: var(--gold);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.publication-row__body {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.publication-row__title {
+  display: block;
+  color: var(--paper);
+  font-size: 1.1rem;
+}
+
+.publication-row__excerpt {
+  display: block;
+  color: var(--paper-muted);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.publication-row__date {
+  flex: none;
+  color: var(--paper-muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.publication-row__arrow {
+  flex: none;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity vars.$speed-slow vars.$easing-calm,
+    transform vars.$speed-slow vars.$easing-calm;
+}
+
+@media screen and (max-width: 600px) {
+  .publication-row__excerpt {
+    white-space: normal;
+  }
+
+  .publication-row__arrow {
+    display: none;
+  }
 }
 
 // ---------------------------------------------------------------------------
 // Article cards & prose
 // ---------------------------------------------------------------------------
-.article-card {
-  padding: 1.75rem 0;
-  border-bottom: 1px solid var(--ink-line);
-  transition: transform vars.$speed-slow vars.$easing-calm;
-}
-
-.article-card:hover {
-  transform: translateX(4px);
-}
-
 .article-card__date {
   color: var(--paper-muted);
   font-size: 0.85rem;
@@ -822,17 +1030,56 @@ a {
   text-transform: uppercase;
 }
 
-.article-card__title {
-  font-size: 1.4rem;
-  margin: 0.35rem 0 0.5rem;
+// The single stand-out card at the top of the articles list (latest post,
+// or top tag match) — larger and left-accented so it reads as a headline.
+.article-feature {
+  display: block;
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-left: 3px solid var(--gold);
+  border-radius: vars.$radius-medium;
+  padding: 2.5rem 2.5rem 2.25rem;
+  transition: border-color vars.$speed-slow vars.$easing-calm;
 }
 
-.article-card__title a {
-  color: var(--paper) !important;
+.article-feature:hover {
+  border-color: var(--gold);
 }
 
-.article-card__title a:hover {
-  color: var(--gold) !important;
+.article-feature__badge {
+  display: inline-block;
+  color: var(--ink);
+  background: var(--gold);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.article-feature__title {
+  color: var(--paper);
+  font-size: 1.9rem;
+  line-height: 1.2;
+  margin: 0.5rem 0 0.75rem;
+}
+
+.article-feature__excerpt {
+  color: var(--paper-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+@media screen and (max-width: 600px) {
+  .article-feature {
+    padding: 1.75rem;
+  }
+
+  .article-feature__title {
+    font-size: 1.5rem;
+  }
 }
 
 .article-card__excerpt {

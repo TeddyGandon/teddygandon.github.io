@@ -3,6 +3,19 @@ export function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
+const WORDS_PER_MINUTE = 200;
+
+export function estimateReadingTime(html) {
+  if (!html) return '';
+  const wordCount = html
+    .replace(/<[^>]*>/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+  const minutes = Math.max(1, Math.round(wordCount / WORDS_PER_MINUTE));
+  return `${minutes} min read`;
+}
+
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
 // Parses loose "Mon YYYY" style dates (e.g. "Sept 2026", "Oct 2026") into a

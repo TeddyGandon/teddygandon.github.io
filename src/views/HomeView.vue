@@ -3,20 +3,38 @@ import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
 import { softSkills } from '../data/experience';
 import { linkedinPosts } from '../data/linkedin';
+import { officialPublications } from '../data/official-publications';
 import { getArticles, getAllArticles } from '../utils/articles';
 import { formatDate } from '../utils/format';
 import { flags } from '../data/flags';
 
 const stats = [
   { value: '20', label: 'Years of engineering' },
-  { value: '5', label: 'Roles, one throughline' },
+  { value: '6', label: 'Roles, one throughline' },
   { value: '4', label: 'Companies' },
 ];
 
 const latestArticles = flags.displayAllArticles ?
   computed(() => getAllArticles().slice(0, 3)) :
   computed(() => getArticles().slice(0, 3));
-const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
+// Only surface posts that resonated — 50+ reactions.
+const MIN_LINKEDIN_REACTIONS = 20;
+const recentLinkedInPosts = computed(() =>
+  linkedinPosts.filter((post) => (post.reactions?.total ?? 0) >= MIN_LINKEDIN_REACTIONS).slice(0, 10),
+);
+
+// LinkedIn's internal reaction names → Font Awesome icon + the label LinkedIn shows.
+const reactionIcons = {
+  LIKE: { icon: 'fa-thumbs-up', label: 'Like' },
+  PRAISE: { icon: 'fa-hands-clapping', label: 'Celebrate' },
+  APPRECIATION: { icon: 'fa-hand-holding-heart', label: 'Support' },
+  EMPATHY: { icon: 'fa-heart', label: 'Love' },
+  INTEREST: { icon: 'fa-lightbulb', label: 'Insightful' },
+  ENTERTAINMENT: { icon: 'fa-face-laugh-squint', label: 'Funny' },
+};
+const postReactions = (post) =>
+  (post.reactions?.types ?? []).filter((type) => reactionIcons[type]).map((type) => ({ type, ...reactionIcons[type] }));
+const recentPublications = computed(() => officialPublications.slice(0, 5));
 </script>
 
 <template>
@@ -120,31 +138,82 @@ const recentLinkedInPosts = computed(() => linkedinPosts.slice(0, 3));
     </div>
   </section>
 
+  <section v-if="recentPublications.length" class="section">
+    <div class="container container-narrow">
+      <p class="section-heading" v-reveal>Published elsewhere</p>
+      <ul class="publication-list">
+        <li
+          v-for="publication in recentPublications"
+          :key="publication.url"
+          class="publication-row"
+          v-reveal
+        >
+          <a :href="publication.url" target="_blank" rel="noopener noreferrer" class="publication-row__link">
+            <span class="publication-row__source">{{ publication.sourceLabel }}</span>
+            <span class="publication-row__body">
+              <span class="publication-row__title">{{ publication.title }}</span>
+              <span class="publication-row__excerpt">{{ publication.excerpt }}</span>
+            </span>
+            <span class="publication-row__date">{{ formatDate(publication.date) }}</span>
+            <span class="publication-row__arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <section v-if="recentLinkedInPosts.length" class="section">
     <div class="container container-narrow">
       <p class="section-heading" v-reveal>Latest on LinkedIn</p>
-      <div class="card-grid">
+      <div class="social-feed" v-reveal>
         <a
           v-for="post in recentLinkedInPosts"
           :key="post.url"
           :href="post.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="featured-article linkedin-card"
-          v-reveal
+          class="social-post"
         >
+          <div class="social-post__header">
+            <span class="social-post__badge"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></span>
+            <span class="social-post__meta">
+              <span class="social-post__name">Teddy Gandon</span>
+              <span class="social-post__date">{{ formatDate(post.date) }}</span>
+            </span>
+          </div>
+          <p class="social-post__text">&ldquo;{{ post.text }}&rdquo;</p>
           <img
             v-if="post.image"
             :src="post.image"
             alt="Photo from the LinkedIn post"
             loading="lazy"
-            class="linkedin-card__image"
+            class="social-post__image"
           />
-          <div class="linkedin-card__body">
-            <p class="article-card__date">{{ formatDate(post.date) }}</p>
-            <p class="article-card__excerpt">{{ post.text }}</p>
-            <span class="featured-article__cta">View on LinkedIn →</span>
+          <div v-if="post.reactions?.total || post.comments" class="social-post__reactions">
+            <span
+              v-if="post.reactions?.total"
+              class="social-post__reaction-summary"
+              :aria-label="`${post.reactions.total} reactions`"
+            >
+              <span class="social-post__reaction-icons">
+                <span
+                  v-for="reaction in postReactions(post)"
+                  :key="reaction.type"
+                  class="social-post__reaction-icon"
+                  :title="reaction.label"
+                >
+                  <i :class="['fa-solid', reaction.icon]" aria-hidden="true"></i>
+                </span>
+              </span>
+              {{ post.reactions.total }}
+            </span>
+            <span v-if="post.comments" class="social-post__comments" :aria-label="`${post.comments} comments`">
+              <i class="fa-regular fa-comment" aria-hidden="true"></i> {{ post.comments }}
+            </span>
           </div>
+          <span class="social-post__cta">
+            View on LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </span>
         </a>
       </div>
       <a
