@@ -907,15 +907,10 @@ a {
   border-radius: 50%;
   background: var(--ink);
   border: 1px solid var(--ink-line);
-  color: var(--gold);
   font-size: 0.6rem;
 
   & + & {
-    margin-left: -0.35rem;
-  }
-
-  &:nth-child(even) {
-    color: var(--teal);
+    margin-left: -0.55rem;
   }
 }
 
