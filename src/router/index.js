@@ -44,15 +44,6 @@ const routes = [
     // No static meta here — ArticleView sets title/description once the article is loaded.
   },
   {
-    path: '/contact',
-    name: 'contact',
-    component: () => import('../views/ContactView.vue'),
-    meta: {
-      title: 'Contact',
-      description: 'Get in touch with Teddy Gandon, Engineering Manager.',
-    },
-  },
-  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('../views/NotFoundView.vue'),
