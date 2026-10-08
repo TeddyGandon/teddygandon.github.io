@@ -14,7 +14,7 @@ const routes = [
     meta: {
       title: 'Experience',
       description:
-        'Twenty years of engineering experience, certifications, and hard/soft skills — Teddy Gandon, Engineering Manager.',
+        'Twenty years of engineering experience, certifications, and hard/soft skills — Teddy Gandon, Senior Engineering Manager.',
     },
   },
   {

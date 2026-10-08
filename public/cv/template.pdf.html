@@ -443,6 +443,9 @@
       - Reorder skills inside a .skill-group, and soft skills, by relevance.
       - Drop a side project that is irrelevant to the offer.
 
+      - Exception in #identity: the .identity__role headline may be retitled
+        to echo the offer's job title (job titles inside #experience may not).
+
     What must not change:
       - Facts: companies, roles, dates (<time>), diplomas, contact details.
         Never invent experience, skills, metrics or employers.
@@ -456,10 +459,11 @@
     <aside class="sidebar">
       <header class="identity" id="identity" data-section="identity" data-tailorable="false">
         <p class="identity__name">TEDDY<br />GANDON</p>
-        <p class="identity__role">ENGINEERING MANAGER</p>
+        <p class="identity__role">SENIOR ENGINEERING MANAGER</p>
         <address class="identity__contact">
         <ul class="identity__group">
           <li><a href="https://teddygandon.github.io">teddygandon.github.io</a></li>
+          <li><a href="https://www.linkedin.com/in/teddygandon">linkedin.com/in/teddygandon</a></li>
           <li><a href="tel:+33662467028">+33 6 62 46 70 28</a></li>
           <li><a href="mailto:moi@teddygandon.com">moi@teddygandon.com</a></li>
         </ul>
@@ -473,11 +477,11 @@
       <section class="section" id="soft-skills" data-section="soft-skills" data-tailorable="true">
         <h2 class="section__title">NICE &amp; SOFT SKILLS</h2>
         <ul class="sidebar-list sidebar-list--dotted">
-          <li>Problem solving</li>
+          <li>People leadership</li>
+          <li>Stakeholder management</li>
           <li>Communication</li>
-          <li>Time management</li>
+          <li>Problem solving</li>
           <li>Emotional intelligence</li>
-          <li>Creativity</li>
           <li>Curiosity</li>
         </ul>
       </section>
@@ -487,12 +491,12 @@
         <div class="sidebar-item">
           <p class="sidebar-item__name">Portfolio</p>
           <p class="sidebar-item__meta"><a href="https://teddygandon.github.io">teddygandon.github.io</a></p>
-          <p class="sidebar-item__text">Personal portfolio for presenting my projects &amp; my own obsessions.</p>
+          <p class="sidebar-item__text">Personal portfolio for presenting my projects &amp; my own obsessions. AI-driven development, Vue.js, GitHub Actions.</p>
         </div>
         <div class="sidebar-item">
           <p class="sidebar-item__name">The First Spine</p>
           <p class="sidebar-item__meta"><a href="https://thefirstspine.fr">thefirstspine.fr</a></p>
-          <p class="sidebar-item__text">My biggest personal project so far — a solo-developed board game. Most of it is open source.</p>
+          <p class="sidebar-item__text">My biggest personal project so far — a solo-developed board game, mostly open source. NestJS, Docker, Ansible.</p>
         </div>
       </section>
 
@@ -500,7 +504,7 @@
         <h2 class="section__title">EDUCATION</h2>
         <div class="sidebar-item">
           <p class="sidebar-item__meta"><time datetime="2009">2009</time></p>
-          <p class="sidebar-item__name">BTS, Intégration multimédia</p>
+          <p class="sidebar-item__name">BTS (2-year degree), Multimedia Integration</p>
           <p class="sidebar-item__text">Autograf, Paris, France</p>
         </div>
         <div class="sidebar-item">
@@ -525,14 +529,14 @@
       <section class="section profile" id="profile" data-section="profile" data-tailorable="true">
         <h2 class="section__title">PROFILE</h2>
         <p>
-          Software developer with two decades of experience and a strong appetite for emerging technologies.
-          I thrive on innovation-driven challenges, and my work is guided by three core actions: leading,
-          developing, and innovating.
+          Senior Engineering Manager with nearly two decades in software and 12 years leading teams, from startup
+          CTO to manager of managers. Currently leading 20 engineers in three squads in India, building
+          internal products (marketing, financial, video) for the music industry.
         </p>
         <p>
-          I also bring experience in intercultural management and people development. I believe that
-          empowering individuals across diverse backgrounds is a key driver for growing projects and
-          achieving sustainable, high-impact results.
+          Hands-on and pragmatic, guided by three core actions: leading, developing and innovating. Track
+          record of growing autonomous, multicultural teams across India, France and Poland, and of bringing
+          AI-assisted engineering into everyday delivery.
         </p>
       </section>
 
@@ -542,70 +546,66 @@
         <div class="timeline">
           <article class="job" id="job-believe" data-entry="job">
             <p class="job__header">
-              <span class="job__dates"><time datetime="2022">2022</time> - <time datetime="2026">2026</time></span> <span class="sep">//</span>
+              <span class="job__dates"><time datetime="2022">2022</time> – Present</span> <span class="sep">//</span>
               <span class="job__company">Believe</span> <span class="sep">//</span>
               <span class="job__role">Engineering Manager</span>
             </p>
             <p class="job__summary">
-              Leading three engineering squads in India for music-industry products, acting as a key bridge
-              between product and tech, managing multicultural teams, and driving upskilling and professional
-              growth.
+              Owning delivery of internal products, bridging product and engineering.
             </p>
             <ul class="job__highlights">
-              <li>Led three engineering squads in India delivering complex products (marketing &amp; financial) for the music industry</li>
-              <li>Acted as a key bridge between product and engineering</li>
-              <li>Managed and developed multicultural teams through a framework to build a strong and autonomous engineering culture</li>
+              <li>Manage 3 engineering managers and 3 squads building financial reporting, internal marketing tools and an internal video management platform</li>
+              <li>Personally hired 10 engineers, kept turnover low and grew engineers and managers through coaching and upskilling</li>
+              <li>Rolled out an operational framework (processes, workflows, tools, management), bringing faster onboarding, clearer roles, horizontal scaling, better delivery and operational excellence</li>
+              <li>Introduced AI-assisted engineering (Claude, Gemini) into the squads' day-to-day work</li>
             </ul>
           </article>
 
           <article class="job" id="job-jellyfish" data-entry="job">
             <p class="job__header">
-              <span class="job__dates"><time datetime="2017">2017</time> - <time datetime="2022">2022</time></span> <span class="sep">//</span>
-              <span class="job__company">Jellyfish</span> <span class="sep">//</span>
-              <span class="job__role">Team Lead Backend Developer</span>
+              <span class="job__dates"><time datetime="2015">2015</time> – <time datetime="2021">2021</time></span> <span class="sep">//</span>
+              <span class="job__company">Jellyfish (formerly Tradelab)</span> <span class="sep">//</span>
+              <span class="job__role">Senior Backend Team Lead</span>
             </p>
             <p class="job__summary">
-              Development of digital marketing applications and management of a team of engineers within the
-              Engineering division at Jellyfish France.
+              Joined as Senior Backend Engineer and promoted to team lead in 2017, leading 3 backend engineers
+              building digital marketing applications.
             </p>
             <ul class="job__highlights">
-              <li>Led the development of digital marketing applications for a high volume of bids in a programmatic context</li>
-              <li>Managed and mentored a team of engineers</li>
-              <li>Collaborated closely with cross‑functional teams (media, data, strategy)</li>
+              <li>Designed and built backend applications for high-volume programmatic bidding</li>
+              <li>Managed and mentored the team, owning technical decisions and delivery</li>
+              <li>Drawing on prior CTO experience, coached engineers into management roles</li>
             </ul>
           </article>
 
           <article class="job" id="job-one-heart-communication" data-entry="job">
             <p class="job__header">
-              <span class="job__dates"><time datetime="2011">2011</time> - <time datetime="2017">2017</time></span> <span class="sep">//</span>
+              <span class="job__dates"><time datetime="2011">2011</time> – <time datetime="2015">2015</time></span> <span class="sep">//</span>
               <span class="job__company">One Heart Communication</span> <span class="sep">//</span>
               <span class="job__role">Chief Technology Officer</span>
             </p>
             <p class="job__summary">
-              Development of a CRM tailored to the specific needs of crowdsourcing and fundraising for nonprofits
-              and social enterprises, combined with the management of a team of developers and oversight of a
-              Polish branch in a startup context.
+              Reporting directly to the CEO of a startup, owned the technology and the CRM platform built for
+              crowdsourcing and fundraising needs of nonprofits and social enterprises.
             </p>
             <ul class="job__highlights">
-              <li>Led the end-to-end development of a custom CRM platform</li>
-              <li>Managed and coached a team of developers in an international context</li>
+              <li>Owned the architecture and delivery of a custom CRM on a pragmatic PHP/Symfony stack</li>
+              <li>Managed and coached a hybrid team of 6 developers (3 in-house, 3 outsourced) and oversaw the Polish branch</li>
             </ul>
           </article>
 
           <article class="job" id="job-cho-you" data-entry="job">
             <p class="job__header">
-              <span class="job__dates"><time datetime="2007">2007</time> - <time datetime="2011">2011</time></span> <span class="sep">//</span>
+              <span class="job__dates"><time datetime="2007">2007</time> – <time datetime="2011">2011</time></span> <span class="sep">//</span>
               <span class="job__company">Cho You</span> <span class="sep">//</span>
               <span class="job__role">PHP, JavaScript, ActionScript engineer</span>
             </p>
             <p class="job__summary">
-              Conception and prototyping of rich applications (RIA), creation and adaptation of graphic
-              guidelines, development of marketing tools, with strong expertise in both GUI design and technical
-              implementation.
+              Designed and built rich internet applications (RIA) and marketing tools, combining GUI design and
+              technical implementation.
             </p>
             <ul class="job__highlights">
-              <li>Designed and prototyped rich interactive applications for big tech clients</li>
-              <li>Created and evolved complete visual and graphic guidelines</li>
+              <li>Prototyped rich interactive applications and visual guidelines for big tech clients</li>
             </ul>
           </article>
         </div>
@@ -613,27 +613,32 @@
 
       <section class="section" id="hard-skills" data-section="hard-skills" data-tailorable="true">
         <h2 class="section__title">HARD SKILLS &amp; OBSESSIONS</h2>
+        <div class="skill-group" data-entry="skill-group" data-group="leadership">
+          <p class="skill-group__name">Leadership</p>
+          <p>
+            Managing managers, hiring, coaching &amp; mentoring, operational frameworks, intercultural
+            &amp; outsourced team management
+          </p>
+        </div>
         <div class="skill-group" data-entry="skill-group" data-group="technical">
           <p class="skill-group__name">Technical</p>
           <p>
-            JavaScript + TypeScript (NestJS, Angular, React, Vue), PHP (Symfony, Laravel, CodeIgniter), SQL
-            (MySQL, Postgres), NoSQL (MongoDB, Elastic, Redis), RabbitMQ, C#, Cloud providers (AWS, GCP),
-            Containerization (Kubernetes, Compose, Docker), Terraform, Git, Ansible
+            JavaScript + TypeScript (NestJS, Angular, React, Vue), PHP (Symfony, Laravel), SQL (MySQL,
+            Postgres), NoSQL (MongoDB, Elastic, Redis), RabbitMQ, C#, Cloud (AWS, GCP), Containerization
+            (Kubernetes, Docker, Compose), Terraform, Ansible, Git, AI-assisted engineering (Claude, Gemini)
           </p>
         </div>
         <div class="skill-group" data-entry="skill-group" data-group="project-management">
           <p class="skill-group__name">Project management</p>
           <p>
-            Agile &amp; delivery frameworks (Scrum, Kanban, Lean), planning, tracking &amp; reporting
-            (roadmapping, release planning, OKR implementation, risk management, RACI), Atlassian Suite
-            (Jira, Confluence, Product Discovery)
+            Agile &amp; delivery frameworks (Scrum, Kanban, Lean), roadmapping, release planning, OKRs, risk
+            management, RACI, Atlassian Suite (Jira, Confluence, Product Discovery)
           </p>
         </div>
         <div class="skill-group" data-entry="skill-group" data-group="others">
           <p class="skill-group__name">Others</p>
           <p>
-            Adobe Suite (Photoshop, Illustrator, InDesign, Premiere, After Effects), Unity, Blender, and
-            obviously game design. Yes.
+            Adobe Suite, Unity, Blender, and obviously game design. Yes.
           </p>
         </div>
       </section>

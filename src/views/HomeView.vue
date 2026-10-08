@@ -10,8 +10,8 @@ import { flags } from '../data/flags';
 
 const stats = [
   { value: '20', label: 'Years of engineering' },
-  { value: '6', label: 'Roles, one throughline' },
-  { value: '4', label: 'Companies' },
+  { value: '15', label: 'Years in leadership' },
+  { value: '4', label: 'Companies, one throughline' },
 ];
 
 const latestArticles = flags.displayAllArticles ?
@@ -46,11 +46,12 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
     <div class="container">
       <div class="hero-grid">
         <div class="hero-copy">
-          <p class="hero-eyebrow" v-reveal>Engineering Manager</p>
+          <p class="hero-eyebrow" v-reveal>Senior Engineering Manager</p>
           <h1 class="title hero-title is-1 mt-2" v-reveal>Teddy Gandon</h1>
           <p class="hero-lede mt-4" v-reveal>
-            Twenty years of engineering, specialized in multicultural management. I build teams that
-            ship calmly and deliberately across languages, time zones, and working styles.
+            Twenty years of engineering, specialized in multicultural management. Today I lead 20
+            engineers across three squads in India, through three managers, and build teams that ship
+            calmly and deliberately across languages, time zones, and working styles.
           </p>
           <p class="hero-lede is-size-6 mt-2" v-if="flags.displayCertifications" v-reveal>
             <strong class="has-text-paper-muted">Certified PSM I &amp; Google Cloud Digital Leader.</strong>

@@ -3,31 +3,25 @@ import { flags } from "./flags";
 // Experience timeline, most recent first. Rendered by ExperienceView / TimelineItem.
 export const experience = [
   {
-    period: '2022 // 2026',
+    period: '2022 // Today',
     role: 'Engineering Manager',
     org: 'Believe France',
     description:
-      'Leading engineering teams across delivery, hiring, and technical direction, with a continued focus on multicultural collaboration.',
+      "Leading 20 engineers in India through three engineering managers, owning delivery of financial reporting, internal marketing and video management platforms. Personally hired 10 engineers and grew engineers and managers through coaching and upskilling, with low turnover. Designed the operational framework behind faster onboarding, clearer roles, horizontal scaling and better delivery, and brought AI-assisted engineering (Claude, Gemini) into the squads' day-to-day work.",
   },
   {
-    period: '2017 // 2021',
+    period: '2015 // 2021',
     role: 'Senior Backend Team Lead',
-    org: 'Jellyfish France',
-    description:
-      'Grew from senior engineer into team lead, guiding backend architecture decisions and mentoring the team day to day.',
-  },
-  {
-    period: '2015 // 2017',
-    role: 'Senior Backend Engineer',
     org: 'Jellyfish France (formerly Tradelab)',
-    description: 'Designed and built backend systems for a fast-moving ad-tech platform.',
+    description:
+      'Designed and built backend systems for a fast-moving ad-tech platform. Grew from senior engineer into team lead of 3 backend engineers, owning technical decisions and delivery of backend applications for high-volume programmatic bidding, and mentoring the team day to day. Drawing on prior CTO experience, coached engineers into management roles.',
   },
   {
     period: '2011 // 2015',
     role: 'CTO, Platform Development Director',
     org: 'One Heart Communication',
     description:
-      'Owned technology end-to-end in a startup context architecture, platform, and team, from early product to scale.',
+      'Reporting directly to the CEO, owned technology end-to-end: the architecture and delivery of a CRM for nonprofit crowdsourcing and fundraising on a pragmatic PHP/Symfony stack, and a hybrid team of 6 developers (3 in-house, 3 outsourced), including oversight of the Polish branch.',
   },
   {
     period: '2007 // 2011',
@@ -38,6 +32,7 @@ export const experience = [
 ];
 
 if (flags.displayNewRole) {
+  experience[0].period = '2022 // 2026';
   experience.unshift({
     period: '2026 // Today',
     role: 'Head Of BTech Alliance',
@@ -49,10 +44,10 @@ if (flags.displayNewRole) {
 
 // Soft skills, presented as a flat set of pills, no ranking implied.
 export const softSkills = [
-  'Problem solving',
-  'Creativity',
-  'Curiosity',
+  'People leadership',
+  'Stakeholder management',
   'Communication',
-  'Time management & planning',
+  'Problem solving',
   'Emotional intelligence',
+  'Curiosity',
 ];

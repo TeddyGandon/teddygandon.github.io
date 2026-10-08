@@ -21,7 +21,7 @@ watchEffect(() => {
     activeTag.value
       ? {
           title: `Articles tagged "${activeTag.value}"`,
-          description: `Articles tagged "${activeTag.value}" — writing by Teddy Gandon, Engineering Manager.`,
+          description: `Articles tagged "${activeTag.value}" — writing by Teddy Gandon, Senior Engineering Manager.`,
           path: '/articles',
         }
       : {
