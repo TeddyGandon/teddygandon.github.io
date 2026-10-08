@@ -42,32 +42,25 @@ Body content in regular Markdown.
 Articles are picked up automatically (`src/utils/articles.js`) — no registration step,
 no rebuild-time config. Sort order is by `date`, descending.
 
-## Themes
+## CV generation
 
-Each `src/assets/scss/_variables-*.scss` file defines a full theme under the same set of
-variable names: palette (`$ink`, `$paper`, `$gold`, `$teal`, ...), the inputs fed into
-Bulma's engine (`$bulma-scheme-h/-s`, `$bulma-accent`, `$bulma-family`), corner radii, and
-motion tokens (`$speed-slow/-slower`, `$easing-calm`). Available themes: `paper` (the
-default calm/editorial look), `cyberpunk`, `christmas`, `halloween`, `amiga`.
+```
+Create a new CV for a job offer by copying "template.pdf.html" into another name - the name should be related to the following job description.
 
-`main.scss` picks one of these at **compile time** via `@use '<file>' as vars;` on its
-first line — that file's radii, motion, font, and Bulma's own accent color get baked into
-the CSS build and can't change without a rebuild.
+Adapt the new CV according to the job description. You can change the content of the CV that you find relevent to pass through a pre-selection. You can change the current job title on the CV that fits more the job description.
 
-The *palette* (just the color variables) is also runtime-switchable, without a rebuild:
-`_theme-vars.scss` compiles all five files' colors into CSS custom properties scoped
-under `[data-palette="..."]` on `<html>`, and `src/utils/theme.js` exposes a reactive
-`theme` ref that sets that attribute. `SiteFooter.vue` uses this to show a small emoji
-button that suggests (and applies) a theme based on the current date/time: September →
-Amiga (💾), October → Halloween (🎃), December → Christmas (🎄), 11pm–4am any other time →
-Cyberpunk (🌆); outside those windows the button doesn't render. Gated by the
-`displayChangingTheme` flag (see below).
+Ensure that the new CV pass AI filters and HR software prefilters.
 
-A few themes also layer a purely decorative, self-contained ambient effect directly in
-their own `_variables-*.scss` file (a neon flicker for cyberpunk, thunder flashes for
-halloween, falling snow for christmas, a scanline/CRT filter plus greyscale images for
-amiga), each scoped to its own `[data-palette=...]` selector and respecting
-`prefers-reduced-motion`.
+The job description comes from a company named "[NAME]". The job offer title is "[NAME]".
+
+Here is the job description :
+
+---
+
+[JOB DESCRIPTION]
+
+---
+```
 
 ## Data
 
@@ -82,9 +75,17 @@ imported directly by the views that render them:
   applies in practice, rendered on `ExperienceView`. `url` is a `'#'` placeholder per entry
   until the real verification badge links (Credly / Scrum.org / Coursera) are added.
 - **`projects.js`** (`sideProjects`) — personal side projects, rendered on `ProjectsView`.
-- **`linkedin.js`** (`linkedinPosts`) — a hand-curated excerpt of LinkedIn posts, rendered on
-  `HomeView`. LinkedIn has no public API for reading a profile's own posts, so this list is
-  updated manually whenever there's a new post worth surfacing.
+- **`linkedin.js`** (`linkedinPosts`) — LinkedIn posts, rendered on `HomeView`. LinkedIn has
+  no public API for reading a profile's own posts, so `npm run load-external-sources`
+  (`scripts/load-external-sources/connectors/linkedin.js`) scrapes the latest ones (with reaction and comment counts) from the public
+  profile page and merges them into this file; entries can still be added by hand.
+- **`official-publications.js`** (`officialPublications`) — articles published on Medium and
+  LeadDev, loaded by the same script (`scripts/load-external-sources.js`).
+
+Both loaded files are upserted, never rewritten from scratch (`scripts/load-external-sources/merge.js`):
+fetched entries are matched to stored ones by URL and updated in place or added. Stored entries
+are never deleted, even when a source fails or stops listing them, and empty fetched values don't
+overwrite stored ones. Hand-added entries are kept too.
 
 ## Flags
 
@@ -108,6 +109,10 @@ regardless of the logic above it — remove that line to restore the date-gated 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site and
 publishes it to GitHub Pages automatically. In the repo's Settings → Pages, set the
 source to **GitHub Actions** (one-time setup).
+
+`.github/workflows/update-external-sources.yml` runs `npm run load-external-sources` every day
+at 05:00 UTC (or on demand from the Actions tab). If `src/data/` changed, it commits the update
+to `main` and starts the deploy workflow.
 
 This repo is a user/organization page (`teddygandon.github.io`), so it's served at the
 domain root — no `base` path configuration needed in `vite.config.js`. `public/404.html`
