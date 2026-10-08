@@ -95,7 +95,7 @@ export const linkedinPosts = [
     "url": "https://www.linkedin.com/posts/teddygandon_kochi-kochitech-mentorship-activity-7468262931688751105-aLbe",
     "image": "https://media.licdn.com/dms/image/v2/D5622AQFBmTawgNNY-w/feedshare-shrink_800/B56Z6SQHJGHcAc-/0/1780570158087?e=2147483647&v=beta&t=JDSfYAxD5MfpAk3mDKAGEyThz6FwNwkzrzYwYd9wM3Y",
     "reactions": {
-      "total": 482,
+      "total": 481,
       "types": [
         "LIKE",
         "EMPATHY",
