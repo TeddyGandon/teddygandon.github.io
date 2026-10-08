@@ -34,8 +34,7 @@ function getEasterEggTheme() {
       <span aria-hidden="true">&bull;</span>
       <a href="https://github.com/teddygandon" target="_blank" rel="noopener noreferrer"> GitHub </a>
       <span aria-hidden="true">&bull;</span>
-      <a href="/teddy-gandon-cv2.pdf" download v-if="flags.displayCertifications">Download CV</a>
-      <a href="/teddy-gandon-cv.pdf" download v-if="!flags.displayCertifications">Download CV</a>
+      <a href="/teddy-gandon-cv.pdf" download>Download CV</a>
       <span aria-hidden="true" v-if="getEasterEggTheme() != null && flags.displayChangingTheme">&bull;</span>
       <a
           type="button"
