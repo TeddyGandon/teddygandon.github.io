@@ -37,7 +37,7 @@ watch(
         <RouterLink to="/experience" active-class="is-active">Experience</RouterLink>
         <RouterLink to="/articles" active-class="is-active">Articles</RouterLink>
         <RouterLink to="/projects" active-class="is-active">Side projects</RouterLink>
-        <RouterLink to="/contact" active-class="is-active">Contact</RouterLink>
+        <a href="https://www.linkedin.com/in/teddygandon/" target="_blank" rel="noopener noreferrer">Contact me on LinkedIn</a>
       </div>
     </div>
   </nav>
