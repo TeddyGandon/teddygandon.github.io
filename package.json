@@ -9,7 +9,12 @@
     "build": "node scripts/load-external-sources.js && vite build && node scripts/generate-sitemap.js",
     "preview": "vite preview",
     "load-external-sources": "node scripts/load-external-sources.js",
-    "export-cv-to-pdf": "node scripts/export-cv-to-pdf.js"
+    "export-cv-to-pdf": "node scripts/export-cv-to-pdf.js",
+    "test": "vitest run --project unit",
+    "test:watch": "vitest --project unit",
+    "test:e2e": "vitest run --project e2e",
+    "test:spelling": "cspell --no-progress",
+    "test:all": "npm run test:spelling && npm test && npm run build && npm run test:e2e"
   },
   "dependencies": {
     "@fontsource/eb-garamond": "^5.3.0",
@@ -21,8 +26,12 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.8",
+    "@vue/test-utils": "^2.5.1",
+    "cspell": "^9.8.0",
+    "happy-dom": "^20.14.6",
     "puppeteer": "^25.13.0",
     "sass": "^1.102.0",
-    "vite": "^8.2.0"
+    "vite": "^8.2.0",
+    "vitest": "^5.0.1"
   }
 }

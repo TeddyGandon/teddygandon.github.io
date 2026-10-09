@@ -4,7 +4,7 @@
 // posts to linkedin.js. Run manually with `npm run load-external-sources`
 // whenever there's something new to surface. Stored entries are never
 // deleted — fetched ones are updated in place or added (see merge.js).
-import { dirname, join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fetchMediumArticles } from './load-external-sources/connectors/medium.js';
 import { fetchLeadDevArticles } from './load-external-sources/connectors/leaddev.js';
@@ -19,7 +19,7 @@ const banner =
 
 // Each output file aggregates one or more sources. Add an entry to `sources`
 // to pull from another platform later.
-const outputs = [
+export const outputs = [
   {
     file: 'official-publications.js',
     exportName: 'officialPublications',
@@ -36,24 +36,33 @@ const outputs = [
   },
 ];
 
-await Promise.all(
-  outputs.map(async ({ file, exportName, sources }) => {
-    const results = await Promise.allSettled(sources.map((source) => source.fetch()));
+export async function loadExternalSources({ dataDir = join(__dirname, '../src/data'), outputs: targets = outputs } = {}) {
+  return Promise.all(
+    targets.map(async ({ file, exportName, sources }) => {
+      const results = await Promise.allSettled(sources.map((source) => source.fetch()));
 
-    const entries = [];
-    results.forEach((result, index) => {
-      const { label } = sources[index];
-      if (result.status === 'fulfilled') {
-        entries.push(...result.value);
-        console.log(`[load-external-sources] ${label}: ${result.value.length} entries fetched`);
-      } else {
-        // A failed source contributes nothing; its stored entries are kept as-is.
-        console.error(`[load-external-sources] ${label} failed: ${result.reason.message}`);
-      }
-    });
+      const entries = [];
+      results.forEach((result, index) => {
+        const { label } = sources[index];
+        if (result.status === 'fulfilled') {
+          entries.push(...result.value);
+          console.log(`[load-external-sources] ${label}: ${result.value.length} entries fetched`);
+        } else {
+          // A failed source contributes nothing; its stored entries are kept as-is.
+          console.error(`[load-external-sources] ${label} failed: ${result.reason.message}`);
+        }
+      });
 
-    const path = join(__dirname, '../src/data', file);
-    const { total, added, updated, kept } = await upsertDataFile({ path, exportName, banner, entries });
-    console.log(`${file} written with ${total} entries (${added} added, ${updated} updated, ${kept} kept)`);
-  }),
-);
+      const path = join(dataDir, file);
+      const stats = await upsertDataFile({ path, exportName, banner, entries });
+      console.log(
+        `${file} written with ${stats.total} entries (${stats.added} added, ${stats.updated} updated, ${stats.kept} kept)`,
+      );
+      return { file, ...stats };
+    }),
+  );
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  await loadExternalSources();
+}

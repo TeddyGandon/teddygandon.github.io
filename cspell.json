@@ -1,0 +1,63 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en",
+  "files": [
+    "src/content/articles/*.md",
+    "src/views/*.vue",
+    "src/components/*.vue",
+    "src/data/{experience,skills,certifications,projects}.js",
+    "index.html",
+    "public/404.html",
+    "public/cv/*.html"
+  ],
+  "ignorePaths": [
+    "node_modules",
+    "dist"
+  ],
+  "ignoreRegExpList": [
+    "/https?:\\/\\/\\S+/g",
+    "/fa-[a-z-]+/g"
+  ],
+  "words": [
+    "Autograf",
+    "Automatica",
+    "Baccalauréat",
+    "Bainbridge",
+    "Bandura",
+    "Bengaluru",
+    "bootcamp",
+    "Brototype",
+    "Compagnonnage",
+    "crowdsourcing",
+    "Dweck",
+    "Edmondson",
+    "Forsgren",
+    "Fournier",
+    "Gandon",
+    "Geert",
+    "Hofstede",
+    "Ivanova",
+    "kata",
+    "Kolb",
+    "Laravel",
+    "Lewin",
+    "Lisanne",
+    "METR",
+    "Mikula",
+    "Nasierowski",
+    "oldstyle",
+    "RACI",
+    "relitigate",
+    "roadmapping",
+    "roguelike",
+    "Shue",
+    "standups",
+    "Symfony",
+    "tailorable",
+    "Thierry",
+    "throughline",
+    "Tradelab",
+    "upskilling"
+  ]
+}
