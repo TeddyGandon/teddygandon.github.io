@@ -46,8 +46,8 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
     <div class="container">
       <div class="hero-grid">
         <div class="hero-copy">
+          <p class="hero-eyebrow" v-reveal>Leading engineering teams across borders</p>
           <h1 class="title hero-title is-1 mt-2" v-reveal>Teddy Gandon</h1>
-          <p class="hero-eyebrow" v-reveal>Driving squads worldwide</p>
           <p class="hero-lede mt-4" v-reveal>
             Twenty years of engineering, specialized in multicultural management. I build teams that ship
             calmly and deliberately across languages, time zones, and working styles.
