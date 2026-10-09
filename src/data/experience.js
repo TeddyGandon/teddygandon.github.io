@@ -38,7 +38,7 @@ if (flags.displayNewRole) {
     role: 'Head Of BTech Alliance',
     org: 'Believe France',
     description:
-      'Leading the BTech Alliance, an outsourcing framework, taking the lead on all outsourced engineering teams globally.',
+      'Leading the BTech Alliance, an outsourcing framework, taking the lead on all outsourced engineering teams globally. Driving 40+ engineers worldwide through engineering managers, owning delivery of several internal platforms for the music industry. Designed the operational framework behind faster onboarding, clearer roles, horizontal scaling and better delivery, and brought AI-assisted engineering (Claude, Gemini) into the squads\' day-to-day work.',
   });
 }
 
