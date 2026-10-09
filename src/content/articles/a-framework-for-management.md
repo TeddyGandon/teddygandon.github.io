@@ -70,9 +70,9 @@ If you want to craft a framework, here's what to consider:
 | Part                | Description                                                                                               |
 | ------------------- | --------------------------------------------------------------------------------------------------------- |
 | Manifesto           | Describes the values of the framework and what it brings to us.                                           |
-| Roles & scopes      | Detailled view of roles and scopes in each of those roles                                                 |
+| Roles & scopes      | Detailed view of roles and scopes in each of those roles                                                 |
 | Activities          | The rituals activities that brings us to excellence (seminars, etc.)                                      |
-| Meetings framwork   | An extensive list of all the meetings describing the pace, the time, duration, requirements and outcomes  |
+| Meetings framework   | An extensive list of all the meetings describing the pace, the time, duration, requirements and outcomes  |
 | Metrics             | Reveal all the metrics you are collecting for full transparency, **and how you are using them**           |
 | Compliance strategy | Describes how and when the compliance is integrated to what the team is crafting                          |
 

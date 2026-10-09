@@ -29,7 +29,7 @@ None of this makes AI a replacement for judgment and **it was never going to be*
 
 ## ...and why do I need AI now
 
-As my responsabilities are growing and my scope is getting larger, I just needed something: time. Investing time in creating skills and refining them was in fact a time saver. But not only; the context switching is real when you are managing several squads and nothing is more energy-intensive than the context switching.
+As my responsibilities are growing and my scope is getting larger, I just needed something: time. Investing time in creating skills and refining them was in fact a time saver. But not only; the context switching is real when you are managing several squads and nothing is more energy-intensive than the context switching.
 
 Nowadays, I am using them for:
 - Surfacing the problems by grouping sources
