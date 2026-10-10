@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" font-family="Georgia, serif">
+  <rect width="800" height="360" fill="#16171c"/>
+  <g stroke="#7fa8a0" stroke-width="2" fill="none">
+    <line x1="400" y1="110" x2="190" y2="230"/>
+    <line x1="400" y1="110" x2="400" y2="230"/>
+    <line x1="400" y1="110" x2="610" y2="230"/>
+  </g>
+  <rect x="300" y="50" width="200" height="60" rx="10" fill="#cdbd98"/>
+  <text x="400" y="87" text-anchor="middle" font-size="20" fill="#16171c">Engineering Manager</text>
+  <g fill="#23262d" stroke="#7fa8a0" stroke-width="2">
+    <rect x="100" y="230" width="180" height="60" rx="10"/>
+    <rect x="310" y="230" width="180" height="60" rx="10"/>
+    <rect x="520" y="230" width="180" height="60" rx="10"/>
+  </g>
+  <g font-size="18" fill="#e8e2d6" text-anchor="middle">
+    <text x="190" y="266">Squad A</text>
+    <text x="400" y="266">Squad B</text>
+    <text x="610" y="266">Platform</text>
+  </g>
+</svg>
