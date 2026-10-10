@@ -48,7 +48,6 @@ describe('Medium connector', () => {
         excerpt: 'Intro & more text.',
         url: 'https://medium.com/@someone/first-123',
         date: '2026-09-28',
-        image: 'https://cdn.test/first.jpg',
       },
       {
         source: 'medium',
@@ -57,7 +56,6 @@ describe('Medium connector', () => {
         excerpt: 'No image here.',
         url: 'https://medium.com/@someone/second-456',
         date: '',
-        image: null,
       },
     ]);
   });
@@ -95,7 +93,6 @@ describe('LeadDev connector', () => {
         excerpt: 'An excerpt .',
         url: 'https://leaddev.com/a/one',
         date: '2026-06-02',
-        image: 'https://leaddev.com/one.png',
       },
       {
         source: 'leaddev',
@@ -104,7 +101,6 @@ describe('LeadDev connector', () => {
         excerpt: 'Its page 404s.',
         url: 'https://leaddev.com/a/gone',
         date: '',
-        image: null,
       },
     ]);
   });

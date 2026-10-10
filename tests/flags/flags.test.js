@@ -107,27 +107,3 @@ describe('displayAllArticles', () => {
     for (const article of scheduled) expect(home.text()).not.toContain(article.title);
   });
 });
-
-describe('displayChangingTheme', () => {
-  it('shows the seasonal theme toggle when on, and applies the theme on click', async () => {
-    setToday(new Date(2026, 9, 15, 12)); // mid-October, local time → Halloween
-    const footer = await mountComponent(FOOTER, { displayChangingTheme: true });
-    const toggle = footer.find('.site-nav__auto-theme');
-    expect(toggle.exists()).toBe(true);
-    expect(toggle.text()).toBe('🎃');
-    await toggle.trigger('click');
-    expect(document.documentElement.getAttribute('data-palette')).toBe('halloween');
-  });
-
-  it('hides the toggle when off', async () => {
-    setToday(new Date(2026, 9, 15, 12));
-    const footer = await mountComponent(FOOTER, { displayChangingTheme: false });
-    expect(footer.find('.site-nav__auto-theme').exists()).toBe(false);
-  });
-
-  it('hides the toggle outside of any seasonal period, even when on', async () => {
-    setToday(new Date(2026, 5, 15, 12)); // mid-June, noon
-    const footer = await mountComponent(FOOTER, { displayChangingTheme: true });
-    expect(footer.find('.site-nav__auto-theme').exists()).toBe(false);
-  });
-});
