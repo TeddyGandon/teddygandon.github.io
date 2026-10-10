@@ -280,6 +280,7 @@ a {
   border-top: 1px solid var(--ink-line);
   color: var(--paper-muted);
   text-align: center;
+  background: var(--ink-raised);
 }
 
 .site-footer__links a {
@@ -441,6 +442,12 @@ a {
   justify-self: center;
 }
 
+@media screen and (max-width: 768px) {
+  .hero-medallion-wrap {
+    display: none;
+  }
+}
+
 .hero-medallion {
   width: 168px;
   height: 168px;
@@ -535,7 +542,7 @@ a {
   color: var(--gold);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin-bottom: 0.75rem;
 }
 
@@ -772,7 +779,7 @@ a {
 
 @media screen and (min-width: 769px) {
   .card-grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   }
 }
 

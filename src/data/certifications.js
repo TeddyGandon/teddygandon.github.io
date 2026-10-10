@@ -3,15 +3,6 @@
 // (Credly / Scrum.org / Coursera) is provided — swap it in per cert then.
 export const certifications = [
   {
-    name: 'Professional Scrum Master I (PSM I)',
-    date: 'Sept 2026',
-    issuer: 'Scrum.org',
-    url: '#',
-    description: 'Agile & distributed team governance, sprint mechanics, and async operational workflows.',
-    appliedNote:
-      'Applied directly to how I run sprints across time zones: async standups, written retros, and a DoD that survives translation.',
-  },
-  {
     name: 'Google Cloud Digital Leader (CDL)',
     issuer: 'Google / Coursera',
     date: 'Oct 2026',
@@ -20,7 +11,6 @@ export const certifications = [
     appliedNote:
       'Grounds the architecture and cost conversations I already have with engineering leads across GCP-hosted teams.',
   },
-  /*
   {
     name: 'Google Project Management Professional Certificate',
     issuer: 'Google / Coursera',
@@ -30,5 +20,4 @@ export const certifications = [
     appliedNote:
       'Formalizes the multi-stakeholder governance and risk tracking behind delivery spread across three continents.',
   },
-  */
 ];
