@@ -48,7 +48,7 @@ export async function fetchMediumArticles({ username }) {
       excerpt: excerptFrom(content),
       url: cleanUrl(link),
       date: pubDate ? new Date(pubDate).toISOString().slice(0, 10) : '',
-      image: firstImage(content),
+      // image: firstImage(content),
     });
   }
   return articles;

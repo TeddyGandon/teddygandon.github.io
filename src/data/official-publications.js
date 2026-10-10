@@ -7,7 +7,6 @@ export const officialPublications = [
     "title": "What multicultural management actually means, day after day",
     "excerpt": "“Multicultural management” shows up on a lot of profiles, mine included, usually as a single line next to “20 years of engineering”. It sounds like a value statement. But in practice, it’s a set of recurring, concrete…",
     "url": "https://medium.com/believe-tech/what-multicultural-management-actually-means-day-after-day-26455c58ec5f",
-    "date": "2026-09-28",
-    "image": "https://cdn-images-1.medium.com/max/1024/1*ZemfmCfF3uyhGdZaDH8GEw.jpeg"
+    "date": "2026-09-28"
   }
 ];

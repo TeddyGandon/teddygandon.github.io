@@ -51,6 +51,6 @@ export async function fetchLeadDevArticles({ username }) {
     excerpt: card.excerpt,
     url: card.url,
     date: metas[index].date,
-    image: metas[index].image,
+    // image: metas[index].image,
   }));
 }
