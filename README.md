@@ -62,38 +62,37 @@ Body content in regular Markdown.
 Articles are picked up automatically (`src/utils/articles.js`) — no registration step,
 no rebuild-time config. Sort order is by `date`, descending.
 
-## CV generation
+## Resume generation
 
 CVs live in `public/cv/` as printable A4 HTML pages named `*.pdf.html` (`template.pdf.html` is
 the master; `template-headof.pdf.html` is a variant). The HTML comment at the top of
 `template.pdf.html` describes which blocks may be tailored for a job offer and which may not.
 
-### Exporting a CV to PDF
+### Exporting a resume to PDF
 
 ```sh
 npm run export-cv-to-pdf                     # public/cv/template.pdf.html        -> public/cv/template.pdf
-npm run export-cv-to-pdf -- headof           # public/cv/template-headof.pdf.html -> public/cv/template-headof.pdf
-npm run export-cv-to-pdf -- template-headof  # same as above; a full file name works too
+npm run export-cv-to-pdf -- template         # same as above; a full file name works too
 ```
 
-`scripts/export-cv-to-pdf.js` renders the CV with [Puppeteer](https://pptr.dev)'s headless
+`scripts/export-cv-to-pdf.js` renders the resume with [Puppeteer](https://pptr.dev)'s headless
 Chrome, which is downloaded by `npm install` (dev dependency), so no local browser is needed.
 It waits for the EB Garamond fonts to load and uses the CV's own `@page` rule (A4, no margin).
 The PDF is written next to its HTML source, and the script reports the page count and warns
-when the CV no longer fits on one page. An unknown name exits with the list of available CVs.
+when the resume no longer fits on one page. An unknown name exits with the list of available CVs.
 
 Note: files in `public/` are deployed with the site, so generated PDFs become public too.
 
-### Tailoring a CV to a job offer
+### Tailoring a resume to a job offer
 
 Prompt to use with Claude Code:
 
 ```
-Create a new CV for a job offer by copying "template.pdf.html" into another name - the name should be related to the following job description.
+Create a new resume for a job offer by copying "template.pdf.html" into another name - the name should be related to the following job description.
 
-Adapt the new CV according to the job description. You can change the content of the CV that you find relevent to pass through a pre-selection. You can change the current job title on the CV that fits more the job description.
+Adapt the new resume according to the job description. You can change the content of the resume that you find relevent to pass through a pre-selection. You can change the current job title on the resume that fits more the job description.
 
-Ensure that the new CV pass AI filters and HR software prefilters.
+Ensure that the new resume pass AI filters and HR software prefilters.
 
 The job description comes from a company named "[NAME]". The job offer title is "[NAME]".
 
