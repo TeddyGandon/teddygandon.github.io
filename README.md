@@ -23,6 +23,26 @@ npm run build   # outputs to dist/
 npm run preview # serve the production build locally
 ```
 
+## Test
+
+```sh
+npm test              # unit tests: flags, scripts, content (Vitest)
+npm run test:spelling # typos in articles, views, data and CVs (cspell)
+npm run test:e2e      # smoke-tests every page of dist/ in headless Chrome — build first
+npm run test:all      # all of the above, build included
+```
+
+- **`tests/flags/`** — mounts the views with each flag on and off, and checks what's shown.
+- **`tests/scripts/`** — sitemap generation, the upsert merge, the Medium / LeadDev / LinkedIn
+  connectors (against fixtures, with `fetch` mocked) and the load-external-sources orchestration.
+- **`tests/content.test.js`** — article front matter and the shape of the generated data files.
+- **`tests/e2e/`** — serves the build with `vite preview` and visits every sitemap URL, every
+  article (scheduled ones included) and every internal link: no JS/console error, no failed
+  request, no broken image, no 404 view. Third-party requests are stubbed.
+
+Unknown-but-correct words (names, jargon) go in the `words` list of `cspell.json`. The deploy
+workflow runs all of these and doesn't publish if one fails.
+
 ## Writing articles
 
 Drop a Markdown file into `src/content/articles/`. The filename (minus `.md`) becomes the
