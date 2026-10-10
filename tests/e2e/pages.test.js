@@ -7,6 +7,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import puppeteer from 'puppeteer';
+import { parseFrontmatter } from '../../src/utils/frontmatter.js';
 import { preview } from 'vite';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
@@ -25,6 +26,8 @@ const sitemapPaths = [...readFileSync(join(distDir, 'sitemap.xml'), 'utf-8').mat
 );
 const articlePaths = readdirSync(resolve('src/content/articles'))
   .filter((file) => file.endsWith('.md'))
+  // Drafts aren't built into the site unless the displayDrafts flag is on, so they'd 404.
+  .filter((file) => parseFrontmatter(readFileSync(resolve('src/content/articles', file), 'utf-8')).data.status !== 'draft')
   .map((file) => `/articles/${file.replace(/\.md$/, '')}`);
 
 let server;

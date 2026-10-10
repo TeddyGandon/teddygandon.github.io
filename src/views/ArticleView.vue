@@ -1,7 +1,8 @@
 <script setup>
-import { computed, ref, watchEffect } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'vue';
 import { RouterLink } from 'vue-router';
 import { getArticleBySlug } from '../utils/articles';
+import { mountCharts } from '../utils/charts';
 import { formatDate } from '../utils/format';
 import { flags } from '../data/flags';
 import { setPageMeta } from '../utils/seo';
@@ -40,6 +41,29 @@ async function copyLink() {
   }, 2000);
 }
 
+// Charts are mounted after v-html has rendered, and torn down when the article
+// changes. `run` guards against a slow lazy import finishing after navigation.
+const prose = ref(null);
+let destroyCharts = () => {};
+let run = 0;
+
+async function renderCharts() {
+  destroyCharts();
+  destroyCharts = () => {};
+  const current = ++run;
+  const destroy = await mountCharts(prose.value);
+  if (current === run) destroyCharts = destroy;
+  else destroy();
+}
+
+onMounted(renderCharts);
+watch(() => article.value?.html, renderCharts, { flush: 'post' });
+
+onBeforeUnmount(() => {
+  run++;
+  destroyCharts();
+});
+
 watchEffect(() => {
   setPageMeta(
     article.value
@@ -74,7 +98,7 @@ watchEffect(() => {
         <div v-if="!flags.displayArticlesTags && article.tags.length" class="mb-5">
           <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ tag }}</span>
         </div>
-        <div class="prose mt-5" v-html="article.html" />
+        <div ref="prose" class="prose mt-5" v-html="article.html" />
 
         <div class="article-share">
           <a
