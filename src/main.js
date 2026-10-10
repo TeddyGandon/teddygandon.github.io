@@ -18,7 +18,6 @@ import './assets/scss/main.scss';
 import App from './App.vue';
 import router from './router';
 import { reveal } from './directives/reveal';
-import './utils/theme'; // applies the stored palette and keeps it reactive for the session
 
 const app = createApp(App);
 app.use(router);
