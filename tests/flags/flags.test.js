@@ -78,7 +78,7 @@ describe('displayNewRole', () => {
   });
 });
 
-describe('displayAllArticles', () => {
+describe('displayFutureArticles', () => {
   // A date where some articles are already published and others still scheduled.
   const today = '2026-08-10';
   const published = articleFiles.filter((article) => article.date <= today);
@@ -91,19 +91,53 @@ describe('displayAllArticles', () => {
 
   it('lists scheduled articles too when on', async () => {
     setToday(new Date(`${today}T12:00:00Z`));
-    const list = await mountView(ARTICLES, { displayAllArticles: true }, { route: '/articles' });
+    const list = await mountView(ARTICLES, { displayFutureArticles: true }, { route: '/articles' });
     expect(list.text()).toContain(`${articleFiles.length} pieces`);
     for (const article of scheduled) expect(list.text()).toContain(article.title);
   });
 
   it('only lists articles dated today or earlier when off', async () => {
     setToday(new Date(`${today}T12:00:00Z`));
-    const list = await mountView(ARTICLES, { displayAllArticles: false }, { route: '/articles' });
+    const list = await mountView(ARTICLES, { displayFutureArticles: false }, { route: '/articles' });
     expect(list.text()).toContain(`${published.length} ${published.length === 1 ? 'piece' : 'pieces'}`);
     for (const article of published) expect(list.text()).toContain(article.title);
     for (const article of scheduled) expect(list.text()).not.toContain(article.title);
 
-    const home = await mountView(HOME, { displayAllArticles: false });
+    const home = await mountView(HOME, { displayFutureArticles: false });
     for (const article of scheduled) expect(home.text()).not.toContain(article.title);
+  });
+});
+
+describe('displayDrafts', () => {
+  const drafts = readdirSync(articlesDir)
+    .filter((file) => file.endsWith('.md'))
+    .map((file) => ({
+      slug: file.replace(/\.md$/, ''),
+      ...parseFrontmatter(readFileSync(join(articlesDir, file), 'utf-8')).data,
+    }))
+    .filter((article) => article.status === 'draft');
+
+  it('has a draft article to test with', () => {
+    expect(drafts.length).toBeGreaterThan(0);
+  });
+
+  it('lists drafts and opens them at their URL when on', async () => {
+    const list = await mountView(ARTICLES, { displayDrafts: true, displayFutureArticles: true }, { route: '/articles' });
+    for (const draft of drafts) {
+      expect(list.text()).toContain(draft.title);
+      const page = await mountView(ARTICLE, { displayDrafts: true }, { props: { slug: draft.slug } });
+      expect(page.text()).not.toContain('Article not found');
+    }
+  });
+
+  it('hides drafts from the lists and their URL when off', async () => {
+    const list = await mountView(ARTICLES, { displayDrafts: false, displayFutureArticles: true }, { route: '/articles' });
+    const home = await mountView(HOME, { displayDrafts: false, displayFutureArticles: true });
+    for (const draft of drafts) {
+      expect(list.text()).not.toContain(draft.title);
+      expect(home.text()).not.toContain(draft.title);
+      const page = await mountView(ARTICLE, { displayDrafts: false }, { props: { slug: draft.slug } });
+      expect(page.text()).toContain('Article not found');
+    }
   });
 });

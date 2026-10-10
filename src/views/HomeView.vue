@@ -14,7 +14,7 @@ const stats = [
   { value: '4', label: 'Companies, one throughline' },
 ];
 
-const latestArticles = flags.displayAllArticles ?
+const latestArticles = flags.displayFutureArticles ?
   computed(() => getAllArticles().slice(0, 3)) :
   computed(() => getArticles().slice(0, 3));
 // Only surface posts that resonated — 50+ reactions.
@@ -51,6 +51,9 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
           <p class="hero-lede mt-4" v-reveal>
             Twenty years of engineering, specialized in multicultural management. I build teams that ship
             calmly and deliberately across languages, time zones, and working styles.
+          </p>
+          <p class="hero-lede is-size-6 mt-2" v-if="flags.displayAvailability" v-reveal>
+            <strong class="has-text-paper-muted">Opened to new position.</strong>
           </p>
           <p class="hero-lede is-size-6 mt-2" v-if="flags.displayCertifications" v-reveal>
             <strong class="has-text-paper-muted">Certified PSM I &amp; Google Cloud Digital Leader.</strong>

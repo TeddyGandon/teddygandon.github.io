@@ -7,7 +7,7 @@ import { flags } from '../data/flags';
 import { setPageMeta } from '../utils/seo';
 
 const route = useRoute();
-const articles = flags.displayAllArticles ? getAllArticles() : getArticles();
+const articles = flags.displayFutureArticles ? getAllArticles() : getArticles();
 const allTags = computed(() => [...new Set(articles.flatMap((article) => article.tags))].sort());
 const activeTag = computed(() => route.query.tag ?? null);
 const filteredArticles = computed(() =>
@@ -69,15 +69,15 @@ watchEffect(() => {
           class="article-feature mt-6"
           v-reveal
         >
-          <span class="article-feature__badge">{{ activeTag ? 'Top match' : 'Latest' }}</span>
           <p class="article-card__date">
             {{ formatDate(featuredArticle.date) }} <span aria-hidden="true">·</span> {{ featuredArticle.readingTime }}
           </p>
-          <h2 class="article-feature__title">{{ featuredArticle.title }}</h2>
-          <p class="article-feature__excerpt">{{ featuredArticle.excerpt }}</p>
           <div v-if="featuredArticle.tags.length" class="article-card__tags">
+            <span class="tag is-primary mr-2 is-uppercase">{{ activeTag ? 'Top match' : 'Latest' }}</span>
             <span v-for="tag in featuredArticle.tags" :key="tag" class="tag is-dark mr-2">{{ tag }}</span>
           </div>
+          <h2 class="article-feature__title">{{ featuredArticle.title }}</h2>
+          <p class="article-feature__excerpt">{{ featuredArticle.excerpt }}</p>
           <span class="featured-article__cta">Read the article →</span>
         </RouterLink>
 

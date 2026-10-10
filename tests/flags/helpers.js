@@ -6,7 +6,8 @@ import { mount, flushPromises } from '@vue/test-utils';
 import { createRouter, createMemoryHistory } from 'vue-router';
 
 export const ALL_OFF = {
-  displayAllArticles: false,
+  displayFutureArticles: false,
+  displayDrafts: false,
   displayCertifications: false,
   displayNewRole: false,
   displayArticlesTags: false,

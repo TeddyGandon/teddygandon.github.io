@@ -1,7 +1,9 @@
 const today = new Date().toISOString().slice(0, 10);
 
 export const flags = {
-  displayAllArticles: false,
+  displayFutureArticles: false,
+  displayDrafts: false,
   displayCertifications: false,
-  displayNewRole: false
+  displayNewRole: false,
+  displayAvailability: false,
 };

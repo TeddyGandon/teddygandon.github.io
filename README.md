@@ -135,7 +135,9 @@ overwrite stored ones. Hand-added entries are kept too.
 `src/data/flags.js` exports simple booleans that gate optional sections of the site,
 consumed via `v-if` in the relevant views/components:
 
-- **`displayAllArticles`** — bypass the future-dated article scheduling in `articles.js`
+- **`displayDrafts`** — shows articles with `status: draft` in the lists and at their URL;
+  off by default, for local/dev use.
+- **`displayFutureArticles`** — bypass the future-dated article scheduling in `articles.js`
   (see "Writing articles" above); for local/dev use.
 - **`displayCertifications`** — shows the Certifications section (and related mentions
   elsewhere); date-gated to flip on `2026-10-01`.
