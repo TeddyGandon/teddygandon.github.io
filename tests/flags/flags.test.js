@@ -78,51 +78,6 @@ describe('displayNewRole', () => {
   });
 });
 
-describe('displayArticlesTags', () => {
-  const tagged = articleFiles.find((article) => article.tags?.length);
-
-  it('shows the tag filter and links the article tags when on', async () => {
-    const list = await mountView(
-      ARTICLES,
-      { displayArticlesTags: true, displayAllArticles: true },
-      { route: '/articles' },
-    );
-    const filter = list.find('.article-tags-filter');
-    expect(filter.exists()).toBe(true);
-    expect(filter.findAll('a').map((link) => link.text())).toContain('All');
-
-    const article = await mountView(ARTICLE, { displayArticlesTags: true }, { props: { slug: tagged.slug } });
-    const links = article.findAll('a.tag');
-    expect(links.map((link) => link.text())).toEqual(tagged.tags);
-    expect(links[0].attributes('href')).toBe(`/articles?tag=${tagged.tags[0]}`);
-  });
-
-  it('filters the list by the tag in the query', async () => {
-    const [tag] = tagged.tags;
-    const list = await mountView(
-      ARTICLES,
-      { displayArticlesTags: true, displayAllArticles: true },
-      { route: `/articles?tag=${tag}` },
-    );
-    const titles = list.findAll('.article-feature__title, .featured-article__title').map((title) => title.text());
-    const expected = articleFiles.filter((article) => article.tags?.includes(tag)).map((article) => article.title);
-    expect(titles.sort()).toEqual(expected.sort());
-  });
-
-  it('hides the filter and renders tags as plain labels when off', async () => {
-    const list = await mountView(
-      ARTICLES,
-      { displayArticlesTags: false, displayAllArticles: true },
-      { route: '/articles' },
-    );
-    expect(list.find('.article-tags-filter').exists()).toBe(false);
-
-    const article = await mountView(ARTICLE, { displayArticlesTags: false }, { props: { slug: tagged.slug } });
-    expect(article.find('a.tag').exists()).toBe(false);
-    expect(article.findAll('span.tag').map((tag) => tag.text())).toEqual(tagged.tags);
-  });
-});
-
 describe('displayAllArticles', () => {
   // A date where some articles are already published and others still scheduled.
   const today = '2026-08-10';

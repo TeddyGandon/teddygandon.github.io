@@ -43,12 +43,11 @@ watchEffect(() => {
         engineering leadership, and the frameworks I keep coming back to.
       </p>
 
-      <div v-if="flags.displayArticlesTags && allTags.length" class="article-tags-filter mt-5" v-reveal>
+      <div v-if="allTags.length" class="article-tags-filter mt-5" v-reveal>
         <RouterLink :to="{ name: 'articles' }" class="tag is-dark mr-2" :class="{ 'is-active': !activeTag }">
           All
         </RouterLink>
           <RouterLink
-            v-if="flags.displayArticlesTags"
             v-for="tag in allTags"
             :key="tag"
             :to="{ name: 'articles', query: { tag } }"
@@ -93,11 +92,11 @@ watchEffect(() => {
             <p class="article-card__date">
               {{ formatDate(article.date) }} <span aria-hidden="true">·</span> {{ article.readingTime }}
             </p>
-            <h3 class="featured-article__title">{{ article.title }}</h3>
-            <p class="article-card__excerpt">{{ article.excerpt }}</p>
             <div v-if="article.tags.length" class="article-card__tags">
               <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ tag }}</span>
             </div>
+            <h3 class="featured-article__title">{{ article.title }}</h3>
+            <p class="article-card__excerpt">{{ article.excerpt }}</p>
           </RouterLink>
         </div>
       </template>
