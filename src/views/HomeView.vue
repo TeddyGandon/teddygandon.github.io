@@ -63,6 +63,9 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
             <RouterLink to="/experience" class="button is-primary is-outlined mr-3" v-if="flags.displayCertifications">
               View experience & certifications
             </RouterLink>
+            <a href="/teddy-gandon-resume.pdf" download class="button is-primary is-outlined mr-3">
+              Download resume
+            </a>
           </div>
         </div>
 

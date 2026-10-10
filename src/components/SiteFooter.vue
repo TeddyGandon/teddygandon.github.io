@@ -13,7 +13,7 @@ const year = new Date().getFullYear();
       <span aria-hidden="true">&bull;</span>
       <a href="https://github.com/teddygandon" target="_blank" rel="noopener noreferrer"> GitHub </a>
       <span aria-hidden="true">&bull;</span>
-      <a href="/teddy-gandon-cv.pdf" download>Download CV</a>
+      <a href="/teddy-gandon-resume.pdf" download>Download resume</a>
     </div>
     <p class="mt-4">
       <i class="has-text-grey-light" style="font-size: 0.9rem">The views expressed here are entirely my own and do not reflect the views of my employer.</i>
