@@ -55,6 +55,7 @@ body {
   color: var(--paper);
   min-height: 100vh;
   font-size: 15px;
+  
 }
 
 // Fixed to the viewport (not the document) so the wash stays put regardless
@@ -1038,8 +1039,7 @@ a {
 .article-feature {
   display: block;
   background: var(--ink-raised);
-  border: 1px solid var(--ink-line);
-  border-left: 3px solid var(--gold);
+  border: 2px solid var(--gold);
   border-radius: vars.$radius-medium;
   padding: 2.5rem 2.5rem 2.25rem;
   transition: border-color vars.$speed-slow vars.$easing-calm;
@@ -1129,6 +1129,13 @@ a {
   font-size: 1.5rem;
 }
 
+.prose h4 {
+  color: var(--bulma-text-strong);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 1.5rem 0 0.75rem;
+}
+
 .prose p {
   margin-bottom: 1.4rem;
 }
@@ -1169,14 +1176,44 @@ a {
   padding: 0;
 }
 
+// ```chart fences — the canvas is injected by utils/charts.js. The fixed
+// height reserves the space before Chart.js loads, so the text doesn't jump.
+.prose .md-chart {
+  margin: 2rem 0;
+}
+
+.prose .md-chart__canvas {
+  position: relative;
+  height: 320px;
+}
+
+.prose .md-chart figcaption {
+  margin-top: 0.75rem;
+  color: var(--paper-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 .prose ul,
 .prose ol {
   margin: 0 0 1.4rem 1.4rem;
 }
 
 .prose img {
+  display: block;
   max-width: 100%;
+  margin: 0 auto;
   border-radius: 8px;
+}
+
+// Caption convention: an italic line right below an image, in the same
+// paragraph (no blank line between them in the Markdown).
+.prose img + em {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--paper-muted);
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .prose table {
@@ -1188,6 +1225,7 @@ a {
   text-align: left;
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: 1.4rem;
 }
 
 .prose tr {
@@ -1201,8 +1239,17 @@ a {
   color: var(--paper);
 }
 
-.prose li {
+.prose ul > li {
   list-style: disc;
+}
+
+.prose ol > li {
+  list-style: decimal;
+}
+
+.prose li > ul,
+.prose li > ol {
+  margin-bottom: 0;
 }
 
 .prose strong {
