@@ -98,33 +98,6 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
     </div>
   </section>
 
-  <!--
-  <section class="section">
-    <div class="container container-narrow">
-      <p class="section-heading has-text-centered" v-reveal>What I bring</p>
-      <div class="has-text-centered" v-reveal>
-        <span v-for="skill in softSkills" :key="skill" class="skill-pill">{{ skill }}</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container container-narrow">
-      <div class="callout-card" v-reveal>
-        <p class="section-heading">Currently</p>
-        <p class="hero-lede">
-          Engineering Manager at <strong class="has-text-white">Believe France</strong>, since 2022 —
-          after five years at Jellyfish France (formerly Tradelab), and a startup CTO chapter before
-          that.
-        </p>
-        <RouterLink to="/experience" class="button is-text has-text-grey-light mt-3">
-          See the full path →
-        </RouterLink>
-      </div>
-    </div>
-  </section>
-  -->
-
   <section v-if="latestArticles.length" class="section">
     <div class="container container-narrow">
       <p class="section-heading" v-reveal>Latest writing</p>
