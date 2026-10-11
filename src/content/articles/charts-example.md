@@ -14,10 +14,11 @@ Charts are written as fenced code blocks tagged `chart`, holding a JSON object w
 {
   "type": "bar",
   "title": "Pull requests merged per quarter",
-  "labels": ["Q1", "Q2", "Q3", "Q4"],
+  "labels": ["Q1 '25", "Q2 '25", "Q3 '25", "Q4 '25", "Q1 '26", "Q2 '26", "Q3 '26", "Q4 '26"],
   "series": [
-    { "name": "Squad A", "data": [42, 51, 47, 60] },
-    { "name": "Squad B", "data": [35, 38, 49, 55] }
+    { "name": "Squad A", "data": [42, 51, 47, 60, 58, 63, 55, 68] },
+    { "name": "Squad B", "data": [35, 38, 49, 55, 52, 57, 61, 64] },
+    { "name": "Squad C", "data": [18, 24, 29, 33, 41, 38, 46, 50] }
   ]
 }
 ```

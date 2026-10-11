@@ -1316,6 +1316,13 @@ a {
   margin: 2rem 0;
 }
 
+// Desktop only: on mobile the chart keeps the full text width.
+@media screen and (min-width: 769px) {
+  .prose .md-chart {
+    margin-inline: 12.5%;
+  }
+}
+
 .prose .md-chart__canvas {
   position: relative;
   height: 320px;
@@ -1324,7 +1331,6 @@ a {
 .prose .md-chart figcaption {
   margin-top: 0.75rem;
   color: var(--paper-muted);
-  font-size: 0.9rem;
   text-align: center;
 }
 
