@@ -772,6 +772,139 @@ a {
   border-top: 1px solid var(--ink-line);
 }
 
+// Side projects: an image banner on top, labels, title, description, then a
+// footer with the note and the link label.
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+// Flex column, so the footers of two cards side by side line up at the bottom.
+.project-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: vars.$radius-medium;
+  transition:
+    transform vars.$speed-slow vars.$easing-calm,
+    border-color vars.$speed-slow vars.$easing-calm;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+
+.project-card__media {
+  position: relative;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+// Fades the bottom of the image into the card, so the banner and the text
+// read as one block.
+.project-card__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, var(--ink-raised));
+  pointer-events: none;
+}
+
+.project-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform vars.$speed-slower vars.$easing-calm;
+}
+
+.project-card:hover .project-card__media img {
+  transform: scale(1.03);
+}
+
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.project-card__labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-card__label {
+  color: var(--gold);
+  border: 1px solid rgb(from var(--gold) r g b / 0.35);
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.project-card__name {
+  color: var(--paper);
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.project-card__desc {
+  color: var(--paper-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.project-card__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ink-line);
+}
+
+.project-card__note {
+  color: var(--paper-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.project-card__cta {
+  color: var(--gold);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.project-card__cta span {
+  display: inline-block;
+  transition: transform vars.$speed-slow vars.$easing-calm;
+}
+
+.project-card:hover .project-card__cta span {
+  transform: translateX(3px);
+}
+
+@media screen and (max-width: 768px) {
+  .project-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-card__body {
+    padding: 1rem 1.25rem 1.5rem;
+  }
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
