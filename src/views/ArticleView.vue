@@ -3,7 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch, watchEffect } from 'v
 import { RouterLink } from 'vue-router';
 import { getArticleBySlug } from '../utils/articles';
 import { mountCharts } from '../utils/charts';
-import { formatDate } from '../utils/format';
+import { formatDate, formatTag } from '../utils/format';
 import { flags } from '../data/flags';
 import { setPageMeta } from '../utils/seo';
 import { SITE_URL } from "../constants";
@@ -92,11 +92,11 @@ watchEffect(() => {
             :to="{ name: 'articles', query: { tag } }"
             class="tag is-dark mr-2"
           >
-            {{ tag }}
+            {{ formatTag(tag) }}
           </RouterLink>
         </div>
         <div v-if="!flags.displayArticlesTags && article.tags.length" class="mb-5">
-          <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ tag }}</span>
+          <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ formatTag(tag) }}</span>
         </div>
         <div ref="prose" class="prose mt-5" v-html="article.html" />
 

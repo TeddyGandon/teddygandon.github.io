@@ -2,7 +2,7 @@
 import { computed, watchEffect } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { getArticles, getAllArticles } from '../utils/articles';
-import { formatDate } from '../utils/format';
+import { formatDate, formatTag } from '../utils/format';
 import { flags } from '../data/flags';
 import { setPageMeta } from '../utils/seo';
 
@@ -20,8 +20,8 @@ watchEffect(() => {
   setPageMeta(
     activeTag.value
       ? {
-          title: `Articles tagged "${activeTag.value}"`,
-          description: `Articles tagged "${activeTag.value}" — writing by Teddy Gandon, Senior Engineering Manager.`,
+          title: `Articles tagged "${formatTag(activeTag.value)}"`,
+          description: `Articles tagged "${formatTag(activeTag.value)}" — writing by Teddy Gandon, Senior Engineering Manager.`,
           path: '/articles',
         }
       : {
@@ -54,12 +54,12 @@ watchEffect(() => {
             class="tag is-dark mr-2"
             :class="{ 'is-active': activeTag === tag }"
           >
-            {{ tag }}
+            {{ formatTag(tag) }}
           </RouterLink>
       </div>
 
       <p v-if="!filteredArticles.length" class="hero-lede mt-5" v-reveal>
-        <template v-if="activeTag">No articles tagged &ldquo;{{ activeTag }}&rdquo; yet.</template>
+        <template v-if="activeTag">No articles tagged &ldquo;{{ formatTag(activeTag) }}&rdquo; yet.</template>
         <template v-else>Nothing published yet — check back soon.</template>
       </p>
 
@@ -74,7 +74,8 @@ watchEffect(() => {
           </p>
           <div v-if="featuredArticle.tags.length" class="article-card__tags">
             <span class="tag is-primary mr-2 is-uppercase">{{ activeTag ? 'Top match' : 'Latest' }}</span>
-            <span v-for="tag in featuredArticle.tags" :key="tag" class="tag is-dark mr-2">{{ tag }}</span>
+            <span v-if="featuredArticle.status == 'draft'" class="tag is-primary mr-2 is-uppercase">Draft</span>
+            <span v-for="tag in featuredArticle.tags" :key="tag" class="tag is-dark mr-2">{{ formatTag(tag) }}</span>
           </div>
           <h2 class="article-feature__title">{{ featuredArticle.title }}</h2>
           <p class="article-feature__excerpt">{{ featuredArticle.excerpt }}</p>
@@ -93,7 +94,8 @@ watchEffect(() => {
               {{ formatDate(article.date) }} <span aria-hidden="true">·</span> {{ article.readingTime }}
             </p>
             <div v-if="article.tags.length" class="article-card__tags">
-              <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ tag }}</span>
+              <span v-if="article.status == 'draft'" class="tag is-primary mr-2 is-uppercase">Draft</span>
+              <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ formatTag(tag) }}</span>
             </div>
             <h3 class="featured-article__title">{{ article.title }}</h3>
             <p class="article-card__excerpt">{{ article.excerpt }}</p>

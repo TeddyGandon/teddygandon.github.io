@@ -3,6 +3,18 @@ export function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
+// Tags are stored as lowercase slugs ("mental-health") for URLs and filtering;
+// this is only how they're displayed ("Mental health"). Acronyms are listed
+// explicitly, so "ai" reads "AI" and not "Ai".
+const TAG_ACRONYMS = { ai: 'AI' };
+
+export function formatTag(tag) {
+  if (!tag) return '';
+  if (TAG_ACRONYMS[tag]) return TAG_ACRONYMS[tag];
+  const words = tag.replace(/-/g, ' ');
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
 const WORDS_PER_MINUTE = 200;
 
 export function estimateReadingTime(html) {
