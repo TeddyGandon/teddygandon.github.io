@@ -66,10 +66,10 @@ watchEffect(() => {
       <template v-else>
         <RouterLink
           :to="{ name: 'article', params: { slug: featuredArticle.slug } }"
-          class="article-feature mt-6"
+          class="surface-card article-feature mt-6"
           v-reveal
         >
-          <p class="article-card__date">
+          <p class="text-meta">
             {{ formatDate(featuredArticle.date) }} <span aria-hidden="true">·</span> {{ featuredArticle.readingTime }}
           </p>
           <div v-if="featuredArticle.tags.length" class="article-card__tags">
@@ -77,9 +77,9 @@ watchEffect(() => {
             <span v-if="featuredArticle.status == 'draft'" class="tag is-primary mr-2 is-uppercase">Draft</span>
             <span v-for="tag in featuredArticle.tags" :key="tag" class="tag is-dark mr-2">{{ formatTag(tag) }}</span>
           </div>
-          <h2 class="article-feature__title">{{ featuredArticle.title }}</h2>
-          <p class="article-feature__excerpt">{{ featuredArticle.excerpt }}</p>
-          <span class="featured-article__cta">Read the article →</span>
+          <h2 class="card-title">{{ featuredArticle.title }}</h2>
+          <p class="card-text">{{ featuredArticle.excerpt }}</p>
+          <span class="card-cta">Read the article <span class="card-cta__arrow" aria-hidden="true">→</span></span>
         </RouterLink>
 
         <div v-if="restArticles.length" class="card-grid mt-6">
@@ -87,18 +87,18 @@ watchEffect(() => {
             v-for="article in restArticles"
             :key="article.slug"
             :to="{ name: 'article', params: { slug: article.slug } }"
-            class="featured-article"
+            class="surface-card"
             v-reveal
           >
-            <p class="article-card__date">
+            <p class="text-meta">
               {{ formatDate(article.date) }} <span aria-hidden="true">·</span> {{ article.readingTime }}
             </p>
             <div v-if="article.tags.length" class="article-card__tags">
               <span v-if="article.status == 'draft'" class="tag is-primary mr-2 is-uppercase">Draft</span>
               <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ formatTag(tag) }}</span>
             </div>
-            <h3 class="featured-article__title">{{ article.title }}</h3>
-            <p class="article-card__excerpt">{{ article.excerpt }}</p>
+            <h3 class="card-title">{{ article.title }}</h3>
+            <p class="card-text">{{ article.excerpt }}</p>
           </RouterLink>
         </div>
       </template>

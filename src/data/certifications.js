@@ -1,9 +1,12 @@
 // Certifications, most relevant to distributed/multicultural management first.
 // `url` is a placeholder ('#') until the real verification badge link
 // (Credly / Scrum.org / Coursera) is provided — swap it in per cert then.
+// `shortName` (optional) is used in running text, like the home page's
+// "Certified …" line; `name` is used when it's missing.
 export const certifications = [
   {
     name: 'Google Cloud Digital Leader (CDL)',
+    shortName: 'Google Cloud Digital Leader',
     issuer: 'Google / Coursera',
     date: 'Oct 2026',
     url: '#',
@@ -13,6 +16,7 @@ export const certifications = [
   },
   {
     name: 'Google Project Management Professional Certificate',
+    shortName: 'Google Project Management',
     issuer: 'Google / Coursera',
     date: 'Dec 2026',
     url: '#',

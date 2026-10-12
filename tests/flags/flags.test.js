@@ -4,6 +4,8 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { parseFrontmatter } from '../../src/utils/frontmatter.js';
+import { certifications } from '../../src/data/certifications.js';
+import { formatList } from '../../src/utils/format.js';
 import { importWithFlags, mountComponent, mountView, setToday } from './helpers.js';
 
 const HOME = '../../src/views/HomeView.vue';
@@ -40,7 +42,9 @@ describe('displayCertifications', () => {
     expect(experience.findAll('.cert-card').length).toBeGreaterThan(0);
 
     const home = await mountView(HOME, { displayCertifications: true });
-    expect(home.text()).toContain('Certified PSM I');
+    // Built from the certifications data, in order: "Certified A, B & C."
+    const names = certifications.map((cert) => cert.shortName ?? cert.name);
+    expect(home.text()).toContain(`Certified ${formatList(names)}.`);
     expect(home.text()).toContain('View experience & certifications');
   });
 
@@ -50,7 +54,7 @@ describe('displayCertifications', () => {
     expect(experience.find('.cert-card').exists()).toBe(false);
 
     const home = await mountView(HOME, { displayCertifications: false });
-    expect(home.text()).not.toContain('Certified PSM I');
+    expect(home.text()).not.toContain('Certified ');
     expect(home.text()).not.toContain('certifications');
     expect(home.text()).toContain('View experience');
   });

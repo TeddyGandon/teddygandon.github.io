@@ -1,11 +1,12 @@
 <script setup>
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
+import { certifications } from '../data/certifications';
 import { softSkills } from '../data/experience';
 import { linkedinPosts } from '../data/linkedin';
 import { officialPublications } from '../data/official-publications';
 import { getArticles, getAllArticles } from '../utils/articles';
-import { formatDate } from '../utils/format';
+import { formatDate, formatList } from '../utils/format';
 import { flags } from '../data/flags';
 
 const stats = [
@@ -13,6 +14,11 @@ const stats = [
   { value: '15', label: 'Years in leadership' },
   { value: '4', label: 'Companies, one throughline' },
 ];
+
+// "Certified A, B & C", in the order of the certifications data.
+const certifiedLine = certifications.length
+  ? `Certified ${formatList(certifications.map((cert) => cert.shortName ?? cert.name))}.`
+  : '';
 
 const latestArticles = flags.displayFutureArticles ?
   computed(() => getAllArticles().slice(0, 3)) :
@@ -55,8 +61,8 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
           <p class="hero-lede is-size-6 mt-2" v-if="flags.displayAvailability" v-reveal>
             <strong class="has-text-paper-muted">Opened to new position.</strong>
           </p>
-          <p class="hero-lede is-size-6 mt-2" v-if="flags.displayCertifications" v-reveal>
-            <strong class="has-text-paper-muted">Certified PSM I &amp; Google Cloud Digital Leader.</strong>
+          <p class="hero-lede is-size-6 mt-2" v-if="flags.displayCertifications && certifiedLine" v-reveal>
+            <strong class="has-text-paper-muted">{{ certifiedLine }}</strong>
           </p>
 
           <div class="mt-5 hero-actions" v-reveal>
@@ -106,16 +112,16 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
           v-for="article in latestArticles"
           :key="article.slug"
           :to="{ name: 'article', params: { slug: article.slug } }"
-          class="featured-article"
+          class="surface-card"
           v-reveal
         >
-          <p class="article-card__date">{{ formatDate(article.date) }}</p>
-          <h3 class="featured-article__title">{{ article.title }}</h3>
-          <p class="article-card__excerpt">{{ article.excerpt }}</p>
-          <span class="featured-article__cta">Read the article →</span>
+          <p class="text-meta">{{ formatDate(article.date) }}</p>
+          <h3 class="card-title">{{ article.title }}</h3>
+          <p class="card-text">{{ article.excerpt }}</p>
+          <span class="card-cta">Read the article <span class="card-cta__arrow" aria-hidden="true">→</span></span>
         </RouterLink>
       </div>
-      <RouterLink to="/articles" class="button is-text has-text-grey-light mt-3">
+      <RouterLink to="/articles" class="button is-text has-text-paper-muted mt-3">
         See all articles →
       </RouterLink>
     </div>
@@ -155,7 +161,7 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
           :href="post.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="social-post"
+          class="surface-card social-post"
         >
           <div class="social-post__header">
             <span class="social-post__badge"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></span>
@@ -194,8 +200,8 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
               <i class="fa-regular fa-comment" aria-hidden="true"></i> {{ post.comments }}
             </span>
           </div>
-          <span class="social-post__cta">
-            View on LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          <span class="card-cta">
+            View on LinkedIn <i class="fa-solid fa-arrow-up-right-from-square card-cta__arrow" aria-hidden="true"></i>
           </span>
         </a>
       </div>
@@ -203,7 +209,7 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
         href="https://www.linkedin.com/in/teddygandon/recent-activity/all/"
         target="_blank"
         rel="noopener noreferrer"
-        class="button is-text has-text-grey-light mt-3"
+        class="button is-text has-text-paper-muted mt-3"
       >
         See all posts on LinkedIn →
       </a>

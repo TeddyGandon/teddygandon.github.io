@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, reactive } from 'vue';
 import { experience, softSkills } from '../data/experience';
 import { hardSkills } from '../data/skills';
 import { certifications } from '../data/certifications';
@@ -9,6 +9,30 @@ import { parseMonthYear } from '../utils/format';
 const sortedCertifications = computed(() =>
   [...certifications].sort((a, b) => parseMonthYear(b.date) - parseMonthYear(a.date)),
 );
+
+// Each group shows its level-3 skills; the lower ones sit behind a per-group
+// "See more" toggle. A group with no level-3 skill shows everything.
+const TOP_LEVEL = 3;
+const expandedGroups = reactive({});
+
+const skillGroups = computed(() =>
+  hardSkills.map((group) => {
+    const hasTop = group.items.some((item) => item.level >= TOP_LEVEL);
+    const hidden = hasTop ? group.items.filter((item) => item.level < TOP_LEVEL).length : 0;
+    const expanded = Boolean(expandedGroups[group.group]);
+    return {
+      ...group,
+      id: `skills-${group.group.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+      hidden,
+      expanded,
+      visibleItems: expanded || !hidden ? group.items : group.items.filter((item) => item.level >= TOP_LEVEL),
+    };
+  }),
+);
+
+function toggleGroup(name) {
+  expandedGroups[name] = !expandedGroups[name];
+}
 </script>
 
 <template>
@@ -38,13 +62,13 @@ const sortedCertifications = computed(() =>
           v-for="cert in sortedCertifications"
           :key="cert.name"
           v-bind="cert.url ? { href: cert.url, target: '_blank', rel: 'noopener noreferrer' } : {}"
-          class="featured-article cert-card"
+          class="surface-card cert-card"
           v-reveal
         >
-          <p class="cert-card__name">{{ cert.name }}</p>
-          <p class="cert-card__issuer">{{ cert.issuer }}, {{ cert.date }}</p>
-          <p class="cert-card__desc">{{ cert.description }}</p>
-          <p class="cert-card__applied">{{ cert.appliedNote }}</p>
+          <p class="card-title">{{ cert.name }}</p>
+          <p class="card-meta">{{ cert.issuer }}, {{ cert.date }}</p>
+          <p class="card-text">{{ cert.description }}</p>
+          <p class="card-note">{{ cert.appliedNote }}</p>
         </component>
       </div>
     </div>
@@ -63,19 +87,32 @@ const sortedCertifications = computed(() =>
     <div class="container container-narrow">
       <p class="section-heading" v-reveal>Hard skills</p>
 
-      <div v-for="group in hardSkills" :key="group.group" class="skill-group" v-reveal>
+      <div v-for="group in skillGroups" :key="group.group" class="skill-group" v-reveal>
         <p class="skill-group__title">{{ group.group }}</p>
-        <div class="skill-meter" v-for="item in group.items" :key="item.name">
-          <span class="skill-meter__name">{{ item.name }}</span>
-          <span class="skill-meter__dots" :aria-label="`${item.name}: ${item.level} out of 3`">
-            <span
-              v-for="dot in 3"
-              :key="dot"
-              class="skill-meter__dot"
-              :class="{ 'is-filled': dot <= item.level }"
-            />
-          </span>
+        <div :id="group.id">
+          <div class="skill-meter" v-for="item in group.visibleItems" :key="item.name">
+            <span class="skill-meter__name">{{ item.name }}</span>
+            <span class="skill-meter__dots" :aria-label="`${item.name}: ${item.level} out of 3`">
+              <span
+                v-for="dot in 3"
+                :key="dot"
+                class="skill-meter__dot"
+                :class="{ 'is-filled': dot <= item.level }"
+              />
+            </span>
+          </div>
         </div>
+        <button
+          v-if="group.hidden"
+          type="button"
+          class="text-button skill-group__toggle"
+          :aria-expanded="group.expanded"
+          :aria-controls="group.id"
+          @click="toggleGroup(group.group)"
+        >
+          {{ group.expanded ? 'See less' : `See ${group.hidden} more` }}
+          <i class="fa-solid" :class="group.expanded ? 'fa-chevron-up' : 'fa-chevron-down'" aria-hidden="true" />
+        </button>
       </div>
     </div>
   </section>

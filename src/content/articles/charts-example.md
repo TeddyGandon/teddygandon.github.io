@@ -44,8 +44,8 @@ Charts are written as fenced code blocks tagged `chart`, holding a JSON object w
   "title": "Weekly AI tool usage",
   "labels": ["W1", "W2", "W3", "W4", "W5", "W6"],
   "series": [
-    { "name": "Squad A", "data": [12, 18, 25, 31, 30, 34] },
-    { "name": "Squad B", "data": [8, 9, 15, 22, 27, 29] }
+    { "name": "Squad A", "data": [12, 18, 25, 31, 30, 29] },
+    { "name": "Squad B", "data": [8, 9, 15, 35, 27, 34] }
   ]
 }
 ```

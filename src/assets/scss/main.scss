@@ -1,5 +1,6 @@
 @use 'variables-paper' as vars;
 @use 'theme-vars';
+@use 'mixins' as *;
 
 // Bulma 1.x is configured at import time — hue/saturation steer its whole dark
 // ramp warm instead of the default blue-grey, the accent color becomes our
@@ -54,8 +55,8 @@ html {
 body {
   color: var(--paper);
   min-height: 100vh;
-  font-size: 15px;
-  
+  // Base text size for the whole site, the size articles were set in.
+  font-size: 1.08rem;
 }
 
 // Fixed to the viewport (not the document) so the wash stays put regardless
@@ -87,18 +88,33 @@ body::before {
 }
 ::-webkit-scrollbar-thumb {
   background: var(--ink-line);
-  border-radius: 999px;
+  border-radius: vars.$radius-pill;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--paper-muted);
 }
 
 a {
-  transition: color vars.$speed-slow vars.$easing-calm;
+  @include transition(color);
 }
 
 // ---------------------------------------------------------------------------
-// Buttons
+// Color helpers
+// ---------------------------------------------------------------------------
+.has-text-gold {
+  color: var(--gold);
+}
+
+.has-text-paper {
+  color: var(--paper);
+}
+
+.has-text-paper-muted {
+  color: var(--paper-muted);
+}
+
+// ---------------------------------------------------------------------------
+// Buttons & links
 // ---------------------------------------------------------------------------
 // Bulma bakes $primary/$link into its own --bulma-link-h/-s/-l custom
 // properties at compile time (from whichever _variables-*.scss `vars`
@@ -126,6 +142,45 @@ a {
 .button.is-primary.is-outlined:focus {
   background-color: var(--gold) !important;
   color: var(--ink) !important;
+}
+
+// Small muted link, like "← All articles".
+.back-link {
+  color: var(--paper-muted);
+  font-size: 0.9rem;
+}
+
+.back-link:hover {
+  color: var(--gold);
+}
+
+// Quiet text button, styled like a link: "See N more" under a skill group.
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  background: none;
+  border: none;
+  color: var(--gold);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.text-button i {
+  font-size: 0.7rem;
+}
+
+.text-button:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.text-button:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
 // ---------------------------------------------------------------------------
@@ -216,9 +271,7 @@ a {
   width: 100%;
   height: 1px;
   background: var(--paper-muted);
-  transition:
-    transform vars.$speed-slow vars.$easing-calm,
-    opacity vars.$speed-slow vars.$easing-calm;
+  @include transition(transform, opacity);
 }
 
 .site-nav__burger.is-active span:nth-child(1) {
@@ -233,7 +286,7 @@ a {
   transform: translateY(-6px) rotate(-45deg);
 }
 
-@media screen and (max-width: 768px) {
+@include mobile {
   .site-nav__burger {
     display: flex;
   }
@@ -267,11 +320,6 @@ a {
     padding: 0.75rem 0;
     width: 100%;
   }
-
-  .site-nav__auto-theme {
-    margin-left: 0;
-    padding: 0.75rem 0;
-  }
 }
 
 // ---------------------------------------------------------------------------
@@ -288,37 +336,23 @@ a {
 .site-footer__links a {
   color: var(--paper-muted) !important;
   margin: 0 0.85rem;
-  transition: color vars.$speed-slow vars.$easing-calm;
 }
 
 .site-footer__links a:hover {
   color: var(--gold) !important;
 }
 
+.site-footer__note {
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
 // ---------------------------------------------------------------------------
 // Hero / intro
 // ---------------------------------------------------------------------------
 .hero-eyebrow {
-  color: var(--gold);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  @include eyebrow;
   font-size: 0.8rem;
-}
-
-.has-text-gold {
-  color: var(--gold);
-}
-
-.has-text-paper {
-  color: var(--paper);
-}
-
-.has-text-paper {
-  color: var(--paper);
-}
-
-.has-text-paper-muted {
-  color: var(--paper-muted);
 }
 
 .hero-title {
@@ -416,7 +450,7 @@ a {
   align-items: center;
 }
 
-@media screen and (min-width: 769px) {
+@include tablet-up {
   .hero-grid {
     grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
   }
@@ -427,9 +461,7 @@ a {
 }
 
 .hero-actions .button {
-  transition:
-    transform vars.$speed-slow vars.$easing-calm,
-    border-color vars.$speed-slow vars.$easing-calm;
+  @include transition(transform, border-color);
 }
 
 .hero-actions .button:hover {
@@ -444,7 +476,7 @@ a {
   justify-self: center;
 }
 
-@media screen and (max-width: 768px) {
+@include mobile {
   .hero-medallion-wrap {
     display: none;
   }
@@ -463,8 +495,8 @@ a {
   background: linear-gradient(160deg, var(--ink-raised), var(--ink));
   border: 1px solid var(--ink-line);
   box-shadow:
-    0 0 0 1px rgba(205, 189, 152, 0.15),
-    0 20px 60px -20px rgba(205, 189, 152, 0.25);
+    0 0 0 1px rgb(from var(--gold) r g b / 0.15),
+    0 20px 60px -20px rgb(from var(--gold) r g b / 0.25);
   position: relative;
 }
 
@@ -477,9 +509,7 @@ a {
 }
 
 .hero-medallion__caption {
-  color: var(--paper-muted);
-  font-size: 0.85rem;
-  line-height: 1.6;
+  @include note-text;
   margin-top: 1.25rem;
   letter-spacing: 0.02em;
 }
@@ -488,6 +518,7 @@ a {
 // Stats strip
 // ---------------------------------------------------------------------------
 .stat-section {
+  background: var(--ink-raised);
   border-top: 1px solid var(--ink-line);
   border-bottom: 1px solid var(--ink-line);
 }
@@ -507,7 +538,7 @@ a {
   border-left: none;
 }
 
-@media screen and (max-width: 768px) {
+@include mobile {
   .stat-grid {
     grid-template-columns: 1fr;
   }
@@ -541,11 +572,114 @@ a {
 // Section rhythm
 // ---------------------------------------------------------------------------
 .section-heading {
-  color: var(--gold);
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  @include eyebrow;
   font-size: 1rem;
   margin-bottom: 0.75rem;
+}
+
+// ---------------------------------------------------------------------------
+// Cards — one surface and one set of text styles, shared by article,
+// certification, project and LinkedIn cards
+// ---------------------------------------------------------------------------
+.card-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+@include tablet-up {
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  }
+}
+
+.surface-card {
+  display: block;
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: vars.$radius-medium;
+  padding: 2rem 2.25rem;
+}
+
+// Only cards that are links react to hover.
+a.surface-card {
+  @include hover-lift;
+}
+
+.card-title {
+  color: var(--paper);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0.5rem 0;
+}
+
+.card-title:first-child {
+  margin-top: 0;
+}
+
+// Gold italic line under a title: issuer, organization.
+.card-meta {
+  color: var(--gold);
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-text {
+  color: var(--paper-muted);
+  line-height: 1.7;
+}
+
+// Small muted note closing a card, set apart by a hairline.
+.card-note {
+  @include note-text;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--ink-line);
+}
+
+// "Read the article →": the arrow nudges right when the card is hovered.
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  color: var(--gold);
+  font-size: 0.9rem;
+}
+
+.card-cta__arrow {
+  display: inline-block;
+  @include transition(transform);
+}
+
+a:hover .card-cta__arrow {
+  transform: translateX(3px);
+}
+
+// Dates, periods and reading times.
+.text-meta {
+  @include meta-caps;
+}
+
+// Small outlined label: project categories.
+.pill {
+  display: inline-flex;
+  align-items: center;
+  color: var(--gold);
+  border: 1px solid rgb(from var(--gold) r g b / 0.35);
+  border-radius: vars.$radius-pill;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 
 // ---------------------------------------------------------------------------
@@ -579,16 +713,13 @@ a {
 }
 
 .timeline-item__period {
-  color: var(--paper-muted);
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  @include meta-caps;
 }
 
 .timeline-item__role {
   font-weight: 500;
   color: var(--paper);
-  margin: 0.15rem 0 0.15rem;
+  margin: 0.15rem 0;
 }
 
 .timeline-item__org {
@@ -613,12 +744,10 @@ a {
   color: var(--paper);
   font-weight: 500;
   padding: 0.45rem 1.1rem;
-  border-radius: 999px;
+  border-radius: vars.$radius-pill;
   font-size: 0.9rem;
   margin: 0 0.5rem 0.5rem 0;
-  transition:
-    border-color vars.$speed-slow vars.$easing-calm,
-    transform vars.$speed-slow vars.$easing-calm;
+  @include transition(border-color, transform);
 }
 
 .skill-pill::before {
@@ -644,6 +773,10 @@ a {
   color: var(--paper);
   font-style: italic;
   margin-bottom: 1rem;
+}
+
+.skill-group__toggle {
+  margin-top: 0.75rem;
 }
 
 .skill-meter {
@@ -681,99 +814,9 @@ a {
 }
 
 // ---------------------------------------------------------------------------
-// Callout card & featured article (homepage)
+// Side projects: an image banner on top, labels, title, text, then a footer
+// with the note and the link label
 // ---------------------------------------------------------------------------
-.callout-card {
-  background: var(--ink-raised);
-  border-left: 2px solid var(--gold);
-  border-radius: 0 vars.$radius vars.$radius 0;
-  padding: 2rem 2.25rem;
-}
-
-.featured-article {
-  display: block;
-  background: var(--ink-raised);
-  border: 1px solid var(--ink-line);
-  border-radius: vars.$radius-medium;
-  padding: 2rem 2.25rem;
-  transition:
-    transform vars.$speed-slow vars.$easing-calm,
-    border-color vars.$speed-slow vars.$easing-calm;
-}
-
-.featured-article:hover {
-  transform: translateY(-3px);
-  border-color: var(--gold);
-}
-
-.featured-article__title {
-  color: var(--paper);
-  font-size: 1.5rem;
-  margin: 0.35rem 0 0.5rem;
-}
-
-.featured-article__cta {
-  display: inline-block;
-  color: var(--gold);
-  font-size: 0.9rem;
-  margin-top: 1rem;
-}
-
-// Shared by certification cards and side-project cards: name / meta / desc / note.
-.info-card__name {
-  color: var(--paper);
-  font-weight: 500;
-}
-
-.info-card__meta {
-  color: var(--gold);
-  font-style: italic;
-  font-size: 0.9rem;
-  margin: 0.15rem 0 0.75rem;
-}
-
-.info-card__desc {
-  color: var(--paper-muted);
-  line-height: 1.7;
-}
-
-.info-card__note {
-  color: var(--paper-muted);
-  font-size: 0.85rem;
-  line-height: 1.6;
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--ink-line);
-}
-
-.cert-card__name {
-  color: var(--paper);
-  font-weight: 500;
-}
-
-.cert-card__issuer {
-  color: var(--gold);
-  font-style: italic;
-  font-size: 0.9rem;
-  margin: 0.15rem 0 0.75rem;
-}
-
-.cert-card__desc {
-  color: var(--paper-muted);
-  line-height: 1.7;
-}
-
-.cert-card__applied {
-  color: var(--paper-muted);
-  font-size: 0.85rem;
-  line-height: 1.6;
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--ink-line);
-}
-
-// Side projects: an image banner on top, labels, title, description, then a
-// footer with the note and the link label.
 .project-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -786,17 +829,7 @@ a {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: var(--ink-raised);
-  border: 1px solid var(--ink-line);
-  border-radius: vars.$radius-medium;
-  transition:
-    transform vars.$speed-slow vars.$easing-calm,
-    border-color vars.$speed-slow vars.$easing-calm;
-}
-
-.project-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--gold);
+  padding: 0;
 }
 
 .project-card__media {
@@ -835,33 +868,7 @@ a {
   padding: 1.25rem 1.5rem 1.5rem;
 }
 
-.project-card__labels {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.project-card__label {
-  color: var(--gold);
-  border: 1px solid rgb(from var(--gold) r g b / 0.35);
-  border-radius: 999px;
-  padding: 0.1rem 0.7rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.02em;
-}
-
-.project-card__name {
-  color: var(--paper);
-  font-size: 1.3rem;
-  font-weight: 500;
-  line-height: 1.25;
-  margin: 0.75rem 0 0.5rem;
-}
-
-.project-card__desc {
-  color: var(--paper-muted);
-  font-size: 0.95rem;
-  line-height: 1.7;
+.project-card__body .card-text {
   margin-bottom: 1.25rem;
 }
 
@@ -875,27 +882,14 @@ a {
 }
 
 .project-card__note {
-  color: var(--paper-muted);
-  font-size: 0.85rem;
-  line-height: 1.6;
+  @include note-text;
 }
 
-.project-card__cta {
-  color: var(--gold);
-  font-size: 0.9rem;
-  white-space: nowrap;
+.project-card__footer .card-cta {
+  margin-top: 0;
 }
 
-.project-card__cta span {
-  display: inline-block;
-  transition: transform vars.$speed-slow vars.$easing-calm;
-}
-
-.project-card:hover .project-card__cta span {
-  transform: translateX(3px);
-}
-
-@media screen and (max-width: 768px) {
+@include mobile {
   .project-list {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -905,27 +899,17 @@ a {
   }
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-@media screen and (min-width: 769px) {
-  .card-grid {
-    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  }
-}
-
-// Horizontal, avatar-led feed for embedded social posts (LinkedIn) — reads
-// as an actual social feed rather than another set of article cards.
+// ---------------------------------------------------------------------------
+// LinkedIn feed: a horizontal, avatar-led row that reads as an actual social
+// feed rather than another set of article cards
+// ---------------------------------------------------------------------------
 .social-feed {
   display: flex;
   gap: 1.25rem;
   overflow-x: auto;
   margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
+  // Room above for the hover lift, which the scroll container would clip.
+  padding: 0.25rem 0 0.75rem;
   scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
 }
@@ -936,7 +920,7 @@ a {
 
 .social-feed::-webkit-scrollbar-thumb {
   background: var(--ink-line);
-  border-radius: 3px;
+  border-radius: vars.$radius-pill;
 }
 
 .social-post {
@@ -944,15 +928,7 @@ a {
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  background: var(--ink-raised);
-  border: 1px solid var(--ink-line);
-  border-radius: vars.$radius-medium;
   padding: 1.5rem;
-  transition: border-color vars.$speed-slow vars.$easing-calm;
-}
-
-.social-post:hover {
-  border-color: var(--gold);
 }
 
 .social-post__header {
@@ -963,15 +939,8 @@ a {
 }
 
 .social-post__badge {
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 50%;
+  @include circle(2.25rem);
   background: var(--ink);
-  border: 1px solid var(--ink-line);
   color: var(--gold);
   font-size: 0.95rem;
 }
@@ -1041,14 +1010,8 @@ a {
 }
 
 .social-post__reaction-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.35rem;
-  height: 1.35rem;
-  border-radius: 50%;
+  @include circle(1.35rem);
   background: var(--ink);
-  border: 1px solid var(--ink-line);
   font-size: 0.6rem;
 
   & + & {
@@ -1056,18 +1019,10 @@ a {
   }
 }
 
-.social-post__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--gold);
-  font-size: 0.85rem;
-  margin-top: 1rem;
-}
-
-// Compact press-style list for publications aggregated from other outlets
-// (Medium, LeadDev, ...) — deliberately text-first and row-based rather than
-// a photo card grid, so it reads as distinct from the LinkedIn feed above.
+// ---------------------------------------------------------------------------
+// Publications: a compact, text-first press list for articles from other
+// outlets (Medium, LeadDev, ...), distinct from the LinkedIn feed above
+// ---------------------------------------------------------------------------
 .publication-list {
   list-style: none;
   margin: 0 0 1.5rem;
@@ -1085,9 +1040,7 @@ a {
   align-items: baseline;
   gap: 0.35rem 1.25rem;
   padding: 1.25rem 0.25rem;
-  transition:
-    background-color vars.$speed-slow vars.$easing-calm,
-    padding-left vars.$speed-slow vars.$easing-calm;
+  @include transition(background-color, padding-left);
 }
 
 .publication-row__link:hover {
@@ -1142,12 +1095,10 @@ a {
   color: var(--gold);
   opacity: 0;
   transform: translateX(-4px);
-  transition:
-    opacity vars.$speed-slow vars.$easing-calm,
-    transform vars.$speed-slow vars.$easing-calm;
+  @include transition(opacity, transform);
 }
 
-@media screen and (max-width: 600px) {
+@include small-mobile {
   .publication-row__excerpt {
     white-space: normal;
   }
@@ -1158,69 +1109,33 @@ a {
 }
 
 // ---------------------------------------------------------------------------
-// Article cards & prose
+// Articles list
 // ---------------------------------------------------------------------------
-.article-card__date {
-  color: var(--paper-muted);
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
 // The single stand-out card at the top of the articles list (latest post,
-// or top tag match) — larger and left-accented so it reads as a headline.
+// or top tag match) — larger and gold-bordered so it reads as a headline.
 .article-feature {
-  display: block;
-  background: var(--ink-raised);
   border: 2px solid var(--gold);
-  border-radius: vars.$radius-medium;
   padding: 2.5rem 2.5rem 2.25rem;
-  transition: border-color vars.$speed-slow vars.$easing-calm;
 }
 
-.article-feature:hover {
-  border-color: var(--gold);
-}
-
-.article-feature__badge {
-  display: inline-block;
-  color: var(--ink);
-  background: var(--gold);
-  font-weight: 600;
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  margin-bottom: 1rem;
-}
-
-.article-feature__title {
-  color: var(--paper);
+.article-feature .card-title {
   font-size: 1.9rem;
   line-height: 1.2;
   margin: 0.5rem 0 0.75rem;
 }
 
-.article-feature__excerpt {
-  color: var(--paper-muted);
+.article-feature .card-text {
   font-size: 1.05rem;
-  line-height: 1.7;
 }
 
-@media screen and (max-width: 600px) {
+@include small-mobile {
   .article-feature {
     padding: 1.75rem;
   }
 
-  .article-feature__title {
+  .article-feature .card-title {
     font-size: 1.5rem;
   }
-}
-
-.article-card__excerpt {
-  color: var(--paper-muted);
-  line-height: 1.7;
 }
 
 .article-card__tags {
@@ -1230,9 +1145,7 @@ a {
 .article-tags-filter .tag,
 .article-card__tags .tag {
   margin-bottom: 0.5rem;
-  transition:
-    color vars.$speed-slow vars.$easing-calm,
-    background-color vars.$speed-slow vars.$easing-calm;
+  @include transition(color, background-color);
 }
 
 .article-tags-filter .tag.is-active {
@@ -1240,15 +1153,18 @@ a {
   color: var(--ink) !important;
 }
 
+// ---------------------------------------------------------------------------
+// Article body
+// ---------------------------------------------------------------------------
 .prose {
   color: var(--paper);
   line-height: 1.8;
-  font-size: 1.08rem;
 }
 
 .prose h1,
 .prose h2,
-.prose h3 {
+.prose h3,
+.prose h4 {
   color: var(--bulma-text-strong);
   font-weight: 500;
   margin: 2rem 0 1rem;
@@ -1263,19 +1179,19 @@ a {
 }
 
 .prose h4 {
-  color: var(--bulma-text-strong);
   font-size: 1.25rem;
-  font-weight: 500;
   margin: 1.5rem 0 0.75rem;
 }
 
-.prose p {
+.prose p,
+.prose pre,
+.prose table {
   margin-bottom: 1.4rem;
 }
 
 .prose a {
   color: var(--gold);
-  border-bottom: 1px solid rgba(205, 189, 152, 0.35);
+  border-bottom: 1px solid rgb(from var(--gold) r g b / 0.35);
 }
 
 .prose a:hover {
@@ -1294,14 +1210,13 @@ a {
   background: var(--ink-raised);
   color: var(--gold);
   padding: 0.1rem 0.4rem;
-  border-radius: 4px;
+  border-radius: vars.$radius-small;
 }
 
 .prose pre {
   background: var(--ink-raised);
   padding: 1.25rem;
-  margin-bottom: 1.4rem;
-  border-radius: 8px;
+  border-radius: vars.$radius;
   overflow-x: auto;
 }
 
@@ -1310,73 +1225,9 @@ a {
   padding: 0;
 }
 
-// ```chart fences — the canvas is injected by utils/charts.js. The fixed
-// height reserves the space before Chart.js loads, so the text doesn't jump.
-.prose .md-chart {
-  margin: 2rem 0;
-}
-
-// Desktop only: on mobile the chart keeps the full text width.
-@media screen and (min-width: 769px) {
-  .prose .md-chart {
-    margin-inline: 12.5%;
-  }
-}
-
-.prose .md-chart__canvas {
-  position: relative;
-  height: 320px;
-}
-
-.prose .md-chart figcaption {
-  margin-top: 0.75rem;
-  color: var(--paper-muted);
-  text-align: center;
-}
-
 .prose ul,
 .prose ol {
   margin: 0 0 1.4rem 1.4rem;
-}
-
-.prose img {
-  display: block;
-  max-width: 100%;
-  margin: 0 auto;
-  border-radius: 8px;
-}
-
-// Caption convention: an italic line right below an image, in the same
-// paragraph (no blank line between them in the Markdown).
-.prose img + em {
-  display: block;
-  margin-top: 0.75rem;
-  color: var(--paper-muted);
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-.prose table {
-	display: table;
-  border-spacing: 2px;
-  border-collapse: separate;
-  box-sizing: border-box;
-  text-indent: 0;
-  text-align: left;
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 1.4rem;
-}
-
-.prose tr {
-	border-bottom: 1px solid var(--teal-soft);
-}
-
-.prose th,
-.prose td {
-	border: 1px solid var(--teal-soft);
-  padding: .5rem;
-  color: var(--paper);
 }
 
 .prose ul > li {
@@ -1396,6 +1247,55 @@ a {
   color: var(--paper);
 }
 
+.prose img {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: vars.$radius;
+}
+
+// Captions: an italic line right below an image (in the same paragraph, no
+// blank line between them in the Markdown), and the title of a chart.
+.prose img + em,
+.prose .md-chart figcaption {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--paper-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--teal-soft);
+  padding: 0.5rem;
+  color: var(--paper);
+}
+
+// ```chart fences — the canvas is injected by utils/charts.js. The fixed
+// height reserves the space before Chart.js loads, so the text doesn't jump.
+.prose .md-chart {
+  margin: 2rem 0;
+}
+
+// Desktop only: on mobile the chart keeps the full text width.
+@include tablet-up {
+  .prose .md-chart {
+    margin-inline: 12.5%;
+  }
+}
+
+.prose .md-chart__canvas {
+  position: relative;
+  height: 320px;
+}
+
 // ---------------------------------------------------------------------------
 // Article share links
 // ---------------------------------------------------------------------------
@@ -1409,26 +1309,13 @@ a {
   border-top: 1px solid var(--ink-line);
 }
 
-.article-share__label {
-  color: var(--paper-muted);
-  font-size: 0.9rem;
-}
-
 .article-share__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 50%;
-  border: 1px solid var(--ink-line);
+  @include circle(2.25rem);
   color: var(--paper-muted);
   background: none;
   cursor: pointer;
   font-size: 0.95rem;
-  transition:
-    color vars.$speed-slow vars.$easing-calm,
-    border-color vars.$speed-slow vars.$easing-calm;
+  @include transition(color, border-color);
 }
 
 .article-share__icon:hover {

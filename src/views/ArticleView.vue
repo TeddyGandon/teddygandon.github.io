@@ -76,12 +76,12 @@ watchEffect(() => {
 <template>
   <section class="section pt-6">
     <div class="container container-narrow">
-      <RouterLink to="/articles" class="has-text-grey-light" style="font-size: 0.9rem">
+      <RouterLink to="/articles" class="back-link">
         ← All articles
       </RouterLink>
 
       <template v-if="article">
-        <p class="article-card__date mt-5">
+        <p class="text-meta mt-5">
           {{ formatDate(article.date) }} <span aria-hidden="true">·</span> {{ article.readingTime }}
         </p>
         <h1 class="title hero-title is-3 mt-2">{{ article.title }}</h1>

@@ -15,6 +15,12 @@ export function formatTag(tag) {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
+// Joins items for running text: "a", "a & b", "a, b & c".
+export function formatList(items) {
+  if (items.length <= 1) return items.join('');
+  return `${items.slice(0, -1).join(', ')} & ${items.at(-1)}`;
+}
+
 const WORDS_PER_MINUTE = 200;
 
 export function estimateReadingTime(html) {

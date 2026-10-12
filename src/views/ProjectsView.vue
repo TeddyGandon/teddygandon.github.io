@@ -22,7 +22,7 @@ const projects = sideProjects.map((project) => ({
           :href="project.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="project-card"
+          class="surface-card project-card"
         >
           <div class="project-card__media">
             <img
@@ -35,14 +35,14 @@ const projects = sideProjects.map((project) => ({
             />
           </div>
           <div class="project-card__body">
-            <div class="project-card__labels">
-              <span v-for="label in project.labels" :key="label" class="project-card__label">{{ label }}</span>
+            <div class="pill-list">
+              <span v-for="label in project.labels" :key="label" class="pill">{{ label }}</span>
             </div>
-            <h2 class="project-card__name">{{ project.name }}</h2>
-            <p class="project-card__desc">{{ project.description }}</p>
+            <h2 class="card-title">{{ project.name }}</h2>
+            <p class="card-text">{{ project.description }}</p>
             <div class="project-card__footer">
               <p class="project-card__note">{{ project.note }}</p>
-              <span class="project-card__cta">{{ project.cta }} <span aria-hidden="true">→</span></span>
+              <span class="card-cta">{{ project.cta }} <span class="card-cta__arrow" aria-hidden="true">→</span></span>
             </div>
           </div>
         </a>

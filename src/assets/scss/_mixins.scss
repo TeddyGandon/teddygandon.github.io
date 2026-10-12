@@ -1,0 +1,77 @@
+// Shared building blocks for main.scss: breakpoints, motion, and the few
+// text/shape patterns that several components repeat.
+@use 'sass:list';
+@use 'variables-paper' as vars;
+
+// Breakpoints — the same split as Bulma: mobile up to 768px, tablet and up
+// from 769px, plus a narrower one for small phones.
+@mixin mobile {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media screen and (min-width: 769px) {
+    @content;
+  }
+}
+
+@mixin small-mobile {
+  @media screen and (max-width: 600px) {
+    @content;
+  }
+}
+
+// One calm timing for every transition: `@include transition(color, transform)`.
+@mixin transition($properties...) {
+  $list: ();
+  @each $property in $properties {
+    $list: list.append($list, $property vars.$speed-slow vars.$easing-calm, comma);
+  }
+  transition: $list;
+}
+
+// Lifts a card and turns its border gold on hover.
+@mixin hover-lift {
+  @include transition(transform, border-color);
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold);
+  }
+}
+
+// Gold, spaced capitals: page eyebrows and section headings.
+@mixin eyebrow {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+// Small muted capitals: dates, periods, reading times.
+@mixin meta-caps {
+  color: var(--paper-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+// Small muted text: notes and captions under the main text.
+@mixin note-text {
+  color: var(--paper-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+// Round, outlined icon holder: share buttons, post badges, reaction chips.
+@mixin circle($size) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  border: 1px solid var(--ink-line);
+}

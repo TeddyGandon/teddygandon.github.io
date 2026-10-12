@@ -16,7 +16,7 @@ const year = new Date().getFullYear();
       <a href="/teddy-gandon-resume.pdf" download>Download resume</a>
     </div>
     <p class="mt-4">
-      <i class="has-text-grey-light" style="font-size: 0.9rem">The views expressed here are entirely my own and do not reflect the views of my employer.</i>
+      <i class="site-footer__note">The views expressed here are entirely my own and do not reflect the views of my employer.</i>
     </p>
   </footer>
 </template>
