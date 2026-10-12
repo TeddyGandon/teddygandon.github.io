@@ -50,7 +50,7 @@ const articles = Object.entries(modules)
     };
   })
   // Drafts stay hidden everywhere (list and direct URL) unless the displayDrafts flag is on.
-  .filter((p) => p.status === 'published' || flags.displayDrafts)
+  .filter((p) => p.status === 'published' || (p.status === 'draft' && flags.displayDrafts))
   .sort((a, b) => (a.date < b.date ? 1 : -1));
 
 // Scheduled posts (date in the future, relative to the visitor's clock)
