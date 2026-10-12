@@ -673,7 +673,7 @@ a:hover .card-cta__arrow {
   @include meta-caps;
 }
 
-// Small outlined label: project categories.
+// The one tag style of the site: article tags, tag filters, project labels.
 .pill {
   display: inline-flex;
   align-items: center;
@@ -682,12 +682,41 @@ a:hover .card-cta__arrow {
   border-radius: vars.$radius-pill;
   padding: 0.1rem 0.7rem;
   font-size: 0.8rem;
+  line-height: 1.5;
   letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+// Pills that are links (the tag filters) react to hover; the selected one is filled.
+a.pill {
+  @include transition(color, background-color, border-color);
+}
+
+a.pill:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: var(--gold-soft);
+}
+
+a.pill.is-active,
+.pill--solid {
+  color: var(--ink);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+// Status badges: "Latest", "Top match", "Draft".
+.pill--solid {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .pill-list {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.4rem;
 }
 
@@ -745,33 +774,60 @@ a:hover .card-cta__arrow {
 // ---------------------------------------------------------------------------
 // Skills
 // ---------------------------------------------------------------------------
-.skill-pill {
-  display: inline-flex;
-  align-items: center;
-  background: var(--ink-raised);
-  border: 1px solid var(--ink-line);
-  color: var(--paper);
-  font-weight: 500;
-  padding: 0.45rem 1.1rem;
-  border-radius: vars.$radius-pill;
-  font-size: 0.9rem;
-  margin: 0 0.5rem 0.5rem 0;
-  @include transition(border-color, transform);
+// Soft skills: an editorial, numbered grid. Each skill sits under a hairline
+// that turns gold from the left on hover, with its number in gold capitals.
+.soft-skills {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 2rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.skill-pill::before {
+.soft-skill {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 0 1.25rem;
+  border-top: 1px solid var(--ink-line);
+}
+
+.soft-skill::before {
   content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
   background: var(--gold);
-  margin-right: 0.55rem;
-  flex-shrink: 0;
+  transform: scaleX(0.15);
+  transform-origin: left;
+  transition: transform vars.$speed-slower vars.$easing-calm;
 }
 
-.skill-pill:hover {
-  border-color: var(--gold);
-  transform: translateY(-2px);
+.soft-skill:hover::before {
+  transform: scaleX(1);
+}
+
+.soft-skill__index {
+  @include eyebrow;
+  font-size: 0.75rem;
+}
+
+.soft-skill__name {
+  color: var(--paper);
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.3;
+}
+
+@include mobile {
+  .soft-skills {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 1.25rem;
+  }
 }
 
 .skill-group + .skill-group {
@@ -1148,18 +1204,7 @@ a:hover .card-cta__arrow {
 }
 
 .article-card__tags {
-  margin-top: 0.75rem;
-}
-
-.article-tags-filter .tag,
-.article-card__tags .tag {
-  margin-bottom: 0.5rem;
-  @include transition(color, background-color);
-}
-
-.article-tags-filter .tag.is-active {
-  background-color: var(--gold);
-  color: var(--ink) !important;
+  margin: 0.75rem 0;
 }
 
 // ---------------------------------------------------------------------------

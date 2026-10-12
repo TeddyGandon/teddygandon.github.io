@@ -43,15 +43,15 @@ watchEffect(() => {
         engineering leadership, and the frameworks I keep coming back to.
       </p>
 
-      <div v-if="allTags.length" class="article-tags-filter mt-5" v-reveal>
-        <RouterLink :to="{ name: 'articles' }" class="tag is-dark mr-2" :class="{ 'is-active': !activeTag }">
+      <div v-if="allTags.length" class="pill-list mt-5" v-reveal>
+        <RouterLink :to="{ name: 'articles' }" class="pill" :class="{ 'is-active': !activeTag }">
           All
         </RouterLink>
           <RouterLink
             v-for="tag in allTags"
             :key="tag"
             :to="{ name: 'articles', query: { tag } }"
-            class="tag is-dark mr-2"
+            class="pill"
             :class="{ 'is-active': activeTag === tag }"
           >
             {{ formatTag(tag) }}
@@ -72,10 +72,10 @@ watchEffect(() => {
           <p class="text-meta">
             {{ formatDate(featuredArticle.date) }} <span aria-hidden="true">·</span> {{ featuredArticle.readingTime }}
           </p>
-          <div v-if="featuredArticle.tags.length" class="article-card__tags">
-            <span class="tag is-primary mr-2 is-uppercase">{{ activeTag ? 'Top match' : 'Latest' }}</span>
-            <span v-if="featuredArticle.status == 'draft'" class="tag is-primary mr-2 is-uppercase">Draft</span>
-            <span v-for="tag in featuredArticle.tags" :key="tag" class="tag is-dark mr-2">{{ formatTag(tag) }}</span>
+          <div v-if="featuredArticle.tags.length" class="pill-list article-card__tags">
+            <span class="pill pill--solid">{{ activeTag ? 'Top match' : 'Latest' }}</span>
+            <span v-if="featuredArticle.status == 'draft'" class="pill pill--solid">Draft</span>
+            <span v-for="tag in featuredArticle.tags" :key="tag" class="pill">{{ formatTag(tag) }}</span>
           </div>
           <h2 class="card-title">{{ featuredArticle.title }}</h2>
           <p class="card-text">{{ featuredArticle.excerpt }}</p>
@@ -93,9 +93,9 @@ watchEffect(() => {
             <p class="text-meta">
               {{ formatDate(article.date) }} <span aria-hidden="true">·</span> {{ article.readingTime }}
             </p>
-            <div v-if="article.tags.length" class="article-card__tags">
-              <span v-if="article.status == 'draft'" class="tag is-primary mr-2 is-uppercase">Draft</span>
-              <span v-for="tag in article.tags" :key="tag" class="tag is-dark mr-2">{{ formatTag(tag) }}</span>
+            <div v-if="article.tags.length" class="pill-list article-card__tags">
+              <span v-if="article.status == 'draft'" class="pill pill--solid">Draft</span>
+              <span v-for="tag in article.tags" :key="tag" class="pill">{{ formatTag(tag) }}</span>
             </div>
             <h3 class="card-title">{{ article.title }}</h3>
             <p class="card-text">{{ article.excerpt }}</p>
