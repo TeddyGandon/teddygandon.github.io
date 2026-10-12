@@ -26,8 +26,8 @@ const sitemapPaths = [...readFileSync(join(distDir, 'sitemap.xml'), 'utf-8').mat
 );
 const articlePaths = readdirSync(resolve('src/content/articles'))
   .filter((file) => file.endsWith('.md'))
-  // Drafts aren't built into the site unless the displayDrafts flag is on, so they'd 404.
-  .filter((file) => parseFrontmatter(readFileSync(resolve('src/content/articles', file), 'utf-8')).data.status !== 'draft')
+  // Drafts only show with the displayDrafts flag on, and hidden articles never do, so both would 404.
+  .filter((file) => (parseFrontmatter(readFileSync(resolve('src/content/articles', file), 'utf-8')).data.status ?? 'published') === 'published')
   .map((file) => `/articles/${file.replace(/\.md$/, '')}`);
 
 let server;

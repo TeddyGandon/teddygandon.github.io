@@ -39,7 +39,7 @@ function toggleGroup(name) {
 <div>
   <section class="section pt-6">
     <div class="container container-narrow">
-      <p class="hero-eyebrow" v-reveal>Path</p>
+      <p class="hero-eyebrow" v-reveal><i class="fa-solid fa-briefcase heading-icon" aria-hidden="true"></i>Path</p>
       <h1 class="title hero-title is-3 mt-2" v-reveal>Experience</h1>
 
       <div class="timeline mt-6">
@@ -55,7 +55,7 @@ function toggleGroup(name) {
   
   <section class="section" v-if="flags.displayCertifications">
     <div class="container container-narrow">
-      <p class="section-heading" v-reveal>Certifications</p>
+      <p class="section-heading" v-reveal><i class="fa-solid fa-award heading-icon" aria-hidden="true"></i>Certifications</p>
       <div class="card-grid">
         <component
           :is="cert.url ? 'a' : 'div'"
@@ -76,7 +76,7 @@ function toggleGroup(name) {
 
   <section class="section">
     <div class="container container-narrow">
-      <p class="section-heading" v-reveal>Soft skills</p>
+      <p class="section-heading" v-reveal><i class="fa-solid fa-people-group heading-icon" aria-hidden="true"></i>Soft skills</p>
       <div v-reveal>
         <span v-for="skill in softSkills" :key="skill" class="skill-pill">{{ skill }}</span>
       </div>
@@ -85,7 +85,7 @@ function toggleGroup(name) {
 
   <section class="section">
     <div class="container container-narrow">
-      <p class="section-heading" v-reveal>Hard skills</p>
+      <p class="section-heading" v-reveal><i class="fa-solid fa-screwdriver-wrench heading-icon" aria-hidden="true"></i>Hard skills</p>
 
       <div v-for="group in skillGroups" :key="group.group" class="skill-group" v-reveal>
         <p class="skill-group__title">{{ group.group }}</p>

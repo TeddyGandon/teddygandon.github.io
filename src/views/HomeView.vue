@@ -106,7 +106,7 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
 
   <section v-if="latestArticles.length" class="section">
     <div class="container container-narrow">
-      <p class="section-heading" v-reveal>Latest writing</p>
+      <p class="section-heading" v-reveal><i class="fa-solid fa-pen-nib heading-icon" aria-hidden="true"></i>Latest writing</p>
       <div class="card-grid">
         <RouterLink
           v-for="article in latestArticles"
@@ -129,7 +129,7 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
 
   <section v-if="recentPublications.length" class="section">
     <div class="container container-narrow">
-      <p class="section-heading" v-reveal>Published elsewhere</p>
+      <p class="section-heading" v-reveal><i class="fa-regular fa-newspaper heading-icon" aria-hidden="true"></i>Published elsewhere</p>
       <ul class="publication-list">
         <li
           v-for="publication in recentPublications"
@@ -153,7 +153,7 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
 
   <section v-if="recentLinkedInPosts.length" class="section">
     <div class="container container-narrow">
-      <p class="section-heading" v-reveal>Latest on LinkedIn</p>
+      <p class="section-heading" v-reveal><i class="fa-brands fa-linkedin-in heading-icon" aria-hidden="true"></i>Latest on LinkedIn</p>
       <div class="social-feed" v-reveal>
         <a
           v-for="post in recentLinkedInPosts"

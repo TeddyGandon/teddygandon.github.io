@@ -36,7 +36,7 @@ watchEffect(() => {
 <template>
   <section class="section pt-6">
     <div class="container container-narrow">
-      <p class="hero-eyebrow" v-reveal>Writing</p>
+      <p class="hero-eyebrow" v-reveal><i class="fa-solid fa-feather-pointed heading-icon" aria-hidden="true"></i>Writing</p>
       <h1 class="title hero-title is-3 mt-2" v-reveal>Articles</h1>
       <p v-if="articles.length" class="hero-lede is-size-6 mt-2" v-reveal>
         {{ articles.length }} {{ articles.length === 1 ? 'piece' : 'pieces' }} on multicultural management,
@@ -82,7 +82,7 @@ watchEffect(() => {
           <span class="card-cta">Read the article <span class="card-cta__arrow" aria-hidden="true">→</span></span>
         </RouterLink>
 
-        <div v-if="restArticles.length" class="card-grid mt-6">
+        <div v-if="restArticles.length" class="card-grid mt-5">
           <RouterLink
             v-for="article in restArticles"
             :key="article.slug"

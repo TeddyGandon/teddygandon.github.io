@@ -577,6 +577,15 @@ a {
   margin-bottom: 0.75rem;
 }
 
+// Gold icon before a page title or a section heading. Sized in em, so it
+// scales with whichever heading it sits in.
+.heading-icon {
+  color: var(--gold);
+  font-size: 0.75em;
+  margin-right: 0.6em;
+  vertical-align: 0.08em;
+}
+
 // ---------------------------------------------------------------------------
 // Cards — one surface and one set of text styles, shared by article,
 // certification, project and LinkedIn cards

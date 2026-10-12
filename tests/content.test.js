@@ -23,7 +23,7 @@ describe('articles', () => {
     expect(data.excerpt, 'excerpt').toBeTruthy();
     expect(Array.isArray(data.tags), 'tags must be a [list]').toBe(true);
     for (const tag of data.tags) expect(tag).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
-    if (data.status) expect(['published', 'draft']).toContain(data.status);
+    if (data.status) expect(['published', 'draft', 'hidden']).toContain(data.status);
     expect(content.length, 'body').toBeGreaterThan(0);
   });
 

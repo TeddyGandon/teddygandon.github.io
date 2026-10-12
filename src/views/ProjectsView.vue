@@ -12,7 +12,7 @@ const projects = sideProjects.map((project) => ({
 <div>
   <section class="section pt-6">
     <div class="container container-narrow">
-      <p class="hero-eyebrow" v-reveal>Free time</p>
+      <p class="hero-eyebrow" v-reveal><i class="fa-solid fa-flask heading-icon" aria-hidden="true"></i>Free time</p>
       <h1 class="title hero-title is-3 mt-2" v-reveal>Side projects</h1>
 
       <div class="project-list mt-6" v-reveal>
