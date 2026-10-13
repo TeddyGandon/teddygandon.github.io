@@ -33,25 +33,29 @@ function slugFromPath(path) {
 
 const today = new Date().toISOString().slice(0, 10);
 
-const articles = Object.entries(modules)
-  .map(([path, raw]) => {
-    const { data, content } = parseFrontmatter(raw);
-    const slug = slugFromPath(path);
-    const html = md.render(content);
-    return {
-      slug,
-      title: data.title ?? slug,
-      date: data.date ?? '',
-      excerpt: data.excerpt ?? '',
-      tags: Array.isArray(data.tags) ? data.tags : [],
-      html,
-      readingTime: estimateReadingTime(html),
-      status: data.status ?? 'published',
-    };
-  })
-  // Drafts stay hidden everywhere (list and direct URL) unless the displayDrafts flag is on.
-  .filter((p) => p.status === 'published' || (p.status === 'draft' && flags.displayDrafts))
-  .sort((a, b) => (a.date < b.date ? 1 : -1));
+function loadDocuments(modules) {
+  return Object.entries(modules)
+    .map(([path, raw]) => {
+      const { data, content } = parseFrontmatter(raw);
+      const slug = slugFromPath(path);
+      const html = md.render(content);
+      return {
+        slug,
+        title: data.title ?? slug,
+        date: data.date ?? '',
+        excerpt: data.excerpt ?? '',
+        tags: Array.isArray(data.tags) ? data.tags : [],
+        html,
+        readingTime: estimateReadingTime(html),
+        status: data.status ?? 'published',
+      };
+    })
+    // Drafts stay hidden everywhere (list and direct URL) unless the displayDrafts flag is on.
+    .filter((p) => p.status === 'published' || (p.status === 'draft' && flags.displayDrafts))
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+const articles = loadDocuments(modules);
 
 // Scheduled posts (date in the future, relative to the visitor's clock)
 // are excluded from both the list and direct slug lookup until then.
@@ -68,4 +72,17 @@ export function getArticles() {
 
 export function getArticleBySlug(slug) {
   return articles.find((article) => article.slug === slug);
+}
+
+// Articles ranked by the number of tags they share with `article`, ties going to the
+// most recent. Articles with no shared tag still fill the list, so it is always full.
+export function getRelatedArticles(article, count = 3) {
+  const pool = flags.displayFutureArticles ? articles : scheduledArticles;
+  const tags = new Set(article.tags);
+  return pool
+    .filter((other) => other.slug !== article.slug)
+    .map((other) => ({ other, shared: other.tags.filter((tag) => tags.has(tag)).length }))
+    .sort((a, b) => b.shared - a.shared || (a.other.date < b.other.date ? 1 : -1))
+    .slice(0, count)
+    .map(({ other }) => other);
 }
