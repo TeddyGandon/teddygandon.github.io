@@ -1,7 +1,7 @@
 ---
 title: A title
 date: 1970-01-01
-excerpt: A summary
+excerpt: A sumary
 tags: [example]
 status: hidden
 ---
@@ -14,4 +14,4 @@ Title
 
 ## Sources
 
-- (1) Author, [Title](https://example.com): Title
+- (1) Author, [Title](https://exemple.com): Title
