@@ -1,6 +1,7 @@
 <script setup>
 import { computed, watchEffect } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
+import ArticleCard from '../components/ArticleCard.vue';
 import { getArticles, getAllArticles } from '../utils/articles';
 import { formatDate, formatTag } from '../utils/format';
 import { flags } from '../data/flags';
@@ -83,23 +84,7 @@ watchEffect(() => {
         </RouterLink>
 
         <div v-if="restArticles.length" class="card-grid mt-5">
-          <RouterLink
-            v-for="article in restArticles"
-            :key="article.slug"
-            :to="{ name: 'article', params: { slug: article.slug } }"
-            class="surface-card"
-            v-reveal
-          >
-            <p class="text-meta">
-              {{ formatDate(article.date) }} <span aria-hidden="true">·</span> {{ article.readingTime }}
-            </p>
-            <div v-if="article.tags.length" class="pill-list article-card__tags">
-              <span v-if="article.status == 'draft'" class="pill pill--solid">Draft</span>
-              <span v-for="tag in article.tags" :key="tag" class="pill">{{ formatTag(tag) }}</span>
-            </div>
-            <h3 class="card-title">{{ article.title }}</h3>
-            <p class="card-text">{{ article.excerpt }}</p>
-          </RouterLink>
+          <ArticleCard v-for="article in restArticles" :key="article.slug" :article="article" />
         </div>
       </template>
     </div>
