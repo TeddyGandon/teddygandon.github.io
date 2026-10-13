@@ -35,19 +35,37 @@ if (flags.displayNewRole) {
   experience[0].period = '2022 // 2026';
   experience.unshift({
     period: '2026 // Today',
-    role: 'Head Of BTech Alliance',
+    role: 'Head of Outsourcing',
     org: 'Believe France',
     description:
-      'Leading the BTech Alliance, an outsourcing framework, taking the lead on all outsourced engineering teams globally. Driving 40+ engineers worldwide through engineering managers, owning delivery of several internal platforms for the music industry. Designed the operational framework behind faster onboarding, clearer roles, horizontal scaling and better delivery, and brought AI-assisted engineering (Claude, Gemini) into the squads\' day-to-day work.',
+      'Leading the outsourcing though the BTech Alliance, an outsourcing framework. Taking the lead on all outsourced engineering teams globally. Driving 40+ engineers worldwide through engineering managers, owning delivery of several internal platforms for the music industry. Designed the operational framework behind faster onboarding, clearer roles, horizontal scaling and better delivery, and brought AI-assisted engineering (Claude, Gemini) into the squads\' day-to-day work.',
   });
 }
 
-// Soft skills, presented as a flat set of pills, no ranking implied.
+// Soft skills with a one-line summary each, no ranking implied.
 export const softSkills = [
-  'People leadership',
-  'Stakeholder management',
-  'Communication',
-  'Problem solving',
-  'Emotional intelligence',
-  'Curiosity',
+  {
+    name: 'People leadership',
+    summary: 'Hiring, coaching and growing engineers and managers, with trust and low turnover.',
+  },
+  {
+    name: 'Stakeholder management',
+    summary: 'Aligning business, product and engineering on priorities, trade-offs and delivery.',
+  },
+  {
+    name: 'Communication',
+    summary: 'Clear, honest and adapted to the audience, across cultures and time zones.',
+  },
+  {
+    name: 'Problem solving',
+    summary: 'Getting to the root cause and favouring pragmatic solutions over perfect ones.',
+  },
+  {
+    name: 'Emotional intelligence',
+    summary: 'Reading the room, listening first and keeping teams steady under pressure.',
+  },
+  {
+    name: 'Curiosity',
+    summary: 'Always learning, from new tech like AI-assisted engineering to how others work.',
+  },
 ];

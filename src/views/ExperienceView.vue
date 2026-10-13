@@ -78,9 +78,10 @@ function toggleGroup(name) {
     <div class="container container-narrow">
       <p class="section-heading" v-reveal><i class="fa-solid fa-people-group heading-icon" aria-hidden="true"></i>Soft skills</p>
       <ol class="soft-skills" v-reveal>
-        <li v-for="(skill, index) in softSkills" :key="skill" class="soft-skill">
+        <li v-for="(skill, index) in softSkills" :key="skill.name" class="soft-skill">
           <span class="soft-skill__index" aria-hidden="true">{{ String(index + 1).padStart(2, '0') }}</span>
-          <span class="soft-skill__name">{{ skill }}</span>
+          <span class="soft-skill__name">{{ skill.name }}</span>
+          <span class="soft-skill__summary">{{ skill.summary }}</span>
         </li>
       </ol>
     </div>
