@@ -85,7 +85,11 @@ onBeforeUnmount(() => {
 });
 
 watchEffect(() => {
-  setPageMeta({ title: article.value.title, description: article.value.excerpt, path: path.value });
+  setPageMeta(
+    article.value
+      ? { title: article.value.title, description: article.value.excerpt, path: path.value }
+      : { title: 'Article not found', path: path.value },
+  );
 });
 </script>
 
