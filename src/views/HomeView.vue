@@ -93,7 +93,7 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
     </div>
   </section>
 
-  <section class="section stat-section py-6">
+  <section class="section stat-section py-6 is-hidden-mobile">
     <div class="container">
       <div class="stat-grid">
         <div v-for="stat in stats" :key="stat.label" class="stat-item" v-reveal>
@@ -121,7 +121,7 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
           <span class="card-cta">Read the article <span class="card-cta__arrow" aria-hidden="true">→</span></span>
         </RouterLink>
       </div>
-      <RouterLink to="/articles" class="button is-text has-text-paper-muted mt-3">
+      <RouterLink to="/articles" class="button is-text has-text-paper-muted">
         See all articles →
       </RouterLink>
     </div>
@@ -209,7 +209,7 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
         href="https://www.linkedin.com/in/teddygandon/recent-activity/all/"
         target="_blank"
         rel="noopener noreferrer"
-        class="button is-text has-text-paper-muted mt-3"
+        class="button is-text has-text-paper-muted"
       >
         See all posts on LinkedIn →
       </a>
