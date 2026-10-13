@@ -5,6 +5,10 @@ import { RouterLink, useRoute } from 'vue-router';
 const isMenuOpen = ref(false);
 const route = useRoute();
 
+// Article pages are not nested under /articles in the router, so active-class
+// alone would drop the highlight when reading one.
+const isArticlesSection = computed(() => route.path === '/articles' || route.path.startsWith('/articles/'));
+
 watch(
   () => route.fullPath,
   () => {
@@ -35,7 +39,7 @@ watch(
       <div id="site-nav-links" class="site-nav__links" :class="{ 'is-active': isMenuOpen }">
         <RouterLink to="/" exact-active-class="is-active">Home</RouterLink>
         <RouterLink to="/experience" active-class="is-active">Experience</RouterLink>
-        <RouterLink to="/articles" active-class="is-active">Articles</RouterLink>
+        <RouterLink to="/articles" :class="{ 'is-active': isArticlesSection }">Articles</RouterLink>
         <RouterLink to="/projects" active-class="is-active">Side projects</RouterLink>
         <a href="https://www.linkedin.com/in/teddygandon/" target="_blank" rel="noopener noreferrer">Contact me on LinkedIn</a>
       </div>
