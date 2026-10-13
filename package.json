@@ -9,7 +9,6 @@
     "build": "node scripts/load-external-sources.js && vite build && node scripts/generate-sitemap.js",
     "preview": "vite preview",
     "load-external-sources": "node scripts/load-external-sources.js",
-    "export-cv-to-pdf": "node scripts/export-cv-to-pdf.js",
     "test": "vitest run --project unit",
     "test:watch": "vitest --project unit",
     "test:e2e": "vitest run --project e2e",

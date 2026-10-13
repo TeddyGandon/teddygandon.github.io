@@ -27,7 +27,7 @@ npm run preview # serve the production build locally
 
 ```sh
 npm test              # unit tests: flags, scripts, content (Vitest)
-npm run test:spelling # typos in articles, views, data and CVs (cspell)
+npm run test:spelling # typos in articles, views and data (cspell)
 npm run test:e2e      # smoke-tests every page of dist/ in headless Chrome — build first
 npm run test:all      # all of the above, build included
 ```
@@ -64,46 +64,9 @@ no rebuild-time config. Sort order is by `date`, descending.
 
 ## Resume generation
 
-CVs live in `public/cv/` as printable A4 HTML pages named `*.pdf.html` (`template.pdf.html` is
-the master; `template-headof.pdf.html` is a variant). The HTML comment at the top of
-`template.pdf.html` describes which blocks may be tailored for a job offer and which may not.
-
-### Exporting a resume to PDF
-
-```sh
-npm run export-cv-to-pdf                     # public/cv/template.pdf.html        -> public/cv/template.pdf
-npm run export-cv-to-pdf -- template         # same as above; a full file name works too
-```
-
-`scripts/export-cv-to-pdf.js` renders the resume with [Puppeteer](https://pptr.dev)'s headless
-Chrome, which is downloaded by `npm install` (dev dependency), so no local browser is needed.
-It waits for the EB Garamond fonts to load and uses the CV's own `@page` rule (A4, no margin).
-The PDF is written next to its HTML source, and the script reports the page count and warns
-when the resume no longer fits on one page. An unknown name exits with the list of available CVs.
-
-Note: files in `public/` are deployed with the site, so generated PDFs become public too.
-
-### Tailoring a resume to a job offer
-
-Prompt to use with Claude Code:
-
-```
-Create a new resume for a job offer by copying "template.pdf.html" into another name - the name should be related to the following job description.
-
-Adapt the new resume according to the job description. You can change the content of the resume that you find relevent to pass through a pre-selection. You can change the current job title on the resume that fits more the job description.
-
-Ensure that the new resume pass AI filters and HR software prefilters.
-
-The job description comes from a company named "[NAME]". The job offer title is "[NAME]".
-
-Here is the job description :
-
----
-
-[JOB DESCRIPTION]
-
----
-```
+Resume templates and their PDF export live in [`../job-hunting-tools`](../job-hunting-tools)
+(`npm run export-cv-to-pdf` there). `public/teddy-gandon-resume.pdf` is the copy the site offers
+for download; replace it with a fresh export when the resume changes.
 
 ## Data
 
