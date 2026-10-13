@@ -18,5 +18,6 @@ const year = new Date().getFullYear();
     <p class="mt-4">
       <i class="site-footer__note">The views expressed here are entirely my own and do not reflect the views of my employer.</i>
     </p>
+    <p class="site-footer__copyright mt-2">&copy; {{ year }} Teddy Gandon. All rights reserved.</p>
   </footer>
 </template>
