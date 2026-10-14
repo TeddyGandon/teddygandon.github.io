@@ -355,6 +355,19 @@ a {
   font-size: 0.8rem;
 }
 
+.site-footer__source {
+  font-size: 0.8rem;
+}
+
+.site-footer__source a {
+  color: var(--paper-muted) !important;
+  text-decoration: underline;
+}
+
+.site-footer__source a:hover {
+  color: var(--gold) !important;
+}
+
 // ---------------------------------------------------------------------------
 // Hero / intro
 // ---------------------------------------------------------------------------

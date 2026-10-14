@@ -15,9 +15,15 @@ const year = new Date().getFullYear();
       <span aria-hidden="true">&bull;</span>
       <a href="/teddy-gandon-resume.pdf" download>Download resume</a>
     </div>
-    <p class="mt-4">
+    <p class="site-footer__copyright mt-4">
+      <a href="https://github.com/TeddyGandon/teddygandon.github.io" target="_blank" rel="noopener noreferrer">
+        Built with Vue and Vite. View the source on GitHub
+      </a>
+      &nbsp; &bull; &nbsp;
+      &copy; {{ year }} Teddy Gandon. All rights reserved.
+    </p>
+    <p class="mt-2">
       <i class="site-footer__note">The views expressed here are entirely my own and do not reflect the views of my employer.</i>
     </p>
-    <p class="site-footer__copyright mt-2">&copy; {{ year }} Teddy Gandon. All rights reserved.</p>
   </footer>
 </template>
