@@ -8,8 +8,7 @@
     "src/components/*.vue",
     "src/data/{experience,skills,certifications,projects}.js",
     "index.html",
-    "public/404.html",
-    "public/cv/*.html"
+    "public/404.html"
   ],
   "ignorePaths": [
     "node_modules",
@@ -20,6 +19,7 @@
     "/fa-[a-z-]+/g"
   ],
   "words": [
+    "Appipeline",
     "Autograf",
     "Automatica",
     "Baccalauréat",
