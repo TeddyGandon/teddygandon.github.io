@@ -16,6 +16,8 @@
   ],
   "ignoreRegExpList": [
     "/https?:\\/\\/\\S+/g",
+    "/`data:[a-z]+\\/[^`]+`/g",
+    "/data:[a-z]+\\/[^'\"\\s]+/g",
     "/fa-[a-z-]+/g"
   ],
   "words": [
