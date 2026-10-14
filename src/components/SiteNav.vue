@@ -41,7 +41,13 @@ watch(
         <RouterLink to="/experience" active-class="is-active">Experience</RouterLink>
         <RouterLink to="/articles" :class="{ 'is-active': isArticlesSection }">Articles</RouterLink>
         <RouterLink to="/projects" active-class="is-active">Side projects</RouterLink>
-        <a href="https://www.linkedin.com/in/teddygandon/" target="_blank" rel="noopener noreferrer">Contact me on LinkedIn</a>
+        <span class="site-nav__separator" aria-hidden="true"></span>
+        <a href="https://www.linkedin.com/in/teddygandon/" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-linkedin site-nav__icon" aria-hidden="true"></i>Contact me on LinkedIn
+        </a>
+        <a href="/teddy-gandon-resume.pdf" download rel="noopener noreferrer">
+          <i class="fa-solid fa-file-arrow-down site-nav__icon" aria-hidden="true"></i>Download resume
+        </a>
       </div>
     </div>
   </nav>
