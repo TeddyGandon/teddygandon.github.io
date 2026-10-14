@@ -1339,6 +1339,14 @@ a.pill.is-active,
   border-radius: vars.$radius;
 }
 
+// The Appipeline logo: 75% of the text width, like the charts below. Desktop
+// only: on mobile it keeps the full text width.
+@include tablet-up {
+  .prose img[src$="/articles/appipeline/logo.svg"] {
+    width: 75%;
+  }
+}
+
 // Captions: an italic line right below an image (in the same paragraph, no
 // blank line between them in the Markdown), and the title of a chart.
 .prose img + em,

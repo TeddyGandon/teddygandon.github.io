@@ -21,6 +21,7 @@ const routes = [
     path: '/projects',
     name: 'projects',
     component: () => import('../views/ProjectsView.vue'),
+    // Title/description are refined further inside ProjectsView when a tag filter is active.
     meta: {
       title: 'Side projects',
       description: 'Personal games and the open-source platform behind them, built in my free time.',
