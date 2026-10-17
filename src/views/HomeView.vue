@@ -8,6 +8,7 @@ import { officialPublications } from '../data/official-publications';
 import { getArticles, getAllArticles } from '../utils/articles';
 import { formatDate, formatList } from '../utils/format';
 import { flags } from '../data/flags';
+import { experience } from '../data/experience';
 
 const stats = [
   { value: '20', label: 'Years of engineering' },
@@ -80,13 +81,9 @@ const recentPublications = computed(() => officialPublications.slice(0, 5));
 
         <div class="hero-medallion-wrap" v-reveal>
           <div class="hero-medallion" aria-hidden="true"><span>TG</span></div>
-          <p class="hero-medallion__caption" v-if="!flags.displayNewRole">
-            Engineering Manager<br />
-            @Believe
-          </p>
-          <p class="hero-medallion__caption" v-if="flags.displayNewRole">
-            Head of BTech Alliance<br />
-            @Believe
+          <p class="hero-medallion__caption">
+            {{ experience[0].role }}<br />
+            @{{ experience[0].org }}
           </p>
         </div>
       </div>
