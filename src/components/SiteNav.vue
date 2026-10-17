@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
+import { flags } from '../data/flags';
 
 const isMenuOpen = ref(false);
 const route = useRoute();
@@ -8,6 +9,7 @@ const route = useRoute();
 // Article pages are not nested under /articles in the router, so active-class
 // alone would drop the highlight when reading one.
 const isArticlesSection = computed(() => route.path === '/articles' || route.path.startsWith('/articles/'));
+const isStudiesSection = computed(() => route.path === '/studies' || route.path.startsWith('/studies/'));
 
 watch(
   () => route.fullPath,
@@ -40,6 +42,7 @@ watch(
         <RouterLink to="/" exact-active-class="is-active">Home</RouterLink>
         <RouterLink to="/experience" active-class="is-active">Experience</RouterLink>
         <RouterLink to="/articles" :class="{ 'is-active': isArticlesSection }">Articles</RouterLink>
+        <RouterLink v-if="flags.displayStudies" to="/studies" :class="{ 'is-active': isStudiesSection }">Studies</RouterLink>
         <RouterLink to="/projects" active-class="is-active">Side projects</RouterLink>
         <span class="site-nav__separator" aria-hidden="true"></span>
         <a href="https://www.linkedin.com/in/teddygandon/" target="_blank" rel="noopener noreferrer">

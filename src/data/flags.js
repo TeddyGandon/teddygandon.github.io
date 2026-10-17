@@ -6,4 +6,5 @@ export const flags = {
   displayCertifications: false,
   displayNewRole: false,
   displayAvailability: false,
+  displayStudies: false,
 };

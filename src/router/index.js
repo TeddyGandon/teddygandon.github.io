@@ -45,6 +45,22 @@ const routes = [
     // No static meta here — ArticleView sets title/description once the article is loaded.
   },
   {
+    path: '/studies',
+    name: 'studies',
+    component: () => import('../views/StudiesView.vue'),
+    meta: {
+      title: 'Studies',
+      description: 'Paper-style studies in engineering and management.',
+    },
+  },
+  {
+    path: '/studies/:slug',
+    name: 'study',
+    component: () => import('../views/StudyView.vue'),
+    props: true,
+    // No static meta here — StudyView sets the title from studies.js.
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('../views/NotFoundView.vue'),
@@ -69,7 +85,7 @@ router.afterEach((to) => {
   ).then(
     () => { sirup.event('viewPage', 'navigation', to.fullPath); }
   );
-  if (to.name === 'article') return; // ArticleView owns its own meta once the article loads
+  if (to.name === 'article' || to.name === 'study') return; // these views set their own meta
   setPageMeta({ title: to.meta.title, description: to.meta.description, path: to.path });
 });
 
