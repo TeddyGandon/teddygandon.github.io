@@ -12,7 +12,7 @@ const studies = getStudies();
       <h1 class="title hero-title is-3 mt-2" v-reveal>Studies</h1>
       <p class="hero-lede is-size-6 mt-2" v-reveal>
         I conducted studies in engineering and management: a question, a method, and what came out of it. 
-        These are open source and helped me to shape my journey leading teams accross borders.
+        These are open source and helped me to shape my journey leading teams across borders.
       </p>
     </div>
 
