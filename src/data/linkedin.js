@@ -53,8 +53,7 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "EMPATHY",
-        "PRAISE",
-        "INTEREST"
+        "PRAISE"
       ]
     },
     "comments": 4
@@ -69,9 +68,7 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "PRAISE",
-        "EMPATHY",
-        "INTEREST",
-        "APPRECIATION"
+        "EMPATHY"
       ]
     },
     "comments": 0
@@ -110,13 +107,11 @@ export const linkedinPosts = [
     "date": "2026-05-29",
     "text": "That’s a wrap on our Believe x Skills Agency 2026 H1 seminar! 🚀\n\n​This was our biggest one yet, packed with high-impact talks and hands-on workshops designed to push boundaries. Here are the highlights:\n\n​📢 Marketing for Tech Teams\n\nHow do you effectively market and champion tech initiatives within a corporate environment? We dove deep into strategies for giving tech teams the visibility they deserve.\n\n​🔄 Language Swap\n\nWhat’s the difference between a developer and an engineer? Developers often master a specific language; engineers are language-agnostic, bringing a broad architectural mindset. For a few hours, our engineers stepped out of their comfort zones, swapping languages to explore new paradigms and expand their horizons.\n\n​👥 In Someone Else’s Shoes\n\nFor three hours, our engineers lived the day-to-day life of our users from navigating the product to handling meetings. It was an eye-opening, highly instructive session that left us with a wealth of new ideas and a deeply renewed user-centric mindset. And the engineers survived no touching the codebase during 3 hours 😂\n\n---\n\n​It was an exhausting few days, but incredibly rewarding. For me, sparking curiosity, helping people grow, and seeing them take pride in what they craft is what makes leadership such a fulfilling adventure.\n\nFor those who come after ✨ \n\n---\n\nWith Ravi Magadum Varsha Nayak Malavika Thota Mohammed Ibrahim Mithun Sindhey Rashmi Nachankar Sourav K Mohammed Minhaj Prathap S S Rinsin Rahim Asif Peerzade Mohammed Yassar Santhosh Shetty Sachin C. Lounis Dahmani \n\nSpecial thanks to Nicolas Nallet Gabriel Leroy Julien Rougé Vincent Quillacq Anh P. Vincent Dadouche Nirvi Shah Aristote SIMONINI Aina D.\n\n​#TechLeadership #TeamGrowth #UserCentric #SoftwareEngineering #ContinuousLearning",
     "url": "https://www.linkedin.com/posts/teddygandon_techleadership-teamgrowth-usercentric-activity-7466132411257450497-ORXr",
-    "image": "https://media.licdn.com/dms/image/v2/D4E22AQGN8ydiVjXnYA/feedshare-shrink_800/B4EZ5z.zFeHsAc-/0/1780062303041?e=2147483647&v=beta&t=1JPcV4RuUuq9waZz7Z4lFQ5VwSnt4t8T3YYBaouWmd4",
+    "image": "https://static.licdn.com/aero-v1/sc/h/c45fy346jw096z9pbphyyhdz7",
     "reactions": {
       "total": 119,
       "types": [
-        "LIKE",
-        "PRAISE",
-        "EMPATHY"
+        "LIKE"
       ]
     },
     "comments": 3
