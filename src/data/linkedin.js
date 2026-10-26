@@ -2,6 +2,20 @@
 // never deleted, so hand-added ones are kept. Most recent first.
 export const linkedinPosts = [
   {
+    "date": "2026-10-26",
+    "text": "✍️ Yes, I am using AI for managing. Yes, everyone is using it. And no, you probably don't use it efficiently.\n\nEvery manager I know is now using some form of AI, and almost every one of them is disappointed with it in the same way: the output sounds plausible, reads well, and is subtly wrong about the thing that actually mattered in the room. Surprisingly enough, it’s not a model problem but usually an input problem. The teams I’ve seen get real leverage from AI treat it the way we treat any system with weak defaults: they control what goes in, and they scope what it’s allowed to do. Two disciplines, both familiar from engineering, both usually skipped when the same person puts on their “manager” hat.\n\nRead the full article ➡️ https://lnkd.in/eeDZHKPJ\n\n#Management #AIinManagement #Leadership #AIWorkflow #EngineeringLeadership #TechLeadership",
+    "url": "https://www.linkedin.com/posts/teddygandon_management-aiinmanagement-leadership-activity-7520422913687228416-qul_",
+    "image": "https://media.licdn.com/dms/image/v2/D4D22AQHraRJj7YymlA/feedshare-shrink_800/B4DaAEY1RMJgAc-/0/1786780013873?e=2147483647&v=beta&t=PG7bUiPKTBdaIGIsuSlc_0n8FkHq5WCDWRgDgDJ_Ces",
+    "reactions": {
+      "total": 6,
+      "types": [
+        "LIKE",
+        "EMPATHY"
+      ]
+    },
+    "comments": 0
+  },
+  {
     "date": "2026-10-05",
     "text": "✍️ Yup, I still code. As a manager, I think it's more important than ever.\n\nEvery few months, in a hallway chat or a Slack thread, someone asks me some version of the same question: do you still code? The honest answer is yes, though a lot less than I used to, and the reasons why turned out to be more interesting to me than the question itself.\n\nRead the full article here ➡️ https://lnkd.in/dzBzfjEu\n\n#InterculturalManagement #GlobalLeadership #CrossCulturalTeams #Management #Leadership #RemoteWork",
     "url": "https://www.linkedin.com/posts/teddygandon_interculturalmanagement-globalleadership-activity-7512814053262737410-6aWD",
@@ -20,12 +34,11 @@ export const linkedinPosts = [
     "date": "2026-09-14",
     "text": "✍️ Proving your leadership accross cultures is a journey\n\nIn my intercultural management journey, I’ve faced the same challenge every time I’ve joined a new team: proving I’m actually fit to lead it. What’s changed, every single time, is what counts as proof. Each culture I’ve worked with has its own answer test, built up over a much longer history than the three months I usually have to earn it, and none of them advertise the rules up front.\n\nRead the full article here ➡️ https://lnkd.in/efJm8SPm\n\n#InterculturalManagement #GlobalLeadership #CrossCulturalTeams #Management #Leadership #RemoteWork",
     "url": "https://www.linkedin.com/posts/teddygandon_interculturalmanagement-globalleadership-activity-7505203828984795137-HlrV",
-    "image": "https://media.licdn.com/dms/image/v2/D4D22AQFutD1hcYE9dQ/feedshare-shrink_800/B4DaAEZlENKMAc-/0/1786780209878?e=2147483647&v=beta&t=D1jbuz3CYOB0DJOBpLcTmv1fJuHYyBGlNyA-dxaEHbc",
+    "image": "https://static.licdn.com/aero-v1/sc/h/c45fy346jw096z9pbphyyhdz7",
     "reactions": {
       "total": 12,
       "types": [
-        "LIKE",
-        "APPRECIATION"
+        "LIKE"
       ]
     },
     "comments": 0
@@ -68,7 +81,9 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "PRAISE",
-        "EMPATHY"
+        "EMPATHY",
+        "INTEREST",
+        "APPRECIATION"
       ]
     },
     "comments": 0
