@@ -7,7 +7,7 @@ export const linkedinPosts = [
     "url": "https://www.linkedin.com/posts/teddygandon_management-aiinmanagement-leadership-activity-7520422913687228416-qul_",
     "image": "https://media.licdn.com/dms/image/v2/D4D22AQHraRJj7YymlA/feedshare-shrink_800/B4DaAEY1RMJgAc-/0/1786780013873?e=2147483647&v=beta&t=PG7bUiPKTBdaIGIsuSlc_0n8FkHq5WCDWRgDgDJ_Ces",
     "reactions": {
-      "total": 6,
+      "total": 11,
       "types": [
         "LIKE",
         "EMPATHY"
@@ -34,11 +34,12 @@ export const linkedinPosts = [
     "date": "2026-09-14",
     "text": "✍️ Proving your leadership accross cultures is a journey\n\nIn my intercultural management journey, I’ve faced the same challenge every time I’ve joined a new team: proving I’m actually fit to lead it. What’s changed, every single time, is what counts as proof. Each culture I’ve worked with has its own answer test, built up over a much longer history than the three months I usually have to earn it, and none of them advertise the rules up front.\n\nRead the full article here ➡️ https://lnkd.in/efJm8SPm\n\n#InterculturalManagement #GlobalLeadership #CrossCulturalTeams #Management #Leadership #RemoteWork",
     "url": "https://www.linkedin.com/posts/teddygandon_interculturalmanagement-globalleadership-activity-7505203828984795137-HlrV",
-    "image": "https://static.licdn.com/aero-v1/sc/h/c45fy346jw096z9pbphyyhdz7",
+    "image": "https://media.licdn.com/dms/image/v2/D4D22AQFutD1hcYE9dQ/feedshare-shrink_800/B4DaAEZlENKMAc-/0/1786780209878?e=2147483647&v=beta&t=D1jbuz3CYOB0DJOBpLcTmv1fJuHYyBGlNyA-dxaEHbc",
     "reactions": {
       "total": 12,
       "types": [
-        "LIKE"
+        "LIKE",
+        "APPRECIATION"
       ]
     },
     "comments": 0
@@ -81,9 +82,7 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "PRAISE",
-        "EMPATHY",
-        "INTEREST",
-        "APPRECIATION"
+        "EMPATHY"
       ]
     },
     "comments": 0
