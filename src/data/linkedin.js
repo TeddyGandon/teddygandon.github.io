@@ -67,7 +67,8 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "EMPATHY",
-        "PRAISE"
+        "PRAISE",
+        "INTEREST"
       ]
     },
     "comments": 4
@@ -82,7 +83,9 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "PRAISE",
-        "EMPATHY"
+        "EMPATHY",
+        "INTEREST",
+        "APPRECIATION"
       ]
     },
     "comments": 0
