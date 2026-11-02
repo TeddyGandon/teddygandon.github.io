@@ -2,6 +2,19 @@
 // never deleted, so hand-added ones are kept. Most recent first.
 export const linkedinPosts = [
   {
+    "date": "2026-11-02",
+    "text": "🔥 Can AI agents replace an engineering squad? I built an experiment to find out.\n\nI set up 3 specialized agents working together:\n- Coder: Implements features based on ticket specifications.\n- Reviewer: Enforces code quality, security, and architectural rules.\n- Tester: Drafts and runs tests aligned with functional requirements.\n\nWhen a review or test fails, the loop triggers automatically: the coder goes back to fix the codebase.\n\nThe experiment revealed a hard truth about AI in software engineering: agents don't fix poor requirements. Without rigorous technical scoping, agents get clueless fast. By the 5th ticket, code quality degraded and regressions appeared.\n\nWriting code is the easy (and mostly the dehumanizing) part. Defining and solving the problem is where engineering happens. AI won't change that; it makes scoping even more critical.\n\nThis reinforces a core belief of mine: developers write code; engineers solve problems. And software engineering was the only exception to this rule.\n\n​After all, we wouldn't ask a civil engineer to lay bricks and build a skyscraper by themselves, we ask them to conceive and design it.\n\n➡️ Take a look at the repo here: https://lnkd.in/eA8P-8CG\n\n#AI #SoftwareEngineering #AIgents #DevOps #Github",
+    "url": "https://www.linkedin.com/posts/teddygandon_ai-softwareengineering-aigents-activity-7522897202961219584-2GCm",
+    "image": "https://media.licdn.com/dms/image/v2/D4E22AQFexhEh5dXbvg/feedshare-shrink_1280/B4EaGazI13I8AM-/0/1793598459526?e=2147483647&v=beta&t=Mgqe8Rb6zTQVGXNlcWWP_7VOnUYdDQl31aRBRfSGwmg",
+    "reactions": {
+      "total": 0,
+      "types": [
+        "LIKE"
+      ]
+    },
+    "comments": 0
+  },
+  {
     "date": "2026-10-26",
     "text": "✍️ Yes, I am using AI for managing. Yes, everyone is using it. And no, you probably don't use it efficiently.\n\nEvery manager I know is now using some form of AI, and almost every one of them is disappointed with it in the same way: the output sounds plausible, reads well, and is subtly wrong about the thing that actually mattered in the room. Surprisingly enough, it’s not a model problem but usually an input problem. The teams I’ve seen get real leverage from AI treat it the way we treat any system with weak defaults: they control what goes in, and they scope what it’s allowed to do. Two disciplines, both familiar from engineering, both usually skipped when the same person puts on their “manager” hat.\n\nRead the full article ➡️ https://lnkd.in/eeDZHKPJ\n\n#Management #AIinManagement #Leadership #AIWorkflow #EngineeringLeadership #TechLeadership",
     "url": "https://www.linkedin.com/posts/teddygandon_management-aiinmanagement-leadership-activity-7520422913687228416-qul_",
@@ -67,8 +80,7 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "EMPATHY",
-        "PRAISE",
-        "INTEREST"
+        "PRAISE"
       ]
     },
     "comments": 4
@@ -83,9 +95,7 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "PRAISE",
-        "EMPATHY",
-        "INTEREST",
-        "APPRECIATION"
+        "EMPATHY"
       ]
     },
     "comments": 0
