@@ -7,7 +7,7 @@ export const linkedinPosts = [
     "url": "https://www.linkedin.com/posts/teddygandon_ai-softwareengineering-aigents-activity-7522897202961219584-2GCm",
     "image": "https://media.licdn.com/dms/image/v2/D4E22AQFexhEh5dXbvg/feedshare-shrink_1280/B4EaGazI13I8AM-/0/1793598459526?e=2147483647&v=beta&t=Mgqe8Rb6zTQVGXNlcWWP_7VOnUYdDQl31aRBRfSGwmg",
     "reactions": {
-      "total": 0,
+      "total": 2,
       "types": [
         "LIKE"
       ]
@@ -80,7 +80,8 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "EMPATHY",
-        "PRAISE"
+        "PRAISE",
+        "INTEREST"
       ]
     },
     "comments": 4
@@ -95,7 +96,9 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "PRAISE",
-        "EMPATHY"
+        "EMPATHY",
+        "INTEREST",
+        "APPRECIATION"
       ]
     },
     "comments": 0
