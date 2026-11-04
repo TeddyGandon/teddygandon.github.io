@@ -2,12 +2,25 @@
 // never deleted, so hand-added ones are kept. Most recent first.
 export const linkedinPosts = [
   {
+    "date": "2026-11-04",
+    "text": "One of the best parts of leading engineering teams is watching great engineers grow, and helping them take their next step.\n\nA former engineer of one of my squads is currently looking for his next role, and any team would be lucky to have him. During our time working together, they stood out as someone driven by relentless curiosity, never settling for superficial fixes and always digging deep to understand and improve complex systems. He brought high self-motivation and true ownership to every task, comfortably tackling ambiguous problems from discovery all the way to deployment.\n\nAbove all, he is a fast, continuous learner who rapidly adapts to new tools and tech stacks while elevating the engineers around them.\n\nIf you’re hiring software engineers who bring high energy, strong technical problem-solving, and a growth mindset, send me a message or comment below and I’ll connect you directly!",
+    "url": "https://www.linkedin.com/posts/teddygandon_one-of-the-best-parts-of-leading-engineering-activity-7523661521852219392-tdIS",
+    "image": "https://static.licdn.com/aero-v1/sc/h/c45fy346jw096z9pbphyyhdz7",
+    "reactions": {
+      "total": 3,
+      "types": [
+        "LIKE"
+      ]
+    },
+    "comments": 1
+  },
+  {
     "date": "2026-11-02",
     "text": "🔥 Can AI agents replace an engineering squad? I built an experiment to find out.\n\nI set up 3 specialized agents working together:\n- Coder: Implements features based on ticket specifications.\n- Reviewer: Enforces code quality, security, and architectural rules.\n- Tester: Drafts and runs tests aligned with functional requirements.\n\nWhen a review or test fails, the loop triggers automatically: the coder goes back to fix the codebase.\n\nThe experiment revealed a hard truth about AI in software engineering: agents don't fix poor requirements. Without rigorous technical scoping, agents get clueless fast. By the 5th ticket, code quality degraded and regressions appeared.\n\nWriting code is the easy (and mostly the dehumanizing) part. Defining and solving the problem is where engineering happens. AI won't change that; it makes scoping even more critical.\n\nThis reinforces a core belief of mine: developers write code; engineers solve problems. And software engineering was the only exception to this rule.\n\n​After all, we wouldn't ask a civil engineer to lay bricks and build a skyscraper by themselves, we ask them to conceive and design it.\n\n➡️ Take a look at the repo here: https://lnkd.in/eA8P-8CG\n\n#AI #SoftwareEngineering #AIgents #DevOps #Github",
     "url": "https://www.linkedin.com/posts/teddygandon_ai-softwareengineering-aigents-activity-7522897202961219584-2GCm",
     "image": "https://media.licdn.com/dms/image/v2/D4E22AQFexhEh5dXbvg/feedshare-shrink_1280/B4EaGazI13I8AM-/0/1793598459526?e=2147483647&v=beta&t=Mgqe8Rb6zTQVGXNlcWWP_7VOnUYdDQl31aRBRfSGwmg",
     "reactions": {
-      "total": 2,
+      "total": 3,
       "types": [
         "LIKE"
       ]
@@ -96,9 +109,7 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "PRAISE",
-        "EMPATHY",
-        "INTEREST",
-        "APPRECIATION"
+        "EMPATHY"
       ]
     },
     "comments": 0
