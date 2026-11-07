@@ -7,7 +7,7 @@ export const linkedinPosts = [
     "url": "https://www.linkedin.com/posts/teddygandon_one-of-the-best-parts-of-leading-engineering-activity-7523661521852219392-tdIS",
     "image": "https://static.licdn.com/aero-v1/sc/h/c45fy346jw096z9pbphyyhdz7",
     "reactions": {
-      "total": 6,
+      "total": 7,
       "types": [
         "LIKE"
       ]
@@ -93,7 +93,8 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "EMPATHY",
-        "PRAISE"
+        "PRAISE",
+        "INTEREST"
       ]
     },
     "comments": 4
