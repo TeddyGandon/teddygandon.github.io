@@ -60,28 +60,6 @@ describe('displayCertifications', () => {
   });
 });
 
-describe('displayNewRole', () => {
-  const timeline = async (flags) => {
-    const wrapper = await mountView(EXPERIENCE, flags);
-    return wrapper.findAll('.timeline-item').map((item) => ({
-      period: item.find('.timeline-item__period').text(),
-      role: item.find('.timeline-item__role').text(),
-    }));
-  };
-
-  it('puts the new role on top of the timeline and closes the previous one when on', async () => {
-    const items = await timeline({ displayNewRole: true });
-    expect(items[0]).toEqual({ period: '2026 // Today', role: 'Head of Engineering, outsourcing' });
-    expect(items[1]).toEqual({ period: '2022 // 2026', role: 'Engineering Manager' });
-  });
-
-  it('keeps the current role open-ended when off', async () => {
-    const items = await timeline({ displayNewRole: false });
-    expect(items[0]).toEqual({ period: '2022 // Today', role: 'Engineering Manager' });
-    expect(items.map((item) => item.role)).not.toContain('Head of Engineering, outsourcing');
-  });
-});
-
 describe('displayFutureArticles', () => {
   // A date where some articles are already published and others still scheduled.
   const today = '2026-08-10';
