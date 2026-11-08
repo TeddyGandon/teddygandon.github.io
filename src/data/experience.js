@@ -3,7 +3,14 @@ import { flags } from "./flags";
 // Experience timeline, most recent first. Rendered by ExperienceView / TimelineItem.
 export const experience = [
   {
-    period: '2022 // Today',
+    period: '2026 // Today',
+    role: 'Head of Engineering, outsourcing',
+    org: 'Believe France',
+    description:
+      'Leading the outsourcing though the BTech Alliance framework. Taking the lead on all outsourced engineering teams globally. Driving 30+ engineers worldwide through engineering managers, owning delivery of several internal platforms for the music industry. Designed the operational framework behind faster onboarding, clearer roles, horizontal scaling and better delivery, and brought AI-assisted engineering (Claude, Gemini) into the squads\' day-to-day work.',
+  },
+  {
+    period: '2022 // 2026',
     role: 'Engineering Manager',
     org: 'Believe France',
     description:
@@ -30,17 +37,6 @@ export const experience = [
     description: 'Built web and Flash/Flex applications, the starting point of a twenty-year engineering path.',
   },
 ];
-
-if (flags.displayNewRole) {
-  experience[0].period = '2022 // 2026';
-  experience.unshift({
-    period: '2026 // Today',
-    role: 'Head of Engineering, outsourcing',
-    org: 'Believe France',
-    description:
-      'Leading the outsourcing though the BTech Alliance framework. Taking the lead on all outsourced engineering teams globally. Driving 40+ engineers worldwide through engineering managers, owning delivery of several internal platforms for the music industry. Designed the operational framework behind faster onboarding, clearer roles, horizontal scaling and better delivery, and brought AI-assisted engineering (Claude, Gemini) into the squads\' day-to-day work.',
-  });
-}
 
 // Soft skills with a one-line summary each, no ranking implied.
 export const softSkills = [

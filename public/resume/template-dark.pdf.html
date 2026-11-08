@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Resume // Teddy Gandon</title>
+  <style>
+    /*
+      A4 printable CV template. Print (or "Save as PDF") with default
+      settings: the sheet is 210 × 297 mm with no page margin (the columns
+      bleed to the edges and carry their own 0.5 cm inner margin).
+      On screen, the same sheet is previewed centered on a grey desk.
+    */
+    /*
+      EB Garamond, self-hosted like the portfolio (same weights as the
+      @fontsource imports in src/main.js), copied into ./fonts since files
+      in public/ are served as-is, outside the Vite bundle.
+    */
+    @font-face {
+      font-family: 'EB Garamond';
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+      src: url('fonts/eb-garamond-latin-400-normal.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'EB Garamond';
+      font-style: italic;
+      font-weight: 400;
+      font-display: block;
+      src: url('fonts/eb-garamond-latin-400-italic.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'EB Garamond';
+      font-style: normal;
+      font-weight: 500;
+      font-display: block;
+      src: url('fonts/eb-garamond-latin-500-normal.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'EB Garamond';
+      font-style: normal;
+      font-weight: 600;
+      font-display: block;
+      src: url('fonts/eb-garamond-latin-600-normal.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'EB Garamond';
+      font-style: italic;
+      font-weight: 600;
+      font-display: block;
+      src: url('fonts/eb-garamond-latin-600-italic.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'EB Garamond';
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+      src: url('fonts/eb-garamond-latin-700-normal.woff2') format('woff2');
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    /*
+      Dark palette: warm off-white ink on a near-black sheet, a slightly
+      lifted charcoal sidebar, and a lighter brass accent — closer to the
+      portfolio's gold — so it keeps its contrast on the dark ground. Still
+      used sparingly for structure (rules, dates, markers).
+    */
+    :root {
+      --ink: #ece8df;
+      --ink-soft: #bdb7aa;
+      --ink-muted: #8a857a;
+      --rule: #3a3731;
+      --sidebar: #1f1e1b;
+      --paper: #161513;
+      --desk: #3a3a3a;
+      --accent: #c9a464;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      margin: 0;
+      background: var(--desk);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+      font-size: 10pt;
+      line-height: 1.4;
+      font-variant-numeric: oldstyle-nums proportional-nums;
+      font-kerning: normal;
+      text-rendering: optimizeLegibility;
+    }
+
+    p,
+    ul,
+    h2 {
+      margin: 0;
+    }
+
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    address {
+      font-style: normal;
+    }
+
+    /*
+      One A4 sheet, edge to edge, split in two full-height columns: a charcoal
+      sidebar (30%) on the left, the near-black main column (70%) on the
+      right. Each column has a 0.5 cm inner margin.
+    */
+    .page {
+      display: grid;
+      grid-template-columns: 30% 70%;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 1cm auto;
+      background: var(--paper);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .sidebar {
+      background: var(--sidebar);
+      border-right: 1px solid var(--rule);
+      padding: 0.5cm;
+      font-size: 9.5pt;
+      line-height: 1.4;
+    }
+
+    .main {
+      background: var(--paper);
+      padding: 0.5cm;
+      color: var(--ink-soft);
+    }
+
+    /* ---- Sections ------------------------------------------------------- */
+
+    .section {
+      margin-top: 0.65cm;
+    }
+
+    .main .section:first-child {
+      margin-top: 0.1cm;
+    }
+
+    /* Spaced capitals after a brass icon, then a hairline to the edge. */
+    .section__title {
+      display: flex;
+      align-items: center;
+      gap: 0.25cm;
+      margin-bottom: 0.3cm;
+      color: var(--ink);
+      font-size: 10pt;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+    }
+
+    /* Font Awesome glyphs, inlined once as <symbol>s at the top of <body>. */
+    .icon {
+      flex: none;
+      width: 1em;
+      height: 1em;
+      fill: currentColor;
+    }
+
+    .section__title .icon {
+      color: var(--accent);
+    }
+
+    /* Narrower column: tighter so every heading stays on one line. */
+    .sidebar .section__title {
+      gap: 0.2cm;
+      font-size: 9pt;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+
+    .section__title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* "a // b" separators, kept in the text but set back in brass. */
+    .sep {
+      color: var(--accent);
+      font-weight: 400;
+      padding: 0 0.15em;
+    }
+
+    /* ---- Sidebar -------------------------------------------------------- */
+
+    .identity {
+      padding-top: 0.1cm;
+    }
+
+    .identity__name {
+      color: var(--ink);
+      font-size: 25pt;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 0.06em;
+    }
+
+    .identity__role {
+      margin-top: 0.3cm;
+      padding-top: 0.25cm;
+      border-top: 2px solid var(--accent);
+      color: var(--accent);
+      font-size: 8.5pt;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+    }
+
+    .identity__group {
+      margin-top: 0.4cm;
+      color: var(--ink-soft);
+    }
+
+    .identity__group li {
+      display: flex;
+      align-items: center;
+      gap: 0.2cm;
+    }
+
+    .identity__group .icon {
+      width: 0.85em;
+      height: 0.85em;
+      color: var(--accent);
+    }
+
+    .identity__group li + li {
+      margin-top: 0.05cm;
+    }
+
+    .sidebar-list li {
+      color: var(--ink-soft);
+    }
+
+    .sidebar-list li + li {
+      margin-top: 0.06cm;
+    }
+
+    /* Soft skills as a light dotted list. */
+    .sidebar-list--dotted li {
+      position: relative;
+      padding-left: 0.35cm;
+    }
+
+    .sidebar-list--dotted li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .sidebar-item + .sidebar-item {
+      margin-top: 0.35cm;
+    }
+
+    .sidebar-item__name {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .sidebar-item__meta {
+      color: var(--accent);
+      font-size: 8.5pt;
+      letter-spacing: 0.04em;
+    }
+
+    .sidebar-item__text {
+      margin-top: 0.05cm;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    /* ---- Main column ---------------------------------------------------- */
+
+    .profile p {
+      color: var(--ink);
+      font-size: 10.5pt;
+      line-height: 1.45;
+    }
+
+    .profile p + p {
+      margin-top: 0.2cm;
+    }
+
+    /* Experience as a timeline: a hairline down the left, a brass node per job. */
+    .timeline {
+      position: relative;
+      padding-left: 0.5cm;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 0.3em;
+      bottom: 0.2cm;
+      width: 1px;
+      background: var(--rule);
+    }
+
+    .job {
+      position: relative;
+      break-inside: avoid;
+    }
+
+    .job + .job {
+      margin-top: 0.42cm;
+    }
+
+    .job::before {
+      content: '';
+      position: absolute;
+      left: calc(-0.5cm);
+      top: 0.38em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+
+    .job__header {
+      color: var(--ink);
+      font-size: 10.5pt;
+    }
+
+    .job__dates {
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .job__company {
+      font-weight: 600;
+    }
+
+    .job__role {
+      font-style: italic;
+    }
+
+    .job__summary {
+      margin-top: 0.08cm;
+    }
+
+    /* Key figures set in ink and bold so they stand out when skimming. */
+    .metric {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .job__highlights {
+      margin-top: 0.1cm;
+    }
+
+    .job__highlights li {
+      position: relative;
+      padding-left: 0.4cm;
+    }
+
+    .job__highlights li + li {
+      margin-top: 0.04cm;
+    }
+
+    .job__highlights li::before {
+      content: '';
+      position: absolute;
+      left: 0.1cm;
+      top: 0.55em;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .skill-group {
+      display: grid;
+      grid-template-columns: 2.9cm 1fr;
+      gap: 0.3cm;
+    }
+
+    .skill-group + .skill-group {
+      margin-top: 0.22cm;
+    }
+
+    .skill-group__name {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    @media print {
+      body {
+        background: var(--paper);
+      }
+
+      /*
+        The columns fill the full A4 height when printing, slightly under it
+        so rounding never spills a blank second page.
+      */
+      .page {
+        width: auto;
+        min-height: calc(297mm - 1mm);
+        margin: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!--
+    TAILORING GUIDE (for an AI or a human adapting this CV to a job offer)
+
+    Structure — every block has a stable id and data-* label:
+      aside.sidebar
+        #identity        [data-tailorable="false"]  name, role, contact, locations
+        #soft-skills     [data-tailorable="true"]   <li> per skill
+        #side-projects   [data-tailorable="true"]   .sidebar-item per project
+        #education       [data-tailorable="false"]  .sidebar-item per diploma
+        #certifications  [data-tailorable="false"]  <li> per certification
+        #languages       [data-tailorable="false"]  <li> per language
+      main.main
+        #profile         [data-tailorable="true"]   1–2 <p> summary paragraphs
+        #experience      [data-tailorable="true"]   article.job[data-entry="job"], most recent first
+                                                   (.job__header, .job__summary, ul.job__highlights > li)
+        #hard-skills     [data-tailorable="true"]   .skill-group[data-group] (name + one <p> list)
+
+    What may change for a given offer (only in data-tailorable="true" blocks):
+      - Reword #profile to echo the offer's priorities and vocabulary.
+      - Reorder, trim or rephrase .job__summary and .job__highlights items to
+        surface the most relevant achievements first.
+      - Reorder skills inside a .skill-group, and soft skills, by relevance.
+      - Drop a side project that is irrelevant to the offer.
+
+      - Exception in #identity: the .identity__role headline may be retitled
+        to echo the offer's job title (job titles inside #experience may not).
+
+    What must not change:
+      - Facts: companies, roles, dates (<time>), diplomas, contact details.
+        Never invent experience, skills, metrics or employers.
+      - Key figures may be wrapped in <strong class="metric">; keep it to a
+        few per section.
+      - Markup: keep tag names, classes, ids and data-* attributes as-is so the
+        layout and this guide stay valid; keep the "<span class="sep">//</span>"
+        separators, and the <svg class="icon"> before each title and contact line.
+      - Layout: the CV must stay on ONE A4 page. When adding words, remove
+        others; keep the text volume per section roughly the same.
+  -->
+  <!-- Icons: Font Awesome Free 7 (CC BY 4.0, https://fontawesome.com/license/free). -->
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-globe" viewBox="0 0 512 512"><path d="M351.9 280l-190.9 0c2.9 64.5 17.2 123.9 37.5 167.4 11.4 24.5 23.7 41.8 35.1 52.4 11.2 10.5 18.9 12.2 22.9 12.2s11.7-1.7 22.9-12.2c11.4-10.6 23.7-28 35.1-52.4 20.3-43.5 34.6-102.9 37.5-167.4zM160.9 232l190.9 0C349 167.5 334.7 108.1 314.4 64.6 303 40.2 290.7 22.8 279.3 12.2 268.1 1.7 260.4 0 256.4 0s-11.7 1.7-22.9 12.2c-11.4 10.6-23.7 28-35.1 52.4-20.3 43.5-34.6 102.9-37.5 167.4zm-48 0C116.4 146.4 138.5 66.9 170.8 14.7 78.7 47.3 10.9 131.2 1.5 232l111.4 0zM1.5 280c9.4 100.8 77.2 184.7 169.3 217.3-32.3-52.2-54.4-131.7-57.9-217.3L1.5 280zm398.4 0c-3.5 85.6-25.6 165.1-57.9 217.3 92.1-32.7 159.9-116.5 169.3-217.3l-111.4 0zm111.4-48C501.9 131.2 434.1 47.3 342 14.7 374.3 66.9 396.4 146.4 399.9 232l111.4 0z"/></symbol>
+      <symbol id="i-linkedin-in" viewBox="0 0 448 512"><path d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 512 512"><path d="M160.2 25C152.3 6.1 131.7-3.9 112.1 1.4l-5.5 1.5c-64.6 17.6-119.8 80.2-103.7 156.4 37.1 175 174.8 312.7 349.8 349.8 76.3 16.2 138.8-39.1 156.4-103.7l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2C233.9 335.4 177.3 277 144.8 205.3L189 169.3c13.9-11.3 18.6-30.4 11.8-47L160.2 25z"/></symbol>
+      <symbol id="i-envelope" viewBox="0 0 512 512"><path d="M48 64c-26.5 0-48 21.5-48 48 0 15.1 7.1 29.3 19.2 38.4l208 156c17.1 12.8 40.5 12.8 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48L48 64zM0 196L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-188-198.4 148.8c-34.1 25.6-81.1 25.6-115.2 0L0 196z"/></symbol>
+      <symbol id="i-location-dot" viewBox="0 0 384 512"><path d="M0 188.6C0 84.4 86 0 192 0S384 84.4 384 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0-50.2-54.5-170.4-197.5-170.4-316.8zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/></symbol>
+      <symbol id="i-user" viewBox="0 0 448 512"><path d="M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z"/></symbol>
+      <symbol id="i-briefcase" viewBox="0 0 512 512"><path d="M200 48l112 0c4.4 0 8 3.6 8 8l0 40-128 0 0-40c0-4.4 3.6-8 8-8zm-56 8l0 40-80 0C28.7 96 0 124.7 0 160l0 96 512 0 0-96c0-35.3-28.7-64-64-64l-80 0 0-40c0-30.9-25.1-56-56-56L200 0c-30.9 0-56 25.1-56 56zM512 304l-192 0 0 16c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-16-192 0 0 112c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-112z"/></symbol>
+      <symbol id="i-screwdriver-wrench" viewBox="0 0 576 512"><path d="M70.8-6.7c5.4-5.4 13.8-6.2 20.2-2L209.9 70.5c8.9 5.9 14.2 15.9 14.2 26.6l0 49.6 90.8 90.8c33.3-15 73.9-8.9 101.2 18.5L542.2 382.1c18.7 18.7 18.7 49.1 0 67.9l-60.1 60.1c-18.7 18.7-49.1 18.7-67.9 0L288.1 384c-27.4-27.4-33.5-67.9-18.5-101.2l-90.8-90.8-49.6 0c-10.7 0-20.7-5.3-26.6-14.2L23.4 58.9c-4.2-6.3-3.4-14.8 2-20.2L70.8-6.7zm145 303.5c-6.3 36.9 2.3 75.9 26.2 107.2l-94.9 95c-28.1 28.1-73.7 28.1-101.8 0s-28.1-73.7 0-101.8l135.4-135.5 35.2 35.1zM384.1 0c20.1 0 39.4 3.7 57.1 10.5 10 3.8 11.8 16.5 4.3 24.1L388.8 91.3c-3 3-4.7 7.1-4.7 11.3l0 41.4c0 8.8 7.2 16 16 16l41.4 0c4.2 0 8.3-1.7 11.3-4.7l56.7-56.7c7.6-7.5 20.3-5.7 24.1 4.3 6.8 17.7 10.5 37 10.5 57.1 0 43.2-17.2 82.3-45 111.1l-49.1-49.1c-33.1-33-78.5-45.7-121.1-38.4l-56.8-56.8 0-29.7-.2-5c-.8-12.4-4.4-24.3-10.5-34.9 29.4-35 73.4-57.2 122.7-57.3z"/></symbol>
+      <symbol id="i-people-group" viewBox="0 0 512 512"><path d="M256 0a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm96 312c0 25-12.7 47-32 59.9l0 92.1c0 26.5-21.5 48-48 48l-32 0c-26.5 0-48-21.5-48-48l0-92.1C172.7 359 160 337 160 312l0-40c0-53 43-96 96-96s96 43 96 96l0 40zM96 32a56 56 0 1 1 0 112 56 56 0 1 1 0-112zm16 240l0 32c0 32.5 12.1 62.1 32 84.7l0 75.3c0 1.2 0 2.5 .1 3.7-8.5 7.6-19.7 12.3-32.1 12.3l-32 0c-26.5 0-48-21.5-48-48l0-56.6C12.9 364.4 0 343.7 0 320l0-32c0-53 43-96 96-96 12.7 0 24.8 2.5 35.9 6.9-12.6 21.4-19.9 46.4-19.9 73.1zM368 464l0-75.3c19.9-22.5 32-52.2 32-84.7l0-32c0-26.7-7.3-51.6-19.9-73.1 11.1-4.5 23.2-6.9 35.9-6.9 53 0 96 43 96 96l0 32c0 23.7-12.9 44.4-32 55.4l0 56.6c0 26.5-21.5 48-48 48l-32 0c-12.3 0-23.6-4.6-32.1-12.3 0-1.2 .1-2.5 .1-3.7zM416 32a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/></symbol>
+      <symbol id="i-flask" viewBox="0 0 448 512"><path d="M288 0L128 0C110.3 0 96 14.3 96 32s14.3 32 32 32L128 215.5 7.5 426.3C2.6 435 0 444.7 0 454.7 0 486.4 25.6 512 57.3 512l333.4 0c31.6 0 57.3-25.6 57.3-57.3 0-10-2.6-19.8-7.5-28.4L320 215.5 320 64c17.7 0 32-14.3 32-32S337.7 0 320 0L288 0zM192 215.5l0-151.5 64 0 0 151.5c0 11.1 2.9 22.1 8.4 31.8l41.6 72.7-164 0 41.6-72.7c5.5-9.7 8.4-20.6 8.4-31.8z"/></symbol>
+      <symbol id="i-graduation-cap" viewBox="0 0 576 512"><path d="M48 195.8l209.2 86.1c9.8 4 20.2 6.1 30.8 6.1s21-2.1 30.8-6.1l242.4-99.8c9-3.7 14.8-12.4 14.8-22.1s-5.8-18.4-14.8-22.1L318.8 38.1C309 34.1 298.6 32 288 32s-21 2.1-30.8 6.1L14.8 137.9C5.8 141.6 0 150.3 0 160L0 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-260.2zm48 71.7L96 384c0 53 86 96 192 96s192-43 192-96l0-116.6-142.9 58.9c-15.6 6.4-32.2 9.7-49.1 9.7s-33.5-3.3-49.1-9.7L96 267.4z"/></symbol>
+      <symbol id="i-award" viewBox="0 0 448 512"><path d="M245.9-25.9c-13.4-8.2-30.3-8.2-43.7 0-24.4 14.9-39.5 18.9-68.1 18.3-15.7-.4-30.3 8.1-37.9 21.9-13.7 25.1-24.8 36.2-49.9 49.9-13.8 7.5-22.2 22.2-21.9 37.9 .7 28.6-3.4 43.7-18.3 68.1-8.2 13.4-8.2 30.3 0 43.7 14.9 24.4 18.9 39.5 18.3 68.1-.4 15.7 8.1 30.3 21.9 37.9 22.1 12.1 33.3 22.1 45.1 41.5L42.7 458.5c-5.9 11.9-1.1 26.3 10.7 32.2l86 43c11.5 5.7 25.5 1.4 31.7-9.8l52.8-95.1 52.8 95.1c6.2 11.2 20.2 15.6 31.7 9.8l86-43c11.9-5.9 16.7-20.3 10.7-32.2l-48.6-97.2c11.7-19.4 23-29.4 45.1-41.5 13.8-7.5 22.2-22.2 21.9-37.9-.7-28.6 3.4-43.7 18.3-68.1 8.2-13.4 8.2-30.3 0-43.7-14.9-24.4-18.9-39.5-18.3-68.1 .4-15.7-8.1-30.3-21.9-37.9-25.1-13.7-36.2-24.8-49.9-49.9-7.5-13.8-22.2-22.2-37.9-21.9-28.6 .7-43.7-3.4-68.1-18.3zM224 96a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></symbol>
+      <symbol id="i-language" viewBox="0 0 576 512"><path d="M160 0c17.7 0 32 14.3 32 32l0 32 128 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-9.6 0-8.4 23.1c-16.4 45.2-41.1 86.5-72.2 122 14.2 8.8 29 16.6 44.4 23.5l50.4 22.4 62.2-140c5.1-11.6 16.6-19 29.2-19s24.1 7.4 29.2 19l128 288c7.2 16.2-.1 35.1-16.2 42.2s-35.1-.1-42.2-16.2l-20-45-157.5 0-20 45c-7.2 16.2-26.1 23.4-42.2 16.2s-23.4-26.1-16.2-42.2l39.8-89.5-50.4-22.4c-23-10.2-45-22.4-65.8-36.4-21.3 17.2-44.6 32.2-69.5 44.7L78.3 380.6c-15.8 7.9-35 1.5-42.9-14.3s-1.5-35 14.3-42.9l34.5-17.3c16.3-8.2 31.8-17.7 46.4-28.3-13.8-12.7-26.8-26.4-38.9-40.9L81.6 224.7c-11.3-13.6-9.5-33.8 4.1-45.1s33.8-9.5 45.1 4.1l10.2 12.2c11.5 13.9 24.1 26.8 37.4 38.7 27.5-30.4 49.2-66.1 63.5-105.4l.5-1.2-210.3 0C14.3 128 0 113.7 0 96S14.3 64 32 64l96 0 0-32c0-17.7 14.3-32 32-32zM416 270.8L365.7 384 466.3 384 416 270.8z"/></symbol>
+  </svg>
+  <div class="page">
+    <aside class="sidebar">
+      <header class="identity" id="identity" data-section="identity" data-tailorable="false">
+        <p class="identity__name">TEDDY<br />GANDON</p>
+        <p class="identity__role">HEAD OF ENGINEERING</p>
+        <address class="identity__contact">
+        <ul class="identity__group">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg><a href="https://teddygandon.github.io">teddygandon.github.io</a></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-linkedin-in"/></svg><a href="https://www.linkedin.com/in/teddygandon">linkedin.com/in/teddygandon</a></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+33662467028">+33 6 62 46 70 28</a></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-envelope"/></svg><a href="mailto:moi@teddygandon.com">moi@teddygandon.com</a></li>
+        </ul>
+        <ul class="identity__group">
+          <li><svg class="icon" aria-hidden="true"><use href="#i-location-dot"/></svg>Bengaluru, India</li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-location-dot"/></svg>Paris, France</li>
+        </ul>
+        </address>
+      </header>
+
+      <section class="section" id="soft-skills" data-section="soft-skills" data-tailorable="true">
+        <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-people-group"/></svg>NICE &amp; SOFT SKILLS</h2>
+        <ul class="sidebar-list sidebar-list--dotted">
+          <li>People leadership</li>
+          <li>Stakeholder management</li>
+          <li>Communication</li>
+          <li>Problem solving</li>
+          <li>Emotional intelligence</li>
+          <li>Curiosity</li>
+        </ul>
+      </section>
+
+      <section class="section" id="side-projects" data-section="side-projects" data-tailorable="true">
+        <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-flask"/></svg>SIDE PROJECTS</h2>
+        <div class="sidebar-item">
+          <p class="sidebar-item__name">The First Spine</p>
+          <p class="sidebar-item__meta"><a href="https://thefirstspine.fr">thefirstspine.fr</a></p>
+          <p class="sidebar-item__text">My biggest personal project so far — a solo-developed board game, mostly open source. NestJS, Docker, Ansible.</p>
+        </div>
+        <div class="sidebar-item">
+          <p class="sidebar-item__name">Drifter's Tales</p>
+          <p class="sidebar-item__meta"><a href="https://store.steampowered.com/app/1935960/Drifters_Tales/">store.steampowered.com</a></p>
+          <p class="sidebar-item__text">Dark fantasy card battler, 13 branching stories. Released 2022.</p>
+        </div>
+      </section>
+
+      <section class="section" id="education" data-section="education" data-tailorable="false">
+        <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-graduation-cap"/></svg>EDUCATION</h2>
+        <div class="sidebar-item">
+          <p class="sidebar-item__meta"><time datetime="2009">2009</time></p>
+          <p class="sidebar-item__name">BTS (2-year degree), Multimedia Integration</p>
+          <p class="sidebar-item__text">Autograf, Paris, France</p>
+        </div>
+        <div class="sidebar-item">
+          <p class="sidebar-item__meta"><time datetime="2007">2007</time></p>
+          <p class="sidebar-item__name">Baccalauréat ES</p>
+          <p class="sidebar-item__text">Château-Thierry, France</p>
+        </div>
+      </section>
+
+      <!--
+      <section class="section" id="certifications" data-section="certifications" data-tailorable="false">
+        <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg>CERTIFICATIONS</h2>
+        <ul class="sidebar-list">
+          <li>Google Cloud Digital Leader <span class="sep">//</span> <time datetime="2026-10">2026</time></li>
+          <li>Google Project Management <span class="sep">//</span> in progress</li>
+        </ul>
+      </section>
+      -->
+
+      <section class="section" id="languages" data-section="languages" data-tailorable="false">
+        <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-language"/></svg>LANGUAGES</h2>
+        <ul class="sidebar-list">
+          <li>French <span class="sep">//</span> native</li>
+          <li>English <span class="sep">//</span> fluent</li>
+          <li>Spanish <span class="sep">//</span> fluent</li>
+          <li>Nerd <span class="sep">//</span> fluent</li>
+        </ul>
+      </section>
+    </aside>
+
+    <main class="main">
+      <section class="section profile" id="profile" data-section="profile" data-tailorable="true">
+        <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>PROFILE</h2>
+        <p>
+          Head of Engineering with nearly two decades in software and <strong class="metric">12 years</strong> leading teams, from startup
+          CTO to manager of managers. Currently leading <strong class="metric">30+ outsourced engineers</strong> worldwide through engineering
+          managers, building internal platforms (marketing, financial, video) for the music industry.
+        </p>
+        <p>
+          Hands-on and pragmatic, guided by three core actions: leading, developing and innovating. Track
+          record of growing autonomous, multicultural teams across India, France and Poland, and of bringing
+          AI-assisted engineering into everyday delivery.
+        </p>
+      </section>
+
+      <section class="section" id="experience" data-section="experience" data-tailorable="true">
+        <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg>EXPERIENCE</h2>
+
+        <div class="timeline">
+          <article class="job" id="job-believe-head" data-entry="job">
+            <p class="job__header">
+              <span class="job__dates"><time datetime="2026">2026</time> – Present</span> <span class="sep">//</span>
+              <span class="job__company">Believe</span> <span class="sep">//</span>
+              <span class="job__role">Head of Engineering, outsourcing</span>
+            </p>
+            <p class="job__summary">
+              Leading outsourcing through the BTech Alliance framework, across all outsourced teams globally.
+            </p>
+            <ul class="job__highlights">
+              <li>Drive <strong class="metric">30+ engineers</strong> worldwide through engineering managers, owning delivery of several internal platforms for the music industry</li>
+              <li>Scale the operational framework across outsourced teams for faster onboarding and better delivery</li>
+              <li>Bring AI-assisted engineering (Claude, Gemini) into the squads' day-to-day work</li>
+            </ul>
+          </article>
+
+          <article class="job" id="job-believe" data-entry="job">
+            <p class="job__header">
+              <span class="job__dates"><time datetime="2022">2022</time> – <time datetime="2026">2026</time></span> <span class="sep">//</span>
+              <span class="job__company">Believe</span> <span class="sep">//</span>
+              <span class="job__role">Engineering Manager</span>
+            </p>
+            <p class="job__summary">
+              Owned delivery of internal products, bridging product and engineering.
+            </p>
+            <ul class="job__highlights">
+              <li>Managed <strong class="metric">3 engineering managers</strong> and <strong class="metric">3 squads</strong> building financial reporting, internal marketing tools and an internal video management platform</li>
+              <li>Personally hired <strong class="metric">10 engineers</strong>, kept turnover low, coached engineers and managers</li>
+              <li>Designed the operational framework (processes, workflows, tools, management)</li>
+            </ul>
+          </article>
+
+          <article class="job" id="job-jellyfish" data-entry="job">
+            <p class="job__header">
+              <span class="job__dates"><time datetime="2015">2015</time> – <time datetime="2021">2021</time></span> <span class="sep">//</span>
+              <span class="job__company">Jellyfish (formerly Tradelab)</span> <span class="sep">//</span>
+              <span class="job__role">Senior Backend Team Lead</span>
+            </p>
+            <p class="job__summary">
+              Promoted from Senior Backend Engineer to team lead in 2017, leading <strong class="metric">3 backend engineers</strong>.
+            </p>
+            <ul class="job__highlights">
+              <li>Designed and built backend applications for high-volume programmatic bidding</li>
+              <li>Drawing on prior CTO experience, coached engineers into management roles</li>
+            </ul>
+          </article>
+
+          <article class="job" id="job-one-heart-communication" data-entry="job">
+            <p class="job__header">
+              <span class="job__dates"><time datetime="2011">2011</time> – <time datetime="2015">2015</time></span> <span class="sep">//</span>
+              <span class="job__company">One Heart Communication</span> <span class="sep">//</span>
+              <span class="job__role">Chief Technology Officer</span>
+            </p>
+            <p class="job__summary">
+              Reporting to the CEO of a startup, owned the technology and the CRM platform built for nonprofit
+              crowdsourcing and fundraising.
+            </p>
+            <ul class="job__highlights">
+              <li>Owned the architecture and delivery of a custom CRM on a pragmatic PHP/Symfony stack</li>
+              <li>Managed and coached a hybrid team of <strong class="metric">6 developers</strong> (3 in-house, 3 outsourced) and oversaw the Polish branch</li>
+            </ul>
+          </article>
+
+          <article class="job" id="job-cho-you" data-entry="job">
+            <p class="job__header">
+              <span class="job__dates"><time datetime="2007">2007</time> – <time datetime="2011">2011</time></span> <span class="sep">//</span>
+              <span class="job__company">Cho You</span> <span class="sep">//</span>
+              <span class="job__role">PHP, JavaScript, ActionScript engineer</span>
+            </p>
+            <p class="job__summary">
+              Designed and built rich internet applications and marketing tools for big tech clients.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="hard-skills" data-section="hard-skills" data-tailorable="true">
+        <h2 class="section__title"><svg class="icon" aria-hidden="true"><use href="#i-screwdriver-wrench"/></svg>HARD SKILLS &amp; OBSESSIONS</h2>
+        <div class="skill-group" data-entry="skill-group" data-group="leadership">
+          <p class="skill-group__name">Leadership</p>
+          <p>
+            Managing managers, hiring, coaching &amp; mentoring, operational frameworks, intercultural
+            &amp; outsourced team management
+          </p>
+        </div>
+        <div class="skill-group" data-entry="skill-group" data-group="technical">
+          <p class="skill-group__name">Technical</p>
+          <p>
+            JavaScript + TypeScript (NestJS, Angular, React, Vue), PHP (Symfony, Laravel), SQL (MySQL,
+            Postgres), NoSQL (MongoDB, Elastic, Redis), RabbitMQ, C#, Cloud (AWS, GCP), Containerization
+            (Kubernetes, Docker, Compose), Terraform, Ansible, Git, AI-assisted engineering (Claude, Gemini)
+          </p>
+        </div>
+        <div class="skill-group" data-entry="skill-group" data-group="project-management">
+          <p class="skill-group__name">Project management</p>
+          <p>
+            Agile &amp; delivery frameworks (Scrum, Kanban, Lean), roadmapping, release planning, OKRs, risk
+            management, RACI, Atlassian Suite (Jira, Confluence, Product Discovery)
+          </p>
+        </div>
+        <div class="skill-group" data-entry="skill-group" data-group="others">
+          <p class="skill-group__name">Others</p>
+          <p>
+            Adobe Suite, Unity, Blender, and obviously game design. Yes.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
