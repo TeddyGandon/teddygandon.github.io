@@ -1,6 +1,6 @@
 // Personal / side projects, chronological: the first shipped game, the
 // open-source platform built after it, then the game running on top of it,
-// then the job-hunting pipeline.
+// then the job-hunting pipeline, then the three-agent engineering workflow.
 export const sideProjects = [
   {
     name: 'The First Spine (platform)',
@@ -45,5 +45,16 @@ export const sideProjects = [
     description:
       'A job-hunting pipeline that starts from a job description in a GitHub issue: it tailors a resume, a cover letter, and a profile summary to the role, then drafts answers to the application questions for jobs found along the way.',
     note: 'Repository, Javascript/GitHub Actions',
+  },
+  {
+    name: 'Squadron',
+    tags: ['Open source', 'Tool', 'GitHub'],
+    url: 'https://github.com/TeddyGandon/squadron',
+    cta: 'View on GitHub',
+    image: `data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMjAgMTcwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9InNxR3JhZCIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzM4YmRmOCIgLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iIzAyODRjNyIgLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMzY5YTEiIC8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjMyMCIgaGVpZ2h0PSIxNzAiIHJ4PSIxNiIgZmlsbD0iIzBmMTcyYSIgc3Ryb2tlPSIjMWUyOTNiIiBzdHJva2Utd2lkdGg9IjEuNSIgLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNjAsNTgpIHNjYWxlKDAuMzYpIj48cGF0aCBkPSJNIC0xNSAtMTAgTCAtMTMwIC0xMDAgTCAtMTEwIC00MCBMIC0xNSAzNSBaIiBmaWxsPSJ1cmwoI3NxR3JhZCkiIC8+PHBhdGggZD0iTSAtMTUgMjUgTCAtMTAwIC0yNSBMIC04NSAxMCBMIC0xNSA2NSBaIiBmaWxsPSJ1cmwoI3NxR3JhZCkiIG9wYWNpdHk9IjAuOCIgLz48cGF0aCBkPSJNIC0xNSA1NSBMIC03MCAxNSBMIC02MCA0MCBMIC0xNSA4NSBaIiBmaWxsPSJ1cmwoI3NxR3JhZCkiIG9wYWNpdHk9IjAuNSIgLz48cGF0aCBkPSJNIDE1IC0xMCBMIDEzMCAtMTAwIEwgMTEwIC00MCBMIDE1IDM1IFoiIGZpbGw9InVybCgjc3FHcmFkKSIgLz48cGF0aCBkPSJNIDE1IDI1IEwgMTAwIC0yNSBMIDg1IDEwIEwgMTUgNjUgWiIgZmlsbD0idXJsKCNzcUdyYWQpIiBvcGFjaXR5PSIwLjgiIC8+PHBhdGggZD0iTSAxNSA1NSBMIDcwIDE1IEwgNjAgNDAgTCAxNSA4NSBaIiBmaWxsPSJ1cmwoI3NxR3JhZCkiIG9wYWNpdHk9IjAuNSIgLz48cGF0aCBkPSJNIDAgMTIwIEwgLTM1IDUwIEwgMCA3MCBMIDM1IDUwIFoiIGZpbGw9InVybCgjc3FHcmFkKSIgLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLDEwKSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYmFlNmZkIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSI4IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9Im5vbmUiIC8+PHBhdGggZD0iTSAtMzUgLTI1IEwgLTU1IDAgTCAtMzUgMjUiIHN0cm9rZS13aWR0aD0iNiIgLz48cGF0aCBkPSJNIDM1IC0yNSBMIDU1IDAgTCAzNSAyNSIgc3Ryb2tlLXdpZHRoPSI2IiAvPjxsaW5lIHgxPSIxMiIgeTE9Ii0yOCIgeDI9Ii0xMiIgeTI9IjI4IiBzdHJva2Utd2lkdGg9IjUiIC8+PC9nPjwvZz48dGV4dCB4PSIxNjAiIHk9IjEyNCIgZmlsbD0iI2ZmZmZmZiIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsUm9ib3RvLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSItMC41IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TcXVhZHJvbjwvdGV4dD48dGV4dCB4PSIxNjAiIHk9IjE0NiIgZmlsbD0iIzk0YTNiOCIgZm9udC1mYW1pbHk9Ii1hcHBsZS1zeXN0ZW0sQmxpbmtNYWNTeXN0ZW1Gb250LCdTZWdvZSBVSScsUm9ib3RvLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI1MDAiIGxldHRlci1zcGFjaW5nPSIwLjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlRocmVlLUFnZW50IEVuZ2luZWVyaW5nIFdvcmtmbG93PC90ZXh0Pjwvc3ZnPgo=`,
+    imageAlt: 'Squadron logo',
+    description:
+      'An experiment in replacing an engineering squad with three AI agents: a coder, a reviewer and a tester that turn a GitHub issue into a merged pull request, with failed reviews and tests looping back to the coder. Its main finding: agents don\'t fix poor requirements.',
+    note: 'Repository template, GitHub Actions/Copilot CLI',
   },
 ];
