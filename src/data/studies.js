@@ -1,6 +1,6 @@
 export const studies = [
   {
-    title: "Timezone frictions (temporary title)",
-    view: "timezone-frictions.vue",
+    title: 'Does a shared operating model bridge cultural gaps?',
+    view: 'operational-framework-and-culture.vue',
   },
 ];
