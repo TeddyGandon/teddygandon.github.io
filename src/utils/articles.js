@@ -9,7 +9,7 @@ import { flags } from '../data/flags';
 // works the same in dev and on the static GitHub Pages build.
 const modules = import.meta.glob('../content/articles/*.md', { query: '?raw', import: 'default', eager: true });
 
-const md = new MarkdownIt({ html: false, linkify: true, typographer: true });
+const md = new MarkdownIt({ html: true, linkify: true, typographer: true });
 
 // ```chart fences hold a JSON config ({ type, title, labels, series }). They render
 // to a placeholder that ArticleView turns into a Chart.js canvas once mounted.
