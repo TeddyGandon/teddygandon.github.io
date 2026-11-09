@@ -2,6 +2,19 @@
 // never deleted, so hand-added ones are kept. Most recent first.
 export const linkedinPosts = [
   {
+    "date": "2026-11-09",
+    "text": "✍️ Just like every distributed system, your team needs to be ready for scaling.\n\nAt some point, every growing team needs more managers than it has. The obvious move is to look inside the squad, find the engineer people already go to, and give them the role. I’ve done it several times, and I’ve learned that the promotion itself is the easy part. Everything that makes it work, or makes it fail, happens before the announcement and in the months after it.\n\nFull article in the comments 👇\n\n#GlobalLeadership #CrossCulturalTeams #Management #Leadership #RemoteWork",
+    "url": "https://www.linkedin.com/posts/teddygandon_globalleadership-crossculturalteams-management-activity-7525435579770273792-aFi1",
+    "image": "https://media.licdn.com/dms/image/v2/D4E22AQEt5wZXXaUauA/feedshare-shrink_1280/B4EaE0TBxkI8AM-/0/1791878765901?e=2147483647&v=beta&t=RKqygQPSXLywz2rT3QAAUhV3bMbujHmR9H2ewlkyy9o",
+    "reactions": {
+      "total": 3,
+      "types": [
+        "LIKE"
+      ]
+    },
+    "comments": 1
+  },
+  {
     "date": "2026-11-04",
     "text": "One of the best parts of leading engineering teams is watching great engineers grow, and helping them take their next step.\n\nA former engineer of one of my squads is currently looking for his next role, and any team would be lucky to have him. During our time working together, they stood out as someone driven by relentless curiosity, never settling for superficial fixes and always digging deep to understand and improve complex systems. He brought high self-motivation and true ownership to every task, comfortably tackling ambiguous problems from discovery all the way to deployment.\n\nAbove all, he is a fast, continuous learner who rapidly adapts to new tools and tech stacks while elevating the engineers around them.\n\nIf you’re hiring software engineers who bring high energy, strong technical problem-solving, and a growth mindset, send me a message or comment below and I’ll connect you directly!",
     "url": "https://www.linkedin.com/posts/teddygandon_one-of-the-best-parts-of-leading-engineering-activity-7523661521852219392-tdIS",
@@ -93,7 +106,8 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "EMPATHY",
-        "PRAISE"
+        "PRAISE",
+        "INTEREST"
       ]
     },
     "comments": 4
