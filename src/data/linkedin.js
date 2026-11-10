@@ -7,9 +7,10 @@ export const linkedinPosts = [
     "url": "https://www.linkedin.com/posts/teddygandon_globalleadership-crossculturalteams-management-activity-7525435579770273792-aFi1",
     "image": "https://media.licdn.com/dms/image/v2/D4E22AQEt5wZXXaUauA/feedshare-shrink_1280/B4EaE0TBxkI8AM-/0/1791878765901?e=2147483647&v=beta&t=RKqygQPSXLywz2rT3QAAUhV3bMbujHmR9H2ewlkyy9o",
     "reactions": {
-      "total": 3,
+      "total": 5,
       "types": [
-        "LIKE"
+        "LIKE",
+        "EMPATHY"
       ]
     },
     "comments": 1
@@ -106,8 +107,7 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "EMPATHY",
-        "PRAISE",
-        "INTEREST"
+        "PRAISE"
       ]
     },
     "comments": 4
