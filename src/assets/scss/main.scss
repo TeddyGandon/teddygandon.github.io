@@ -1330,20 +1330,26 @@ a.pill.is-active,
 }
 
 .prose ul,
-.prose ol {
+.prose ol,
+.study ul,
+.study ol {
   margin: 0 0 1.4rem 1.4rem;
 }
 
-.prose ul > li {
+.prose ul > li,
+.study ul > li {
   list-style: disc;
 }
 
-.prose ol > li {
+.prose ol > li,
+.study ol > li {
   list-style: decimal;
 }
 
 .prose li > ul,
-.prose li > ol {
+.prose li > ol,
+.study li > ul,
+.study li > ol {
   margin-bottom: 0;
 }
 
@@ -1486,6 +1492,12 @@ a.pill.is-active,
   min-width: 14rem;
 }
 
+// Empty cells of a response sheet, wide enough to write a short answer in.
+.study td.is-blank {
+  min-width: 6rem;
+  height: 2.25rem;
+}
+
 .study blockquote {
   border-left: 2px solid var(--gold);
   padding-left: 1.25rem;
@@ -1611,15 +1623,22 @@ a.pill.is-active,
   margin-top: 0.75rem;
 }
 
+// On mobile, one study per line, cropped to a wide strip: a full A4 page
+// would take more than the screen's height.
 @include mobile {
   .study-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .study-card__page {
+    aspect-ratio: 2 / 1;
   }
 }
 
+// Narrow phones: a little taller, so a long title still fits the strip.
 @include small-mobile {
-  .study-list {
-    grid-template-columns: minmax(0, 1fr);
+  .study-card__page {
+    aspect-ratio: 3 / 2;
   }
 }
 
@@ -1711,4 +1730,191 @@ a.pill.is-active,
 
 .route-fade-leave-to {
   opacity: 0;
+}
+// ---------------------------------------------------------------------------
+// Print: black text on white paper, no navigation, sizes in points.
+// ---------------------------------------------------------------------------
+@page {
+  margin: 18mm 16mm;
+}
+
+@media print {
+  // Light palette for every theme. !important so it beats the
+  // [data-palette=...] overrides, which have the same specificity.
+  :root,
+  [data-palette] {
+    --ink: #fff !important;
+    --ink-raised: #f4f4f4 !important;
+    --ink-line: #c8c8c8 !important;
+    --paper: #1a1a1a !important;
+    --paper-muted: #555 !important;
+    --gold: #6b5a2e !important;
+    --gold-soft: rgba(107, 90, 46, 0.12) !important;
+    --gold-glow: transparent !important;
+    --teal: #3f6b60 !important;
+    --teal-soft: #c8c8c8 !important;
+    --teal-glow: transparent !important;
+    --bulma-text: #1a1a1a !important;
+    --bulma-text-strong: #000 !important;
+    --bulma-text-weak: #555 !important;
+    --bulma-scheme-main: #fff !important;
+    --bulma-background: #fff !important;
+    --bulma-border: #c8c8c8 !important;
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    background: #fff;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  // Navigation and calls to action do nothing on paper.
+  body::before,
+  .site-nav,
+  .site-footer,
+  .back-link,
+  .hero-glow,
+  .button {
+    display: none !important;
+  }
+
+  // The page is the paper: no narrow column, only a little side room for
+  // marks that sit just outside the text, like the timeline dots.
+  .section {
+    padding: 0;
+  }
+
+  .container,
+  .container-narrow {
+    max-width: none;
+    padding: 0 0.75rem;
+  }
+
+  // Content waiting for a scroll to fade in would print blank.
+  .reveal,
+  .route-fade-enter-from,
+  .route-fade-leave-to {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  // Links in running text stay findable; cards and lists keep their look.
+  .prose a,
+  .study a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  // Headings in points, kept with the text that follows them.
+  h1,
+  .study h1,
+  .hero-title {
+    font-size: 20pt !important;
+  }
+
+  h2,
+  .prose h2,
+  .study h2 {
+    font-size: 15pt !important;
+    margin: 1.2em 0 0.5em;
+  }
+
+  h3,
+  .prose h3,
+  .study h3 {
+    font-size: 12.5pt !important;
+    margin: 1em 0 0.4em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+
+  .prose,
+  .study {
+    line-height: 1.5;
+  }
+
+  .prose p,
+  .study p,
+  .hero-lede {
+    font-size: 11pt;
+    orphans: 3;
+    widows: 3;
+  }
+
+  .study hr {
+    margin: 1.5em 0;
+  }
+
+  figure,
+  blockquote,
+  tr,
+  img {
+    break-inside: avoid;
+  }
+
+  // Wide tables wrap onto the page instead of being cut at its edge.
+  .study-table {
+    overflow: visible;
+  }
+
+  .prose table,
+  .study table {
+    font-size: 8.5pt;
+  }
+
+  .study th,
+  .study td {
+    white-space: normal;
+    padding: 0.25rem 0.35rem;
+  }
+
+  .study td.is-text {
+    min-width: 0;
+  }
+
+  // Blank response cells: room to write by hand.
+  .study td.is-blank {
+    min-width: 0;
+    height: 1.6rem;
+  }
+
+  // Response sheets print on their own landscape pages, with columns of
+  // equal width so the widest one still fits the paper.
+  // The label right above each sheet goes with it.
+  .study-table:has(.is-blank),
+  .study p:has(+ .study-table .is-blank) {
+    page: sheet;
+  }
+
+  .study-table:has(.is-blank) table {
+    table-layout: fixed;
+  }
+
+  .study-table:has(.is-blank) thead tr:first-child th:first-child {
+    width: 5.5rem;
+  }
+
+  .study th {
+    background: #f0f0f0;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+}
+
+@page sheet {
+  size: A4 landscape;
 }

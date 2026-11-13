@@ -13,6 +13,7 @@ export const staticRoutes = [
   { path: '/experience', priority: '0.8' },
   { path: '/projects', priority: '0.6' },
   { path: '/articles', priority: '0.8' },
+  { path: '/studies', priority: '0.6' },
 ];
 
 export function buildSitemap({

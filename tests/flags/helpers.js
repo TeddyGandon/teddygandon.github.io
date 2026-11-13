@@ -9,7 +9,6 @@ export const ALL_OFF = {
   displayFutureArticles: false,
   displayDrafts: false,
   displayCertifications: false,
-  displayNewRole: false,
   displayArticlesTags: false,
   displayChangingTheme: false,
 };
