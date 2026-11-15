@@ -107,7 +107,8 @@ export const linkedinPosts = [
       "types": [
         "LIKE",
         "EMPATHY",
-        "PRAISE"
+        "PRAISE",
+        "INTEREST"
       ]
     },
     "comments": 4
