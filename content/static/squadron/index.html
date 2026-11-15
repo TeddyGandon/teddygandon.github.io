@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0b1120" />
+    <meta name="robots" content="index, follow" />
+    <title>Squadron · An experiment with three AI agents · by Teddy Gandon</title>
+    <meta
+      name="description"
+      content="Squadron is an experiment: a GitHub Actions template where three AI agents, a coder, a reviewer and a tester, try to take a GitHub issue all the way to a merged pull request."
+      id="meta-description"
+    />
+    <link rel="canonical" href="https://teddygandon.github.io/squadron/" id="meta-canonical" />
+    <link rel="icon" type="image/svg+xml" href="/squadron/mark.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Squadron" />
+    <meta property="og:url" content="https://teddygandon.github.io/squadron/" />
+    <meta property="og:title" content="Squadron · An experiment with three AI agents" />
+    <meta
+      property="og:description"
+      content="An experiment: can a coder, a reviewer and a tester agent take a GitHub issue to a merged pull request?"
+    />
+    <meta property="og:image" content="https://teddygandon.github.io/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="stylesheet" href="/squadron/style.css" />
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="grid-bg" aria-hidden="true"></div>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <main id="content">
+      <!-- ============ HERO ============ -->
+      <section class="hero" id="top">
+        <div class="wrap hero__inner">
+          <p class="badge"><span class="badge__dot"></span>An experiment · Open-source GitHub template</p>
+          <h1>
+            A squad <span class="gradient-text">of agents</span>
+          </h1>
+          <p class="hero__sub">
+            Squadron is an experiment, not a product. A coder, a reviewer and a tester agent try to take a GitHub
+            issue all the way to a merged pull request, handing off with labels and sending the work back when a review
+            or a test fails. It works, up to a point.
+          </p>
+          <div class="actions">
+            <a class="button button--primary" href="https://github.com/TeddyGandon/squadron/generate" target="_blank" rel="noopener noreferrer">Try the template</a>
+            <a class="button" href="/squadron/docs">View the docs</a>
+          </div>
+
+          <!-- Terminal mock of a run -->
+          <div class="terminal" role="img" aria-label="Example run: the coder checks requirements and opens a pull request, the reviewer approves, the tester runs the tests and squash-merges, and the issue becomes done.">
+            <div class="terminal__bar">
+              <span></span><span></span><span></span>
+              <p>example run · issue #42 · Add CSV export</p>
+            </div>
+            <ol class="terminal__body" aria-hidden="true">
+              <li><span class="t-tag t-human">you</span> labeled issue <code>status:todo</code></li>
+              <li><span class="t-tag t-coder">coder</span> requirements check <b class="ok">ready</b></li>
+              <li><span class="t-tag t-coder">coder</span> opened PR #43 from <code>squadron/issue-42</code> → <code>agent:reviewer</code></li>
+              <li><span class="t-tag t-reviewer">reviewer</span> 1 blocking finding → <code>agent:coder</code></li>
+              <li><span class="t-tag t-coder">coder</span> pushed fix → <code>agent:reviewer</code></li>
+              <li><span class="t-tag t-reviewer">reviewer</span> verdict <b class="ok">approved</b> → <code>agent:tester</code></li>
+              <li><span class="t-tag t-tester">tester</span> <code>npm run test</code> · 18 passed</li>
+              <li><span class="t-tag t-tester">tester</span> squash-merged PR #43 · issue <code>status:done</code> <span class="cursor"></span></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PIPELINE ============ -->
+      <section class="block" id="pipeline">
+        <div class="wrap">
+          <header class="block__head">
+            <p class="kicker">01 · Pipeline</p>
+            <h2>A loop, not a line.</h2>
+            <p>Each agent hands off to the next with a label. When a review or a test fails, the same pull request goes back to the coder. In theory, it runs until the tests pass.</p>
+          </header>
+
+          <figure class="diagram">
+            <svg viewBox="0 0 880 300" role="img" aria-labelledby="diagram-title diagram-desc">
+              <title id="diagram-title">Squadron pipeline</title>
+              <desc id="diagram-desc">An issue labeled status:todo goes to the coder, which opens a pull request for the reviewer. Approval goes to the tester, which merges on success. A requested change or a failed test returns the pull request to the coder.</desc>
+              <defs>
+                <linearGradient id="beam" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0" stop-color="#bae6fd" />
+                  <stop offset="0.5" stop-color="#38bdf8" />
+                  <stop offset="1" stop-color="#818cf8" />
+                </linearGradient>
+                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" class="diagram__arrowhead" />
+                </marker>
+                <marker id="arrow-back" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" class="diagram__arrowhead diagram__arrowhead--back" />
+                </marker>
+              </defs>
+
+              <line x1="138" y1="120" x2="222" y2="120" class="diagram__edge" marker-end="url(#arrow)" />
+              <line x1="358" y1="120" x2="432" y2="120" class="diagram__edge" marker-end="url(#arrow)" />
+              <line x1="568" y1="120" x2="642" y2="120" class="diagram__edge" marker-end="url(#arrow)" />
+              <polyline points="778,120 800,120 800,34 845,34" class="diagram__edge" marker-end="url(#arrow)" />
+
+              <text x="180" y="78" class="diagram__label">status:todo</text>
+              <text x="395" y="78" class="diagram__label">agent:reviewer</text>
+              <text x="605" y="78" class="diagram__label">agent:tester</text>
+              <text x="770" y="24" class="diagram__label">merged</text>
+
+              <path d="M500 152 C500 220 290 220 290 156" class="diagram__edge diagram__edge--back" marker-end="url(#arrow-back)" />
+              <path d="M710 152 C710 270 290 270 290 156" class="diagram__edge diagram__edge--back" marker-end="url(#arrow-back)" />
+              <text x="395" y="222" class="diagram__label diagram__label--back">changes requested</text>
+              <text x="500" y="262" class="diagram__label diagram__label--back">tests failed · agent:coder</text>
+
+              <g class="diagram__node diagram__node--human">
+                <rect x="20" y="88" width="118" height="64" rx="14" />
+                <text x="79" y="117">Issue</text>
+                <text x="79" y="136" class="diagram__sub">written by you</text>
+              </g>
+              <g class="diagram__node">
+                <rect x="222" y="88" width="136" height="64" rx="14" />
+                <text x="290" y="117">Coder</text>
+                <text x="290" y="136" class="diagram__sub">implements, opens PR</text>
+              </g>
+              <g class="diagram__node">
+                <rect x="432" y="88" width="136" height="64" rx="14" />
+                <text x="500" y="117">Reviewer</text>
+                <text x="500" y="136" class="diagram__sub">reads, posts verdict</text>
+              </g>
+              <g class="diagram__node">
+                <rect x="642" y="88" width="136" height="64" rx="14" />
+                <text x="710" y="117">Tester</text>
+                <text x="710" y="136" class="diagram__sub">tests the issue</text>
+              </g>
+              <g class="diagram__node diagram__node--done">
+                <circle cx="858" cy="34" r="12" />
+              </g>
+            </svg>
+          </figure>
+
+          <div class="labels">
+            <p class="labels__title">Issue status</p>
+            <span class="label label--todo">status:todo</span>
+            <span class="label label--progress">status:in-progress</span>
+            <span class="label label--testing">status:testing</span>
+            <span class="label label--done">status:done</span>
+          </div>
+
+          <div class="labels">
+            <p class="labels__title">Handoffs</p>
+            <span class="label label--agent">agent:coder</span>
+            <span class="label label--agent">agent:reviewer</span>
+            <span class="label label--agent">agent:tester</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ AGENTS ============ -->
+      <section class="block" id="agents">
+        <div class="wrap">
+          <header class="block__head">
+            <p class="kicker">02 · Agents</p>
+            <h2>Same model. Different eyes.</h2>
+            <p>All three run on the same model. The idea I wanted to test: give each role a different view of the work and clear limits, so they check each other instead of agreeing with themselves.</p>
+          </header>
+
+          <div class="bento">
+            <article class="tile tile--coder">
+              <span class="tile__icon" aria-hidden="true">&lt;/&gt;</span>
+              <h3>Coder</h3>
+              <p>Checks the requirements first, then updates the docs, implements the issue and opens the pull request. Fixes it when it comes back.</p>
+              <ul class="nope">
+                <li>Won't start on an issue with blocking gaps</li>
+                <li>Can't push, comment or merge itself</li>
+              </ul>
+            </article>
+            <article class="tile tile--reviewer">
+              <span class="tile__icon" aria-hidden="true">◎</span>
+              <h3>Reviewer</h3>
+              <p>Reads the diff against the issue: code, docs, security, architecture. Returns a JSON verdict.</p>
+              <ul class="nope">
+                <li>Edits a single file? The run fails.</li>
+                <li>No valid verdict? The run fails.</li>
+              </ul>
+            </article>
+            <article class="tile tile--tester">
+              <span class="tile__icon" aria-hidden="true">✓</span>
+              <h3>Tester</h3>
+              <p>Writes and runs tests from the issue alone. The workflow runs the tests again itself before merging.</p>
+              <ul class="nope">
+                <li>No README, PR description or summaries</li>
+                <li>Never weakens tests or touches product code</li>
+              </ul>
+            </article>
+            <article class="tile tile--wide">
+              <p class="kicker">Requirements check</p>
+              <h3>Questions before code.</h3>
+              <p>If the issue leaves doubt, the coder comments what's missing and puts the issue back to <code>status:todo</code>. Answer in the issue body and re-apply the label.</p>
+            </article>
+            <article class="tile">
+              <p class="kicker">Retry</p>
+              <h3>One label away.</h3>
+              <p>Every failure comments a run link and the label to re-apply.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SETUP ============ -->
+      <section class="block" id="setup">
+        <div class="wrap setup">
+          <div>
+            <header class="block__head block__head--left">
+              <p class="kicker">03 · Setup</p>
+              <h2>Want to try it?</h2>
+            </header>
+            <ol class="setup__steps">
+              <li><b>Create your repo</b> from the <a href="https://github.com/TeddyGandon/squadron/generate" target="_blank" rel="noopener noreferrer">Squadron template</a>.</li>
+              <li><b>Add two secrets</b>: a Copilot token, and a fine-grained token with Contents, Pull requests, Issues and Workflows in read and write.</li>
+              <li><b>Run</b> <em>Actions → Squadron Setup</em> once. It creates the labels and checks the secrets.</li>
+              <li><b>Open an issue</b> from a form, or add <code>status:todo</code> when it's ready.</li>
+            </ol>
+            <p class="setup__note">Later, <em>Actions → Squadron Update</em> pulls the latest <code>.github/</code>, <code>SQUADRON.md</code> and <code>USAGE.md</code> from the template. <a href="/squadron/docs/">Read the full docs →</a></p>
+          </div>
+
+          <div class="code" role="group" aria-label="Repository configuration">
+            <div class="code__bar"><span></span><span></span><span></span><p>Settings → Secrets and variables</p></div>
+<pre><code><span class="c"># secrets: required</span>
+<span class="k">COPILOT_GITHUB_TOKEN</span>   = <span class="s">github_pat_…</span>  <span class="c"># Copilot steps only</span>
+<span class="k">SQUADRON_GITHUB_TOKEN</span>  = <span class="s">github_pat_…</span>  <span class="c"># never given to an agent</span>
+
+<span class="c"># variables: optional</span>
+<span class="k">SQUADRON_TEST_COMMAND</span>  = <span class="s">"npm run test"</span>
+<span class="k">SQUADRON_TEST_PATHS</span>    = <span class="s">"**/*.test.*,**/*.spec.*"</span></code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <a class="brand brand--small" href="#top"><img src="/squadron/mark.svg" alt="" width="20" height="20" /><span>SQUADRON</span></a>
+        <p>An experiment by <a href="/">Teddy Gandon</a> · <a href="/projects">more side projects</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

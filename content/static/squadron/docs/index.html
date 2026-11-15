@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0b1120" />
+    <meta name="robots" content="index, follow" />
+    <title>Docs · Squadron · by Teddy Gandon</title>
+    <meta
+      name="description"
+      content="Squadron documentation: setup, issue forms, the requirements check, the coder, reviewer and tester agents, labels, configuration, failures, updates and security boundaries."
+      id="meta-description"
+    />
+    <link rel="canonical" href="https://teddygandon.github.io/squadron/docs/" id="meta-canonical" />
+    <link rel="icon" type="image/svg+xml" href="/squadron/mark.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Squadron" />
+    <meta property="og:url" content="https://teddygandon.github.io/squadron/docs/" />
+    <meta property="og:title" content="Squadron docs" />
+    <meta property="og:description" content="Everything about the Squadron experiment: setup, agents, labels, configuration and security." />
+    <meta property="og:image" content="https://teddygandon.github.io/og-image.png" />
+
+    <link rel="stylesheet" href="/squadron/style.css" />
+  </head>
+  <body class="docs-page">
+    <div class="aurora aurora--calm" aria-hidden="true"><span></span><span></span><span></span></div>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <div class="wrap docs">
+      <!-- ============ SIDEBAR ============ -->
+      <aside class="docs__side">
+        <a class="docs__home" href="/squadron/">
+          <span class="docs__home-back">← Back to the homepage</span>
+        </a>
+        <details class="toc" open>
+          <summary>On this page</summary>
+          <nav aria-label="Documentation">
+            <details class="toc__section" open>
+              <summary class="toc__group">Getting started</summary>
+              <a href="#introduction">Introduction</a>
+              <a href="#how-it-works">How it works</a>
+              <a href="#quick-start">Quick start</a>
+            </details>
+            <details class="toc__section">
+              <summary class="toc__group">Setup</summary>
+              <a href="#secrets">Secrets</a>
+              <a href="#setup-workflow">Setup workflow</a>
+              <a href="#variables">Variables</a>
+              <a href="#branch-protection">Branch protection</a>
+            </details>
+            <details class="toc__section">
+              <summary class="toc__group">Writing issues</summary>
+              <a href="#issue-forms">Issue forms</a>
+              <a href="#requirements-check">Requirements check</a>
+              <a href="#requirements-helper">Requirements helper</a>
+            </details>
+            <details class="toc__section">
+              <summary class="toc__group">Agents</summary>
+              <a href="#coder">Coder</a>
+              <a href="#reviewer">Reviewer</a>
+              <a href="#tester">Tester</a>
+            </details>
+            <details class="toc__section">
+              <summary class="toc__group">Reference</summary>
+              <a href="#labels">Labels</a>
+              <a href="#lifecycle">Lifecycle</a>
+              <a href="#failures">Failures and retries</a>
+              <a href="#updating">Updating</a>
+              <a href="#security">Security boundaries</a>
+              <a href="#architecture">Architecture</a>
+              <a href="#limits">Known limits</a>
+              <a href="#faq">FAQ</a>
+            </details>
+          </nav>
+        </details>
+      </aside>
+
+      <!-- ============ CONTENT ============ -->
+      <main id="content" class="docs__main prose">
+        <header class="docs__head">
+          <p class="kicker">Documentation</p>
+          <h1>Squadron docs</h1>
+          <p class="docs__lead">
+            Everything you need to run the experiment in your own repository: setup, how to write issues the agents
+            can work from, what each agent does and doesn't do, and how the workflow is put together.
+          </p>
+        </header>
+
+        <!-- Introduction -->
+        <section id="introduction">
+          <h2>Introduction</h2>
+          <p>
+            Squadron is a GitHub repository template that runs a three-role AI engineering workflow on GitHub Actions.
+            A <strong>coder</strong>, a <strong>reviewer</strong> and a <strong>tester</strong> agent, all running on
+            GitHub Copilot CLI, take a labeled issue to a merged pull request. Status is tracked with issue labels, so
+            no GitHub Project is needed.
+          </p>
+          <div class="callout">
+            <p class="callout__title">It's an experiment</p>
+            <p>
+              Squadron was built to find out how far agents get on their own. The loop works, but quality depends
+              almost entirely on how well the issues are written. Use it on repositories where you can afford to
+              review and revert what it merges.
+            </p>
+          </div>
+        </section>
+
+        <!-- How it works -->
+        <section id="how-it-works">
+          <h2>How it works</h2>
+          <ol class="flow">
+            <li><b>You</b> write an issue from a form. The form applies <code>status:todo</code>.</li>
+            <li><b>The coder</b> checks the requirements. If something blocking is missing, it asks on the issue and stops. Otherwise it implements the issue, updates the docs and opens a pull request.</li>
+            <li><b>The reviewer</b> reads the diff against the issue and posts a verdict. Approved: on to the tester. Changes needed: back to the coder.</li>
+            <li><b>The tester</b> writes tests from the issue alone. The workflow runs the test command. Passing: squash-merge. Failing: back to the coder.</li>
+            <li><b>GitHub</b> reports the merge and the issue becomes <code>status:done</code>.</li>
+          </ol>
+          <p>
+            Handoffs between agents happen through labels on the pull request (<code>agent:coder</code>,
+            <code>agent:reviewer</code>, <code>agent:tester</code>). Each agent removes its trigger label when it
+            starts, so re-applying a label is always enough to run that step again.
+          </p>
+        </section>
+
+        <!-- Quick start -->
+        <section id="quick-start">
+          <h2>Quick start</h2>
+          <ol class="steps-list">
+            <li>Create your product repository from the template: <a href="https://github.com/TeddyGandon/squadron/generate" target="_blank" rel="noopener noreferrer">Use this template</a>.</li>
+            <li>Add the <code>COPILOT_GITHUB_TOKEN</code> and <code>SQUADRON_GITHUB_TOKEN</code> <a href="#secrets">secrets</a>.</li>
+            <li>Run <em>Actions → Squadron Setup → Run workflow</em> once.</li>
+            <li>Open an issue from the Feature, Technical task or Bug form.</li>
+          </ol>
+          <p>
+            Replace the template's <code>README.md</code> with your product's own. Template documentation lives in
+            <code>SQUADRON.md</code> and <code>USAGE.md</code>, which the <a href="#updating">update workflow</a> keeps current.
+          </p>
+        </section>
+
+        <!-- Secrets -->
+        <section id="secrets">
+          <h2>Secrets</h2>
+          <p>Create these in <em>Settings → Secrets and variables → Actions</em>.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Secret</th><th>What it is</th><th>Where it's used</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>COPILOT_GITHUB_TOKEN</code></td>
+                  <td>A token authorized to use GitHub Copilot.</td>
+                  <td>Copilot CLI steps only. It's stripped from Copilot's own shell environment.</td>
+                </tr>
+                <tr>
+                  <td><code>SQUADRON_GITHUB_TOKEN</code></td>
+                  <td>A fine-grained token for this repository with <strong>Contents</strong>, <strong>Pull requests</strong>, <strong>Issues</strong> and <strong>Workflows</strong> set to read and write. Approve it for the organization if required.</td>
+                  <td>Pull requests, labels, comments, pushes and merges, plus the update workflow. Never present in a Copilot step.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Setup workflow -->
+        <section id="setup-workflow">
+          <h2>Setup workflow</h2>
+          <p>
+            Run <em>Actions → Squadron Setup → Run workflow</em> once after adding the secrets. It:
+          </p>
+          <ul>
+            <li>creates the <code>status:*</code> and <code>agent:*</code> <a href="#labels">labels</a>;</li>
+            <li>checks that both secrets are present;</li>
+            <li>checks that <code>SQUADRON_GITHUB_TOKEN</code> can write to the repository.</li>
+          </ul>
+          <div class="callout callout--warn">
+            <p>The issue forms only apply <code>status:todo</code> if the label exists, so run the setup before opening your first issue.</p>
+          </div>
+        </section>
+
+        <!-- Variables -->
+        <section id="variables">
+          <h2>Variables</h2>
+          <p>Optional repository variables, for when the defaults don't fit your product:</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Variable</th><th>Default</th><th>Purpose</th></tr></thead>
+              <tbody>
+                <tr><td><code>SQUADRON_TEST_COMMAND</code></td><td><code>npm run test</code></td><td>The command the workflow runs as the merge gate.</td></tr>
+                <tr><td><code>SQUADRON_TEST_PATHS</code></td><td><code>**/*.test.*,**/*.spec.*</code></td><td>Comma-separated git glob patterns for test files, anywhere in the repository. Only matching files (plus npm manifests) are committed by the tester.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Branch protection -->
+        <section id="branch-protection">
+          <h2>Branch protection</h2>
+          <p>
+            Configure branch protection and required checks as you like: they stay authoritative. The reviewer's
+            verdict is a pull request comment, not a GitHub approval review.
+          </p>
+          <p>
+            When the tester's direct merge is blocked, for example by required checks still running on its test
+            commit, it enables auto-merge instead. If you use required checks, turn on
+            <em>Settings → General → Allow auto-merge</em>.
+          </p>
+        </section>
+
+        <!-- Issue forms -->
+        <section id="issue-forms">
+          <h2>Issue forms</h2>
+          <p>
+            The issue title and body are the coder's requirements and the tester's <em>only</em> source of expected
+            behavior. Agents don't read comments. Three forms structure that input:
+          </p>
+          <div class="form-grid">
+            <div class="form-card">
+              <h3>Feature</h3>
+              <p class="form-card__prefix"><code>[Feature]: </code></p>
+              <ul>
+                <li>Problem or opportunity <span class="req">required</span></li>
+                <li>Proposed behavior <span class="req">required</span></li>
+                <li>Acceptance criteria <span class="req">required</span></li>
+                <li>Scope and constraints</li>
+                <li>Additional context</li>
+              </ul>
+            </div>
+            <div class="form-card">
+              <h3>Technical task</h3>
+              <p class="form-card__prefix"><code>[Technical]: </code></p>
+              <ul>
+                <li>Objective <span class="req">required</span></li>
+                <li>Context and motivation <span class="req">required</span></li>
+                <li>Constraints or proposed approach</li>
+                <li>Acceptance criteria <span class="req">required</span></li>
+                <li>References</li>
+              </ul>
+            </div>
+            <div class="form-card">
+              <h3>Bug report</h3>
+              <p class="form-card__prefix"><code>[Bug]: </code></p>
+              <ul>
+                <li>Bug summary <span class="req">required</span></li>
+                <li>Actual behavior <span class="req">required</span></li>
+                <li>Expected behavior <span class="req">required</span></li>
+                <li>Steps to reproduce <span class="req">required</span></li>
+                <li>Environment</li>
+                <li>Fix acceptance criteria <span class="req">required</span></li>
+                <li>Logs or screenshots</li>
+              </ul>
+            </div>
+          </div>
+          <p>For an issue created without a form, add <code>status:todo</code> yourself when it's ready.</p>
+          <h3>Tips for issues that hold up</h3>
+          <ul>
+            <li>Write observable acceptance criteria: inputs, outputs, messages, files, exit codes, UI states.</li>
+            <li>Say what must <em>not</em> change, especially behavior delivered by earlier issues.</li>
+            <li>Describe mockups and screenshots in text: an image the agent can't interpret is a missing requirement.</li>
+            <li>Make the choices: "A or B?" and "TBD" will stop the coder.</li>
+          </ul>
+        </section>
+
+        <!-- Requirements check -->
+        <section id="requirements-check">
+          <h2>Requirements check</h2>
+          <p>
+            Before writing any code, the coder runs the <code>squadron-requirements-checker</code> skill on the issue
+            title and body, and researches the repository for anything the issue mentions. A gap is
+            <strong>blocking</strong> only if:
+          </p>
+          <ul>
+            <li>two reasonable engineers could implement it in materially different ways, with no basis to choose;</li>
+            <li>the tester couldn't decide pass or fail from the issue alone;</li>
+            <li>it conflicts with the repository or with itself in a way that changes the result;</li>
+            <li>it depends on information the agents can't access, like a private link or an image with no text description.</li>
+          </ul>
+          <p>
+            Conventional choices that follow the repository's existing patterns are not blocking. When the issue is
+            not ready, the coder posts a comment starting with <code>## Squadron requirements check</code> listing
+            each question, and puts the issue back to <code>status:todo</code> without implementing anything.
+          </p>
+          <div class="callout">
+            <p><strong>To continue:</strong> answer the questions in the issue <em>body</em> (not in a comment), then remove and re-apply <code>status:todo</code>.</p>
+          </div>
+          <p>The checker returns a JSON verdict, which the workflow turns into that comment:</p>
+<pre class="codeblock"><code>{
+  "ready": false,
+  "summary": "One or two sentences on the overall state of the requirements.",
+  "missing_requirements": [
+    {
+      "topic": "Error handling",
+      "question": "What should the export do when the list is empty?",
+      "reason": "The tester can't decide pass or fail without it."
+    }
+  ]
+}</code></pre>
+        </section>
+
+        <!-- Requirements helper -->
+        <section id="requirements-helper">
+          <h2>Requirements helper</h2>
+          <p>
+            The <code>squadron-requirements-helper</code> Copilot skill helps you draft an issue that passes the
+            check. Give it a rough idea, notes, logs or specs: it researches the repository, asks a few focused
+            questions, and returns a paste-ready title and body using the exact headings of the matching form. It
+            never creates the issue or applies labels for you.
+          </p>
+        </section>
+
+        <!-- Coder -->
+        <section id="coder">
+          <h2>Coder</h2>
+          <p class="role-tag role-tag--coder">Triggered by <code>status:todo</code> on an issue, or <code>agent:coder</code> on a pull request</p>
+          <ul>
+            <li>Sets the issue to <code>status:in-progress</code> and runs the <a href="#requirements-check">requirements check</a>.</li>
+            <li>Implements the issue, updates the affected documentation, and opens a pull request from <code>squadron/issue-&lt;number&gt;</code> whose body contains <code>Closes #&lt;number&gt;</code>.</li>
+            <li>Queues the review by applying <code>agent:reviewer</code> to the pull request.</li>
+            <li>On <code>agent:coder</code>, fixes the same pull request using the latest review or tester comment, pushes, and re-applies <code>agent:reviewer</code>.</li>
+          </ul>
+          <p class="cant">Can't push, comment or merge itself. Any change it makes under <code>.github/workflows</code> is discarded.</p>
+        </section>
+
+        <!-- Reviewer -->
+        <section id="reviewer">
+          <h2>Reviewer</h2>
+          <p class="role-tag role-tag--reviewer">Triggered by <code>agent:reviewer</code> on a pull request</p>
+          <ul>
+            <li>Reviews the code and documentation against the linked issue.</li>
+            <li>Returns a JSON verdict, which the workflow posts as a comment starting with <code>## Squadron automated review</code>.</li>
+            <li>No blocking findings: the issue becomes <code>status:testing</code> and the pull request gets <code>agent:tester</code>.</li>
+            <li>Blocking findings: the issue goes back to <code>status:in-progress</code> and the pull request gets <code>agent:coder</code>.</li>
+          </ul>
+          <p class="cant">Read-only: the run fails if it changes a file, or if its answer has no valid verdict.</p>
+        </section>
+
+        <!-- Tester -->
+        <section id="tester">
+          <h2>Tester</h2>
+          <p class="role-tag role-tag--tester">Triggered by <code>agent:tester</code> on a pull request</p>
+          <ul>
+            <li>Uses only the issue title and body as its requirements: no docs, pull request description, review comments or agent summaries. It reads code and existing tests only to find setup and entry points.</li>
+            <li>Adds or updates tests matching <code>SQUADRON_TEST_PATHS</code>, and makes sure <code>SQUADRON_TEST_COMMAND</code> works, adding a missing npm script or test dependency if needed. If existing tests already cover the issue, it may change nothing.</li>
+            <li>The workflow commits only test files and npm manifest and lockfile changes, discards everything else, reinstalls dependencies and runs the command itself.</li>
+            <li>Success: squash-merge, or auto-merge if a direct merge is blocked. Failure: a comment with the last 80 log lines (starting with <code>Squadron tester failed</code>), the issue back to <code>status:in-progress</code>, and <code>agent:coder</code> on the pull request.</li>
+          </ul>
+          <p class="cant">Never weakens tests, uses a no-op command, or changes product code.</p>
+        </section>
+
+        <!-- Labels -->
+        <section id="labels">
+          <h2>Labels</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Label</th><th>On</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td><span class="label label--todo">status:todo</span></td><td>Issue</td><td>Ready for the coder. Applying it starts the workflow.</td></tr>
+                <tr><td><span class="label label--progress">status:in-progress</span></td><td>Issue</td><td>The coder is checking, implementing or fixing.</td></tr>
+                <tr><td><span class="label label--testing">status:testing</span></td><td>Issue</td><td>The review passed, the tester is working.</td></tr>
+                <tr><td><span class="label label--done">status:done</span></td><td>Issue</td><td>The pull request has merged.</td></tr>
+                <tr><td><span class="label label--agent">agent:coder</span></td><td>Pull request</td><td>Queues the coder to fix the pull request.</td></tr>
+                <tr><td><span class="label label--agent">agent:reviewer</span></td><td>Pull request</td><td>Queues a review.</td></tr>
+                <tr><td><span class="label label--agent">agent:tester</span></td><td>Pull request</td><td>Queues testing and merge.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>An issue has one <code>status:*</code> label at a time; a pull request has at most one <code>agent:*</code> label. Unrelated labels are preserved.</p>
+        </section>
+
+        <!-- Lifecycle -->
+        <section id="lifecycle">
+          <h2>Lifecycle</h2>
+<pre class="codeblock codeblock--diagram"><code><span class="c">issue</span>  status:todo
+   │
+   ▼
+<span class="k">coder</span>  status:in-progress ── requirements missing ──▶ comment + status:todo
+   │ opens PR squadron/issue-N
+   ▼ agent:reviewer
+<span class="k">reviewer</span> ── changes requested ──▶ status:in-progress + agent:coder ──┐
+   │ approved                                                   │
+   ▼ status:testing + agent:tester                              │
+<span class="k">tester</span>  ── tests failed ──▶ status:in-progress + agent:coder ───────┤
+   │ tests pass                                                 │
+   ▼ squash-merge                                  <span class="k">coder</span> fixes ◀─┘
+<span class="s">status:done</span></code></pre>
+          <p>Jobs are serialized per issue and per pull request, so two runs never work on the same item at once.</p>
+        </section>
+
+        <!-- Failures -->
+        <section id="failures">
+          <h2>Failures and retries</h2>
+          <p>
+            Every failed run comments on its issue or pull request with a link to the run and the label to re-apply.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>To retry</th><th>Re-apply</th></tr></thead>
+              <tbody>
+                <tr><td>The coder, from the issue</td><td><code>status:todo</code> on the issue</td></tr>
+                <tr><td>A fix on the pull request</td><td><code>agent:coder</code> on the pull request</td></tr>
+                <tr><td>The review</td><td><code>agent:reviewer</code> on the pull request</td></tr>
+                <tr><td>Testing and merge</td><td><code>agent:tester</code> on the pull request</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Only pull requests from <code>squadron/issue-&lt;number&gt;</code> branches in the same repository are automated. Pull requests you open yourself are left alone.</p>
+        </section>
+
+        <!-- Updating -->
+        <section id="updating">
+          <h2>Updating</h2>
+          <p>
+            Run <em>Actions → Squadron Update → Run workflow</em> to copy the latest <code>.github/</code>,
+            <code>SQUADRON.md</code> and <code>USAGE.md</code> from the template's default branch. Changes are
+            committed and pushed as <code>chore: update Squadron</code>; if nothing changed, it does nothing.
+          </p>
+          <div class="callout callout--warn">
+            <p>The whole <code>.github/</code> directory and both documents are replaced, so customizations there will be overwritten. Other files, including <code>README.md</code>, are left unchanged.</p>
+          </div>
+          <p>See the <a href="https://github.com/TeddyGandon/squadron/blob/main/SQUADRON-CHANGELOG.md" target="_blank" rel="noopener noreferrer">changelog</a> for what each update brings.</p>
+        </section>
+
+        <!-- Security -->
+        <section id="security">
+          <h2>Security boundaries</h2>
+          <ul>
+            <li>Copilot CLI can edit files and run tools, so apply <code>status:todo</code> only to issues that should be processed. Issue text is treated as untrusted input.</li>
+            <li><code>SQUADRON_GITHUB_TOKEN</code> is never present in a Copilot step, and <code>COPILOT_GITHUB_TOKEN</code> is stripped from Copilot's shell environment.</li>
+            <li>Fork pull requests and pull requests from other branches never get the automation credentials.</li>
+            <li>Helper scripts always run from a checkout of the default branch, never from the pull request under review.</li>
+            <li>Agent changes under <code>.github/workflows</code> are discarded before publishing.</li>
+            <li>The review is model-generated: treat it as automation feedback, not a substitute for required human review.</li>
+            <li>An issue becomes <code>status:done</code> only after its pull request actually merges.</li>
+          </ul>
+        </section>
+
+        <!-- Architecture -->
+        <section id="architecture">
+          <h2>Architecture</h2>
+          <p>
+            Every job checks out the default branch to <code>squadron/</code> (trusted scripts and skills) and the
+            product code to <code>product/</code>, where Copilot runs. Copilot CLI is pinned to
+            <code>@github/copilot@1.0.105</code> in every role workflow.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>File</th><th>Role</th></tr></thead>
+              <tbody>
+                <tr><td><code>.github/workflows/coder.yml</code></td><td>The only event listener (workflow <em>Squadron</em>). Routes each label or merge event to one job: <code>coder</code>, <code>coder-fix</code>, <code>reviewer</code>, <code>tester</code> or <code>mark-done</code>.</td></tr>
+                <tr><td><code>.github/workflows/reviewer.yml</code></td><td>Reusable reviewer workflow, called by <code>coder.yml</code>.</td></tr>
+                <tr><td><code>.github/workflows/tester.yml</code></td><td>Reusable tester workflow, called by <code>coder.yml</code>.</td></tr>
+                <tr><td><code>.github/workflows/setup.yml</code></td><td>Manual, one-time: labels and secret checks.</td></tr>
+                <tr><td><code>.github/workflows/update.yml</code></td><td>Manual: syncs the template files.</td></tr>
+                <tr><td><code>.github/scripts/set-issue-status-label.sh</code></td><td>Replaces the issue's <code>status:*</code> label.</td></tr>
+                <tr><td><code>.github/scripts/set-agent-label.sh</code></td><td>Clears <code>agent:*</code> labels and optionally adds one, which starts the next agent.</td></tr>
+                <tr><td><code>.github/scripts/extract-requirements-report.py</code></td><td>Extracts the requirements verdict and renders the questions comment.</td></tr>
+                <tr><td><code>.github/scripts/extract-review-report.py</code></td><td>Extracts the review verdict and renders the review comment.</td></tr>
+                <tr><td><code>.github/scripts/install-dependencies.sh</code></td><td>Runs <code>npm ci</code> or <code>npm install</code> when there's a <code>package.json</code>.</td></tr>
+                <tr><td><code>.github/skills/squadron-requirements-checker/</code></td><td>What makes an issue ready, and the JSON verdict.</td></tr>
+                <tr><td><code>.github/skills/squadron-requirements-helper/</code></td><td>Helps people write issues that pass the check.</td></tr>
+                <tr><td><code>.github/ISSUE_TEMPLATE/</code></td><td>The Feature, Technical task and Bug forms.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Known limits -->
+        <section id="limits">
+          <h2>Known limits</h2>
+          <ul>
+            <li><strong>Quality drifts across tickets.</strong> Agents don't remember previous issues or share a picture of the system. In my runs, quality had visibly degraded by the fifth ticket.</li>
+            <li><strong>The tester only protects the current issue.</strong> Nothing re-checks what earlier issues assumed unless their tests still cover it.</li>
+            <li><strong>No questions mid-way.</strong> Apart from the requirements check up front, agents fill gaps with their own guesses.</li>
+            <li><strong>npm-oriented.</strong> Dependency installation and test setup assume an npm project; other stacks need a custom <code>SQUADRON_TEST_COMMAND</code> and may need workflow changes.</li>
+          </ul>
+          <p>More on this in <a href="/articles/squadron">Squadron, or why agents don't fix poor requirements</a>.</p>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+          <h2>FAQ</h2>
+          <details class="faq">
+            <summary>Do I need a GitHub Project?</summary>
+            <p>No. Status lives in issue labels.</p>
+          </details>
+          <details class="faq">
+            <summary>The coder asked questions. Where do I answer?</summary>
+            <p>In the issue body. Agents don't read comments. Then remove and re-apply <code>status:todo</code>.</p>
+          </details>
+          <details class="faq">
+            <summary>Will it touch pull requests I open myself?</summary>
+            <p>No. Only pull requests from <code>squadron/issue-&lt;number&gt;</code> branches in the same repository are automated.</p>
+          </details>
+          <details class="faq">
+            <summary>Does the reviewer's approval count as a GitHub review?</summary>
+            <p>No. It's a comment. Branch protection and required checks remain authoritative.</p>
+          </details>
+          <details class="faq">
+            <summary>Can I customize the workflows?</summary>
+            <p>Yes, but the update workflow replaces <code>.github/</code>. Keep customizations elsewhere, or don't run updates.</p>
+          </details>
+          <details class="faq">
+            <summary>My project doesn't use npm.</summary>
+            <p>Set <code>SQUADRON_TEST_COMMAND</code> to your test command and <code>SQUADRON_TEST_PATHS</code> to your test file patterns. Dependency installation only runs when there's a <code>package.json</code>.</p>
+          </details>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <a class="brand brand--small" href="/squadron/"><img src="/squadron/mark.svg" alt="" width="20" height="20" /><span>SQUADRON</span></a>
+        <p>An experiment by <a href="/">Teddy Gandon</a> · <a href="/projects">more side projects</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
