@@ -2,12 +2,26 @@
 // never deleted, so hand-added ones are kept. Most recent first.
 export const linkedinPosts = [
   {
+    "date": "2026-11-19",
+    "text": "When planning our H2 2026 seminar at Believe, our guiding philosophy was simple: never settle for the same old routine. Every time we gather as a team, we challenge ourselves to raise the bar and build something truly meaningful for our people, constantly reinventing the format to keep our moments together fresh, engaging, and impactful.\n\nWhile strategy sessions and workshops are essential, we wanted to go beyond the usual slides and break the mold with an experience that would spark genuine creativity, strengthen our collective energy, and reconnect us with what drives us every single day: our core business, the music, and the artists we support around the world.\n\nTo make that happen, we decided to surprise everyone with a special intimate Q&A session with the incredibly talented Farhan Khan!\n\nBased in Mumbai, Farhan is a lyricist, poet, and rapper who effortlessly blends traditional Urdu poetry with modern Hip Hop, R&B, and Bollywood influences. Stepping into his artistic universe and hearing the stories behind his craft firsthand was an unforgettable moment of sharing, emotion, and musical discovery. It’s experiences like these that bring our mission to life and remind us why we are so passionate about what we do, staying close to the creators, the culture, and the talent shaping today’s music scene.\n\nA massive thank you to Farhan Khan for his generosity, art, and incredible energy, and a huge shoutout to Gaurav Sharma for helping us bring this new format to life and making this evening one we won’t soon forget!\n\n#Believe #LifeAtBelieve #MusicIndustry #TeamCulture #EmployeeExperience #IndianHipHop #FarhanKhan #MumbaiMusic #ArtistFirst #CompanyOffsite",
+    "url": "https://www.linkedin.com/posts/teddygandon_believe-lifeatbelieve-musicindustry-activity-7529162546021302272-wbcs",
+    "image": "https://media.licdn.com/dms/image/v2/D5622AQH-aZmaz1XBiw/feedshare-shrink_800/B56aHz1biiHwAg-/0/1795092233387?e=2147483647&v=beta&t=8oCmpsAPflfgGm7fSavuwZ-UnT4LLz2imd-l3ff3t9o",
+    "reactions": {
+      "total": 9,
+      "types": [
+        "LIKE",
+        "EMPATHY"
+      ]
+    },
+    "comments": 1
+  },
+  {
     "date": "2026-11-09",
     "text": "✍️ Just like every distributed system, your team needs to be ready for scaling.\n\nAt some point, every growing team needs more managers than it has. The obvious move is to look inside the squad, find the engineer people already go to, and give them the role. I’ve done it several times, and I’ve learned that the promotion itself is the easy part. Everything that makes it work, or makes it fail, happens before the announcement and in the months after it.\n\nFull article in the comments 👇\n\n#GlobalLeadership #CrossCulturalTeams #Management #Leadership #RemoteWork",
     "url": "https://www.linkedin.com/posts/teddygandon_globalleadership-crossculturalteams-management-activity-7525435579770273792-aFi1",
     "image": "https://media.licdn.com/dms/image/v2/D4E22AQEt5wZXXaUauA/feedshare-shrink_1280/B4EaE0TBxkI8AM-/0/1791878765901?e=2147483647&v=beta&t=RKqygQPSXLywz2rT3QAAUhV3bMbujHmR9H2ewlkyy9o",
     "reactions": {
-      "total": 5,
+      "total": 6,
       "types": [
         "LIKE",
         "EMPATHY"
@@ -21,9 +35,10 @@ export const linkedinPosts = [
     "url": "https://www.linkedin.com/posts/teddygandon_one-of-the-best-parts-of-leading-engineering-activity-7523661521852219392-tdIS",
     "image": "https://static.licdn.com/aero-v1/sc/h/c45fy346jw096z9pbphyyhdz7",
     "reactions": {
-      "total": 8,
+      "total": 9,
       "types": [
-        "LIKE"
+        "LIKE",
+        "APPRECIATION"
       ]
     },
     "comments": 3
