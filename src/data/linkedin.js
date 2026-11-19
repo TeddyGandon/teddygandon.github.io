@@ -7,7 +7,7 @@ export const linkedinPosts = [
     "url": "https://www.linkedin.com/posts/teddygandon_believe-lifeatbelieve-musicindustry-activity-7529162546021302272-wbcs",
     "image": "https://media.licdn.com/dms/image/v2/D5622AQH-aZmaz1XBiw/feedshare-shrink_800/B56aHz1biiHwAg-/0/1795092233387?e=2147483647&v=beta&t=8oCmpsAPflfgGm7fSavuwZ-UnT4LLz2imd-l3ff3t9o",
     "reactions": {
-      "total": 9,
+      "total": 22,
       "types": [
         "LIKE",
         "EMPATHY"
