@@ -2,15 +2,31 @@
 // never deleted, so hand-added ones are kept. Most recent first.
 export const linkedinPosts = [
   {
+    "date": "2026-11-20",
+    "text": "We just wrapped up our BTech Alliance seminar at Believe in the office of Skills Agency, and my brain is full in the best way possible 🧠✨\n\nBuilding and running the Alliance, a multi-cultural engineering community, comes with plenty of priorities, but one thing was clear when planning it: I didn’t want three days of slide decks that could’ve been emails. We wanted conversations and sessions that actually hit home.\n\nA few highlights from those three days:\n\n🎮 Learning by doing: We ran an AI hackathon, built prototypes in a \"My dream agent <3\" workshop focused on daily dev pain points, and onboarded folks onto our internal engineering portal via a game where you had to explore the actual product to find the answers.\n\n⚙️ Pragmatic tech: Shifting infra design to a true FinOps mindset to keep cloud costs in check, and having honest conversations around responsible AI (confidentiality, sustainability, and safety) rather than just chasing hype.\n\n🌱 Real talk on mental health: An open, candid discussion on burnout and work-life balance, specifically framed around the reality of working in tech in India. High output shouldn't come at the cost of your health.\n\nBUT, the absolute highlight for me was bringing our engineers and Farhan Khan together in the same room for a live Q&A 🎵🎤\n\nYou can read 50+ onboarding slide decks about the music industry, but nothing beats sitting five feet away from an artist while they explain how your tech directly impacts their daily craft and livelihood. Seeing our team connect their code, tickets, and pipelines to real human beings was priceless.\n\nTime to shut the laptop and recharge for the weekend (exhaustion is hitting me as I am writing this)🔋\n\n#Believe #Engineering #MusicTech #FinOps #TeamCulture\n\n---\n\n🤝 Co-organized with Mohammed Ibrahim, Rinsin Rahim and Sachin C.\n\n🙌With Asif Peerzade, Lounis Dahmani, Mohammed Minhaj, Mohammed Yassar, Rashmi Nachankar, Sourav K, Thanuja Gowda, Prathap S S, Santhosh Shetty, Raj Kumar, Varsha Nayak, Mithun Sindhey\n\n🫶 Huge kudos to Anuja Kshatriya (she-her-hers), Clément Hussenot-Desenonges, Jonathan Jalouzot Cohen, Gabriel D. and Gaurav Sharma for the amazing talks and workshops!\n\n🙏 Many thanks to the product & engineering folks at Believe for their support, Jeanne Guillet, Flo Legendre, Aina D., Vincent Orinel, Henri BRAVARD, Julien Rougé, Gabriel Leroy, Arnaud Véronie, Nicolas Nallet, Antoine Jacoutot",
+    "url": "https://www.linkedin.com/posts/teddygandon_believe-engineering-musictech-activity-7529548147992223744-hc2L",
+    "image": "https://media.licdn.com/dms/image/v2/D5622AQF71YUKAeIszQ/feedshare-shrink_800/B56aH5T6ROKUAs-/0/1795184108875?e=2147483647&v=beta&t=yw4h9qjPtKIsWnJF3bNcIKjkb46loOmeullqctc1j3s",
+    "reactions": {
+      "total": 26,
+      "types": [
+        "LIKE",
+        "EMPATHY",
+        "PRAISE"
+      ]
+    },
+    "comments": 6
+  },
+  {
     "date": "2026-11-19",
     "text": "When planning our H2 2026 seminar at Believe, our guiding philosophy was simple: never settle for the same old routine. Every time we gather as a team, we challenge ourselves to raise the bar and build something truly meaningful for our people, constantly reinventing the format to keep our moments together fresh, engaging, and impactful.\n\nWhile strategy sessions and workshops are essential, we wanted to go beyond the usual slides and break the mold with an experience that would spark genuine creativity, strengthen our collective energy, and reconnect us with what drives us every single day: our core business, the music, and the artists we support around the world.\n\nTo make that happen, we decided to surprise everyone with a special intimate Q&A session with the incredibly talented Farhan Khan!\n\nBased in Mumbai, Farhan is a lyricist, poet, and rapper who effortlessly blends traditional Urdu poetry with modern Hip Hop, R&B, and Bollywood influences. Stepping into his artistic universe and hearing the stories behind his craft firsthand was an unforgettable moment of sharing, emotion, and musical discovery. It’s experiences like these that bring our mission to life and remind us why we are so passionate about what we do, staying close to the creators, the culture, and the talent shaping today’s music scene.\n\nA massive thank you to Farhan Khan for his generosity, art, and incredible energy, and a huge shoutout to Gaurav Sharma for helping us bring this new format to life and making this evening one we won’t soon forget!\n\n#Believe #LifeAtBelieve #MusicIndustry #TeamCulture #EmployeeExperience #IndianHipHop #FarhanKhan #MumbaiMusic #ArtistFirst #CompanyOffsite",
     "url": "https://www.linkedin.com/posts/teddygandon_believe-lifeatbelieve-musicindustry-activity-7529162546021302272-wbcs",
     "image": "https://media.licdn.com/dms/image/v2/D5622AQH-aZmaz1XBiw/feedshare-shrink_800/B56aHz1biiHwAg-/0/1795092233387?e=2147483647&v=beta&t=8oCmpsAPflfgGm7fSavuwZ-UnT4LLz2imd-l3ff3t9o",
     "reactions": {
-      "total": 22,
+      "total": 40,
       "types": [
         "LIKE",
-        "EMPATHY"
+        "EMPATHY",
+        "PRAISE"
       ]
     },
     "comments": 1
