@@ -7,14 +7,14 @@ export const linkedinPosts = [
     "url": "https://www.linkedin.com/posts/teddygandon_believe-engineering-musictech-activity-7529548147992223744-hc2L",
     "image": "https://media.licdn.com/dms/image/v2/D5622AQF71YUKAeIszQ/feedshare-shrink_800/B56aH5T6ROKUAs-/0/1795184108875?e=2147483647&v=beta&t=yw4h9qjPtKIsWnJF3bNcIKjkb46loOmeullqctc1j3s",
     "reactions": {
-      "total": 26,
+      "total": 31,
       "types": [
         "LIKE",
         "EMPATHY",
         "PRAISE"
       ]
     },
-    "comments": 6
+    "comments": 7
   },
   {
     "date": "2026-11-19",
@@ -22,7 +22,7 @@ export const linkedinPosts = [
     "url": "https://www.linkedin.com/posts/teddygandon_believe-lifeatbelieve-musicindustry-activity-7529162546021302272-wbcs",
     "image": "https://media.licdn.com/dms/image/v2/D5622AQH-aZmaz1XBiw/feedshare-shrink_800/B56aHz1biiHwAg-/0/1795092233387?e=2147483647&v=beta&t=8oCmpsAPflfgGm7fSavuwZ-UnT4LLz2imd-l3ff3t9o",
     "reactions": {
-      "total": 40,
+      "total": 42,
       "types": [
         "LIKE",
         "EMPATHY",
