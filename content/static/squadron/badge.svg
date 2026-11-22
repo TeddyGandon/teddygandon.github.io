@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="163" height="20" viewBox="0 0 163 20" role="img" aria-label="Made with Squadron">
+  <title>Made with Squadron</title>
+  <defs>
+    <linearGradient id="sq-badge-mark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+    <linearGradient id="sq-badge-right" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+    <linearGradient id="sq-badge-gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.12" />
+      <stop offset="1" stop-opacity="0.12" />
+    </linearGradient>
+    <clipPath id="sq-badge-round">
+      <rect width="163" height="20" rx="3" />
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#sq-badge-round)">
+    <rect width="89" height="20" fill="#0f172a" />
+    <rect x="89" width="74" height="20" fill="url(#sq-badge-right)" />
+    <rect width="163" height="20" fill="url(#sq-badge-gloss)" />
+  </g>
+  <rect x="0.5" y="0.5" width="162" height="19" rx="2.5" fill="none" stroke="#94a3b8" stroke-opacity="0.3" />
+
+  <!-- Squadron mark -->
+  <svg x="5" y="3" width="16" height="14" viewBox="-140 -110 280 240">
+    <path d="M -15 -10 L -130 -100 L -110 -40 L -15 35 Z" fill="url(#sq-badge-mark)" />
+    <path d="M -15 25 L -100 -25 L -85 10 L -15 65 Z" fill="url(#sq-badge-mark)" opacity="0.8" />
+    <path d="M -15 55 L -70 15 L -60 40 L -15 85 Z" fill="url(#sq-badge-mark)" opacity="0.5" />
+    <path d="M 15 -10 L 130 -100 L 110 -40 L 15 35 Z" fill="url(#sq-badge-mark)" />
+    <path d="M 15 25 L 100 -25 L 85 10 L 15 65 Z" fill="url(#sq-badge-mark)" opacity="0.8" />
+    <path d="M 15 55 L 70 15 L 60 40 L 15 85 Z" fill="url(#sq-badge-mark)" opacity="0.5" />
+    <path d="M 0 120 L -35 50 L 0 70 L 35 50 Z" fill="url(#sq-badge-mark)" />
+    <circle cx="0" cy="10" r="10" fill="#bae6fd" />
+  </svg>
+
+  <g font-family="Verdana, Geneva, DejaVu Sans, sans-serif" font-size="11" text-rendering="geometricPrecision">
+    <text x="25" y="15" fill="#010101" fill-opacity="0.3" textLength="58" lengthAdjust="spacingAndGlyphs">made with</text>
+    <text x="25" y="14" fill="#cbd5e1" textLength="58" lengthAdjust="spacingAndGlyphs">made with</text>
+    <text x="96" y="15" fill="#010101" fill-opacity="0.3" font-weight="bold" textLength="60" lengthAdjust="spacingAndGlyphs">Squadron</text>
+    <text x="96" y="14" fill="#ffffff" font-weight="bold" textLength="60" lengthAdjust="spacingAndGlyphs">Squadron</text>
+  </g>
+</svg>

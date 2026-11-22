@@ -48,11 +48,11 @@
           </p>
           <div class="actions">
             <a class="button button--primary" href="https://github.com/TeddyGandon/squadron/generate" target="_blank" rel="noopener noreferrer">Try the template</a>
-            <a class="button" href="/squadron/docs">View the docs</a>
+            <a class="button" href="/squadron/docs/">View the docs</a>
           </div>
 
           <!-- Terminal mock of a run -->
-          <div class="terminal" role="img" aria-label="Example run: the coder checks requirements and opens a pull request, the reviewer approves, the tester runs the tests and squash-merges, and the issue becomes done.">
+          <div class="terminal" role="img" aria-label="Example run: the coder checks requirements and opens a pull request, the reviewer approves, the tester runs the tests and hands back to the coder, which squash-merges, and the issue becomes done.">
             <div class="terminal__bar">
               <span></span><span></span><span></span>
               <p>example run · issue #42 · Add CSV export</p>
@@ -64,8 +64,9 @@
               <li><span class="t-tag t-reviewer">reviewer</span> 1 blocking finding → <code>agent:coder</code></li>
               <li><span class="t-tag t-coder">coder</span> pushed fix → <code>agent:reviewer</code></li>
               <li><span class="t-tag t-reviewer">reviewer</span> verdict <b class="ok">approved</b> → <code>agent:tester</code></li>
-              <li><span class="t-tag t-tester">tester</span> <code>npm run test</code> · 18 passed</li>
-              <li><span class="t-tag t-tester">tester</span> squash-merged PR #43 · issue <code>status:done</code> <span class="cursor"></span></li>
+              <li><span class="t-tag t-tester">tester</span> <code>npm run test</code> · 18 passed → <code>agent:coder</code></li>
+              <li><span class="t-tag t-coder">coder</span> no conflicts · squash-merged PR #43</li>
+              <li><span class="t-tag t-human">github</span> issue <code>status:done</code> · next queued issue starts <span class="cursor"></span></li>
             </ol>
           </div>
         </div>
@@ -77,13 +78,13 @@
           <header class="block__head">
             <p class="kicker">01 · Pipeline</p>
             <h2>A loop, not a line.</h2>
-            <p>Each agent hands off to the next with a label. When a review or a test fails, the same pull request goes back to the coder. In theory, it runs until the tests pass.</p>
+            <p>Each agent hands off to the next with a label. When a review or a test fails, the same pull request goes back to the coder. When the tests pass, it goes back to the coder too, this time to merge. One issue at a time, so pull requests don't conflict with each other.</p>
           </header>
 
           <figure class="diagram">
             <svg viewBox="0 0 880 300" role="img" aria-labelledby="diagram-title diagram-desc">
               <title id="diagram-title">Squadron pipeline</title>
-              <desc id="diagram-desc">An issue labeled status:todo goes to the coder, which opens a pull request for the reviewer. Approval goes to the tester, which merges on success. A requested change or a failed test returns the pull request to the coder.</desc>
+              <desc id="diagram-desc">An issue labeled status:todo is queued, then goes to the coder, which opens a pull request for the reviewer. Approval goes to the tester. When the tests pass, the coder merges the pull request. A requested change or a failed test returns the pull request to the coder.</desc>
               <defs>
                 <linearGradient id="beam" x1="0" x2="1" y1="0" y2="0">
                   <stop offset="0" stop-color="#bae6fd" />
@@ -104,9 +105,10 @@
               <polyline points="778,120 800,120 800,34 845,34" class="diagram__edge" marker-end="url(#arrow)" />
 
               <text x="180" y="78" class="diagram__label">status:todo</text>
+              <text x="180" y="98" class="diagram__label">queued</text>
               <text x="395" y="78" class="diagram__label">agent:reviewer</text>
               <text x="605" y="78" class="diagram__label">agent:tester</text>
-              <text x="770" y="24" class="diagram__label">merged</text>
+              <text x="752" y="24" class="diagram__label">passed · coder merges</text>
 
               <path d="M500 152 C500 220 290 220 290 156" class="diagram__edge diagram__edge--back" marker-end="url(#arrow-back)" />
               <path d="M710 152 C710 270 290 270 290 156" class="diagram__edge diagram__edge--back" marker-end="url(#arrow-back)" />
@@ -116,12 +118,12 @@
               <g class="diagram__node diagram__node--human">
                 <rect x="20" y="88" width="118" height="64" rx="14" />
                 <text x="79" y="117">Issue</text>
-                <text x="79" y="136" class="diagram__sub">written by you</text>
+                <text x="79" y="136" class="diagram__sub">one at a time</text>
               </g>
               <g class="diagram__node">
                 <rect x="222" y="88" width="136" height="64" rx="14" />
                 <text x="290" y="117">Coder</text>
-                <text x="290" y="136" class="diagram__sub">implements, opens PR</text>
+                <text x="290" y="136" class="diagram__sub">implements, merges</text>
               </g>
               <g class="diagram__node">
                 <rect x="432" y="88" width="136" height="64" rx="14" />
@@ -169,10 +171,10 @@
             <article class="tile tile--coder">
               <span class="tile__icon" aria-hidden="true">&lt;/&gt;</span>
               <h3>Coder</h3>
-              <p>Checks the requirements first, then updates the docs, implements the issue and opens the pull request. Fixes it when it comes back.</p>
+              <p>Checks the requirements first, then updates the docs, implements the issue and opens the pull request. Fixes it when it comes back, and merges it once the tests pass.</p>
               <ul class="nope">
                 <li>Won't start on an issue with blocking gaps</li>
-                <li>Can't push, comment or merge itself</li>
+                <li>Merges only the exact commit the tester passed</li>
               </ul>
             </article>
             <article class="tile tile--reviewer">
@@ -187,7 +189,7 @@
             <article class="tile tile--tester">
               <span class="tile__icon" aria-hidden="true">✓</span>
               <h3>Tester</h3>
-              <p>Writes and runs tests from the issue alone. The workflow runs the tests again itself before merging.</p>
+              <p>Writes and runs tests from the issue alone. The workflow runs the tests again itself, then hands the pull request back to the coder to merge.</p>
               <ul class="nope">
                 <li>No README, PR description or summaries</li>
                 <li>Never weakens tests or touches product code</li>
@@ -196,12 +198,22 @@
             <article class="tile tile--wide">
               <p class="kicker">Requirements check</p>
               <h3>Questions before code.</h3>
-              <p>If the issue leaves doubt, the coder comments what's missing and puts the issue back to <code>status:todo</code>. Answer in the issue body and re-apply the label.</p>
+              <p>If the issue leaves doubt, the coder comments what's missing and removes its status, so it leaves the queue. Answer in the issue body and add <code>status:todo</code> again. An issue that needs a GitHub Actions workflow is sent back too: agents can't change those files.</p>
+            </article>
+            <article class="tile">
+              <p class="kicker">Queue</p>
+              <h3>One at a time.</h3>
+              <p>A new <code>status:todo</code> issue waits while another is in progress or testing, then starts on its own, oldest first.</p>
+            </article>
+            <article class="tile tile--wide">
+              <p class="kicker">Merge</p>
+              <h3>Conflicts go back through review.</h3>
+              <p>Before merging, the coder checks the pull request against its base branch. If it conflicts, it resolves the conflicts, pushes a merge commit and sends the pull request back to the reviewer and the tester. Conflicts in <code>.github/workflows</code> are left to a person.</p>
             </article>
             <article class="tile">
               <p class="kicker">Retry</p>
               <h3>One label away.</h3>
-              <p>Every failure comments a run link and the label to re-apply.</p>
+              <p>Every failure comments a run link and the label to re-apply. A failed issue holds the queue until it's retried or closed.</p>
             </article>
           </div>
         </div>
@@ -219,9 +231,10 @@
               <li><b>Create your repo</b> from the <a href="https://github.com/TeddyGandon/squadron/generate" target="_blank" rel="noopener noreferrer">Squadron template</a>.</li>
               <li><b>Add two secrets</b>: a Copilot token, and a fine-grained token with Contents, Pull requests, Issues and Workflows in read and write.</li>
               <li><b>Run</b> <em>Actions → Squadron Setup</em> once. It creates the labels and checks the secrets.</li>
-              <li><b>Open an issue</b> from a form, or add <code>status:todo</code> when it's ready.</li>
+              <li><b>Open an issue</b> from a form, and add <code>status:todo</code> when it's ready.</li>
             </ol>
-            <p class="setup__note">Later, <em>Actions → Squadron Update</em> pulls the latest <code>.github/</code>, <code>SQUADRON.md</code> and <code>USAGE.md</code> from the template. <a href="/squadron/docs/">Read the full docs →</a></p>
+            <p class="setup__note">Later, <em>Actions → Squadron Update</em> pulls the latest Squadron workflows, scripts, skills and docs from the template, and leaves your own <code>.github/</code> files alone. <a href="/squadron/docs/">Read the full docs →</a></p>
+            <p class="setup__note">Shipped something with it? <a href="/squadron/docs/#badge"><img class="setup__badge" src="/squadron/badge.svg" alt="Made with Squadron" width="163" height="20" /></a> <a href="/squadron/docs/#badge">Get the badge →</a></p>
           </div>
 
           <div class="code" role="group" aria-label="Repository configuration">

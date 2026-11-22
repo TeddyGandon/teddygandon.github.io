@@ -9,7 +9,7 @@
     <title>Docs · Squadron · by Teddy Gandon</title>
     <meta
       name="description"
-      content="Squadron documentation: setup, issue forms, the requirements check, the coder, reviewer and tester agents, labels, configuration, failures, updates and security boundaries."
+      content="Squadron documentation: setup, issue forms, the requirements check, the coder, reviewer and tester agents, labels, the issue queue, configuration, failures, updates and security boundaries."
       id="meta-description"
     />
     <link rel="canonical" href="https://teddygandon.github.io/squadron/docs/" id="meta-canonical" />
@@ -66,11 +66,14 @@
               <summary class="toc__group">Reference</summary>
               <a href="#labels">Labels</a>
               <a href="#lifecycle">Lifecycle</a>
+              <a href="#queue">One issue at a time</a>
               <a href="#failures">Failures and retries</a>
+              <a href="#workflow-limits">What agents can't change</a>
               <a href="#updating">Updating</a>
               <a href="#security">Security boundaries</a>
               <a href="#architecture">Architecture</a>
               <a href="#limits">Known limits</a>
+              <a href="#badge">Badge</a>
               <a href="#faq">FAQ</a>
             </details>
           </nav>
@@ -111,11 +114,12 @@
         <section id="how-it-works">
           <h2>How it works</h2>
           <ol class="flow">
-            <li><b>You</b> write an issue from a form. The form applies <code>status:todo</code>.</li>
+            <li><b>You</b> write an issue from a form and add <code>status:todo</code> when it's ready. The issue is queued: Squadron works on <a href="#queue">one issue at a time</a>.</li>
             <li><b>The coder</b> checks the requirements. If something blocking is missing, it asks on the issue and stops. Otherwise it implements the issue, updates the docs and opens a pull request.</li>
             <li><b>The reviewer</b> reads the diff against the issue and posts a verdict. Approved: on to the tester. Changes needed: back to the coder.</li>
-            <li><b>The tester</b> writes tests from the issue alone. The workflow runs the test command. Passing: squash-merge. Failing: back to the coder.</li>
-            <li><b>GitHub</b> reports the merge and the issue becomes <code>status:done</code>.</li>
+            <li><b>The tester</b> writes tests from the issue alone. The workflow runs the test command. Passing or failing, the pull request goes back to the coder.</li>
+            <li><b>The coder</b> merges after a passing run. If the pull request conflicts with its base branch, it resolves the conflicts first and sends it back through review and testing.</li>
+            <li><b>GitHub</b> reports the merge, the issue becomes <code>status:done</code> and the next queued issue starts.</li>
           </ol>
           <p>
             Handoffs between agents happen through labels on the pull request (<code>agent:coder</code>,
@@ -131,11 +135,11 @@
             <li>Create your product repository from the template: <a href="https://github.com/TeddyGandon/squadron/generate" target="_blank" rel="noopener noreferrer">Use this template</a>.</li>
             <li>Add the <code>COPILOT_GITHUB_TOKEN</code> and <code>SQUADRON_GITHUB_TOKEN</code> <a href="#secrets">secrets</a>.</li>
             <li>Run <em>Actions → Squadron Setup → Run workflow</em> once.</li>
-            <li>Open an issue from the Feature, Technical task or Bug form.</li>
+            <li>Open an issue from the Feature, Technical task or Bug form, then add <code>status:todo</code>.</li>
           </ol>
           <p>
             Replace the template's <code>README.md</code> with your product's own. Template documentation lives in
-            <code>SQUADRON.md</code> and <code>USAGE.md</code>, which the <a href="#updating">update workflow</a> keeps current.
+            <code>SQUADRON.md</code>, <code>USAGE.md</code> and <code>SQUADRON-CHANGELOG.md</code>, which the <a href="#updating">update workflow</a> keeps current.
           </p>
         </section>
 
@@ -169,12 +173,12 @@
             Run <em>Actions → Squadron Setup → Run workflow</em> once after adding the secrets. It:
           </p>
           <ul>
-            <li>creates the <code>status:*</code> and <code>agent:*</code> <a href="#labels">labels</a>;</li>
+            <li>creates or refreshes the <code>status:*</code> and <code>agent:*</code> <a href="#labels">labels</a>;</li>
             <li>checks that both secrets are present;</li>
             <li>checks that <code>SQUADRON_GITHUB_TOKEN</code> can write to the repository.</li>
           </ul>
           <div class="callout callout--warn">
-            <p>The issue forms only apply <code>status:todo</code> if the label exists, so run the setup before opening your first issue.</p>
+            <p>Run the setup before labeling your first issue. If you set Squadron up before November 19, 2026, run it again after updating, to refresh the <code>status:todo</code> label description.</p>
           </div>
         </section>
 
@@ -201,8 +205,8 @@
             verdict is a pull request comment, not a GitHub approval review.
           </p>
           <p>
-            When the tester's direct merge is blocked, for example by required checks still running on its test
-            commit, it enables auto-merge instead. If you use required checks, turn on
+            When the coder's direct merge is blocked, for example by required checks still running on the
+            tester's commit, it enables auto-merge instead. If you use required checks, turn on
             <em>Settings → General → Allow auto-merge</em>.
           </p>
         </section>
@@ -251,13 +255,14 @@
               </ul>
             </div>
           </div>
-          <p>For an issue created without a form, add <code>status:todo</code> yourself when it's ready.</p>
+          <p>The forms don't apply any label: add <code>status:todo</code> yourself when the issue is ready, whether it comes from a form or not.</p>
           <h3>Tips for issues that hold up</h3>
           <ul>
             <li>Write observable acceptance criteria: inputs, outputs, messages, files, exit codes, UI states.</li>
             <li>Say what must <em>not</em> change, especially behavior delivered by earlier issues.</li>
             <li>Describe mockups and screenshots in text: an image the agent can't interpret is a missing requirement.</li>
             <li>Make the choices: "A or B?" and "TBD" will stop the coder.</li>
+            <li>If the work needs a GitHub Actions workflow, say a person will add it, or scope it out: see <a href="#workflow-limits">what agents can't change</a>.</li>
           </ul>
         </section>
 
@@ -273,15 +278,17 @@
             <li>two reasonable engineers could implement it in materially different ways, with no basis to choose;</li>
             <li>the tester couldn't decide pass or fail from the issue alone;</li>
             <li>it conflicts with the repository or with itself in a way that changes the result;</li>
-            <li>it depends on information the agents can't access, like a private link or an image with no text description.</li>
+            <li>it depends on information the agents can't access, like a private link or an image with no text description;</li>
+            <li>it needs work the agents aren't allowed to deliver, like a file under <code>.github/workflows</code>, unless the issue marks that part out of scope or manual.</li>
           </ul>
           <p>
             Conventional choices that follow the repository's existing patterns are not blocking. When the issue is
             not ready, the coder posts a comment starting with <code>## Squadron requirements check</code> listing
-            each question, and puts the issue back to <code>status:todo</code> without implementing anything.
+            each question and removes the issue's status label without implementing anything. The issue leaves the
+            queue, and the next queued issue starts.
           </p>
           <div class="callout">
-            <p><strong>To continue:</strong> answer the questions in the issue <em>body</em> (not in a comment), then remove and re-apply <code>status:todo</code>.</p>
+            <p><strong>To continue:</strong> answer the questions in the issue <em>body</em> (not in a comment), then add <code>status:todo</code> again.</p>
           </div>
           <p>The checker returns a JSON verdict, which the workflow turns into that comment:</p>
 <pre class="codeblock"><code>{
@@ -304,7 +311,8 @@
             The <code>squadron-requirements-helper</code> Copilot skill helps you draft an issue that passes the
             check. Give it a rough idea, notes, logs or specs: it researches the repository, asks a few focused
             questions, and returns a paste-ready title and body using the exact headings of the matching form. It
-            never creates the issue or applies labels for you.
+            never creates the issue or applies labels for you. If the request needs a GitHub Actions workflow, it helps you scope
+            it to what the agents can deliver.
           </p>
         </section>
 
@@ -313,12 +321,19 @@
           <h2>Coder</h2>
           <p class="role-tag role-tag--coder">Triggered by <code>status:todo</code> on an issue, or <code>agent:coder</code> on a pull request</p>
           <ul>
-            <li>Sets the issue to <code>status:in-progress</code> and runs the <a href="#requirements-check">requirements check</a>.</li>
+            <li>When the issue's turn comes in the <a href="#queue">queue</a>, it becomes <code>status:in-progress</code> and the coder runs the <a href="#requirements-check">requirements check</a>.</li>
             <li>Implements the issue, updates the affected documentation, and opens a pull request from <code>squadron/issue-&lt;number&gt;</code> whose body contains <code>Closes #&lt;number&gt;</code>.</li>
             <li>Queues the review by applying <code>agent:reviewer</code> to the pull request.</li>
-            <li>On <code>agent:coder</code>, fixes the same pull request using the latest review or tester comment, pushes, and re-applies <code>agent:reviewer</code>.</li>
+            <li>On <code>agent:coder</code>, fixes the same pull request using the latest review or tester comment, pushes, and re-applies <code>agent:reviewer</code>. It only follows comments posted with <code>SQUADRON_GITHUB_TOKEN</code>, so other people's comments can't steer it.</li>
+            <li>If a fix makes no changes, it asks the reviewer for a fresh review instead of failing, once per commit. A second run with no changes on the same commit fails and asks a person to step in.</li>
+            <li>After a <code>Squadron tester passed</code> comment, it switches to merge mode and test-merges the base branch first:
+              <ul>
+                <li>no conflict: it squash-merges the pull request, or enables auto-merge if a direct merge is blocked;</li>
+                <li>conflicts: it resolves them, pushes a merge commit, comments the conflicting files, and sends the pull request back to the reviewer, so the resolved code is reviewed and tested again.</li>
+              </ul>
+            </li>
           </ul>
-          <p class="cant">Can't push, comment or merge itself. Any change it makes under <code>.github/workflows</code> is discarded.</p>
+          <p class="cant">The agent itself can't push, comment or merge: the workflow does it. It merges only the commit the tester passed, and refuses if the branch changed since. Changes under <code>.github/workflows</code> are discarded, and conflicts there are left to a person.</p>
         </section>
 
         <!-- Reviewer -->
@@ -330,6 +345,7 @@
             <li>Returns a JSON verdict, which the workflow posts as a comment starting with <code>## Squadron automated review</code>.</li>
             <li>No blocking findings: the issue becomes <code>status:testing</code> and the pull request gets <code>agent:tester</code>.</li>
             <li>Blocking findings: the issue goes back to <code>status:in-progress</code> and the pull request gets <code>agent:coder</code>.</li>
+            <li>Never blocks for a missing workflow change or a requirement only a workflow can meet (CI, tagging, releases, deployments): it lists those as a manual follow-up.</li>
           </ul>
           <p class="cant">Read-only: the run fails if it changes a file, or if its answer has no valid verdict.</p>
         </section>
@@ -342,9 +358,9 @@
             <li>Uses only the issue title and body as its requirements: no docs, pull request description, review comments or agent summaries. It reads code and existing tests only to find setup and entry points.</li>
             <li>Adds or updates tests matching <code>SQUADRON_TEST_PATHS</code>, and makes sure <code>SQUADRON_TEST_COMMAND</code> works, adding a missing npm script or test dependency if needed. If existing tests already cover the issue, it may change nothing.</li>
             <li>The workflow commits only test files and npm manifest and lockfile changes, discards everything else, reinstalls dependencies and runs the command itself.</li>
-            <li>Success: squash-merge, or auto-merge if a direct merge is blocked. Failure: a comment with the last 80 log lines (starting with <code>Squadron tester failed</code>), the issue back to <code>status:in-progress</code>, and <code>agent:coder</code> on the pull request.</li>
+            <li>Success: a <code>Squadron tester passed on commit &lt;sha&gt;</code> comment and <code>agent:coder</code> on the pull request, so the <a href="#coder">coder</a> merges that commit. Failure: a comment with the last 80 log lines (starting with <code>Squadron tester failed</code>), the issue back to <code>status:in-progress</code>, and <code>agent:coder</code> on the pull request.</li>
           </ul>
-          <p class="cant">Never weakens tests, uses a no-op command, or changes product code.</p>
+          <p class="cant">Never weakens tests, uses a no-op command, changes product code, or merges.</p>
         </section>
 
         <!-- Labels -->
@@ -354,13 +370,13 @@
             <table>
               <thead><tr><th>Label</th><th>On</th><th>Meaning</th></tr></thead>
               <tbody>
-                <tr><td><span class="label label--todo">status:todo</span></td><td>Issue</td><td>Ready for the coder. Applying it starts the workflow.</td></tr>
-                <tr><td><span class="label label--progress">status:in-progress</span></td><td>Issue</td><td>The coder is checking, implementing or fixing.</td></tr>
-                <tr><td><span class="label label--testing">status:testing</span></td><td>Issue</td><td>The review passed, the tester is working.</td></tr>
+                <tr><td><span class="label label--todo">status:todo</span></td><td>Issue</td><td>Queued for the coder. Applying it starts the issue, or queues it if another one is in progress.</td></tr>
+                <tr><td><span class="label label--progress">status:in-progress</span></td><td>Issue</td><td>The coder is checking, implementing, fixing or merging. Holds the queue.</td></tr>
+                <tr><td><span class="label label--testing">status:testing</span></td><td>Issue</td><td>The review passed, the tester is working. Holds the queue.</td></tr>
                 <tr><td><span class="label label--done">status:done</span></td><td>Issue</td><td>The pull request has merged.</td></tr>
-                <tr><td><span class="label label--agent">agent:coder</span></td><td>Pull request</td><td>Queues the coder to fix the pull request.</td></tr>
+                <tr><td><span class="label label--agent">agent:coder</span></td><td>Pull request</td><td>Queues the coder to fix the pull request, or to merge it after a passing test run.</td></tr>
                 <tr><td><span class="label label--agent">agent:reviewer</span></td><td>Pull request</td><td>Queues a review.</td></tr>
-                <tr><td><span class="label label--agent">agent:tester</span></td><td>Pull request</td><td>Queues testing and merge.</td></tr>
+                <tr><td><span class="label label--agent">agent:tester</span></td><td>Pull request</td><td>Queues testing.</td></tr>
               </tbody>
             </table>
           </div>
@@ -370,20 +386,44 @@
         <!-- Lifecycle -->
         <section id="lifecycle">
           <h2>Lifecycle</h2>
-<pre class="codeblock codeblock--diagram"><code><span class="c">issue</span>  status:todo
-   │
+<pre class="codeblock codeblock--diagram"><code><span class="c">issue</span>  status:todo ── pipeline busy ──▶ queue comment, waits
+   │ pipeline free
    ▼
-<span class="k">coder</span>  status:in-progress ── requirements missing ──▶ comment + status:todo
+<span class="k">coder</span>  status:in-progress ── requirements missing ──▶ comment + no status
    │ opens PR squadron/issue-N
    ▼ agent:reviewer
 <span class="k">reviewer</span> ── changes requested ──▶ status:in-progress + agent:coder ──┐
    │ approved                                                   │
    ▼ status:testing + agent:tester                              │
 <span class="k">tester</span>  ── tests failed ──▶ status:in-progress + agent:coder ───────┤
-   │ tests pass                                                 │
-   ▼ squash-merge                                  <span class="k">coder</span> fixes ◀─┘
-<span class="s">status:done</span></code></pre>
+   │ tests pass: agent:coder                                    │
+   ▼                                               <span class="k">coder</span> fixes ◀─┘
+<span class="k">coder</span>  ── conflicts ──▶ resolve + push + agent:reviewer
+   │ no conflict: squash-merge
+   ▼
+<span class="s">status:done</span> ──▶ next queued issue starts</code></pre>
           <p>Jobs are serialized per issue and per pull request, so two runs never work on the same item at once.</p>
+        </section>
+
+        <!-- Queue -->
+        <section id="queue">
+          <h2>One issue at a time</h2>
+          <p>
+            Squadron works on a single issue at a time, so its pull requests never branch from a base that another
+            Squadron pull request is about to change. When an issue gets <code>status:todo</code>:
+          </p>
+          <ul>
+            <li>if another open issue is <code>status:in-progress</code> or <code>status:testing</code>, nothing starts, and the new issue gets a comment saying it's queued;</li>
+            <li>otherwise the oldest queued issue starts, which may not be the one you just labeled. A retry (<code>status:todo</code> re-applied to an issue already in progress or testing) goes first.</li>
+          </ul>
+          <p>
+            The pipeline frees up when the pull request merges, when a Squadron pull request is closed without merging,
+            when the issue is closed, or when the requirements check sends it back. The oldest queued issue then
+            starts automatically. Labeling several issues at once is fine: each claim processes the whole queue.
+          </p>
+          <div class="callout callout--warn">
+            <p>A failed issue keeps the pipeline busy on purpose: it needs a person, and other issues would conflict with its pull request. Retry it with the label named in the failure comment, or free the queue by closing the issue or its pull request.</p>
+          </div>
         </section>
 
         <!-- Failures -->
@@ -399,23 +439,53 @@
                 <tr><td>The coder, from the issue</td><td><code>status:todo</code> on the issue</td></tr>
                 <tr><td>A fix on the pull request</td><td><code>agent:coder</code> on the pull request</td></tr>
                 <tr><td>The review</td><td><code>agent:reviewer</code> on the pull request</td></tr>
-                <tr><td>Testing and merge</td><td><code>agent:tester</code> on the pull request</td></tr>
+                <tr><td>Testing</td><td><code>agent:tester</code> on the pull request</td></tr>
+                <tr><td>The merge, if the branch changed after the tests passed</td><td><code>agent:tester</code> on the pull request</td></tr>
+                <tr><td>A merge-conflict resolution</td><td><code>agent:coder</code>, or resolve them yourself, push, and re-apply <code>agent:reviewer</code></td></tr>
               </tbody>
             </table>
           </div>
+          <p>
+            Conflicts in <code>.github/workflows</code> always need a person. If the coder fix makes no changes twice
+            on the same commit, re-applying <code>agent:coder</code> would repeat the same result: resolve the
+            remaining findings yourself, or update the issue, then re-apply <code>agent:reviewer</code>.
+          </p>
+          <p>
+            While an issue is failed, the <a href="#queue">queue</a> waits. Closing a Squadron pull request without
+            merging removes its issue's status; add <code>status:todo</code> to queue it again.
+          </p>
           <p>Only pull requests from <code>squadron/issue-&lt;number&gt;</code> branches in the same repository are automated. Pull requests you open yourself are left alone.</p>
+        </section>
+
+        <!-- Workflow limits -->
+        <section id="workflow-limits">
+          <h2>What agents can't change</h2>
+          <p>
+            Agents never publish changes under <code>.github/workflows</code>. If an issue needs a GitHub Actions
+            workflow (CI, releases, deployments, schedules), the <a href="#requirements-check">requirements check</a>
+            sends it back until it either limits the scope to what agents can deliver (scripts, configuration,
+            documentation, or an example workflow stored outside <code>.github/workflows</code>) or states that a
+            person will add the workflow.
+          </p>
+          <p>
+            The reviewer doesn't block a pull request for a missing workflow change: it mentions it as a manual
+            follow-up. Add or change workflow files yourself.
+          </p>
         </section>
 
         <!-- Updating -->
         <section id="updating">
           <h2>Updating</h2>
           <p>
-            Run <em>Actions → Squadron Update → Run workflow</em> to copy the latest <code>.github/</code>,
-            <code>SQUADRON.md</code> and <code>USAGE.md</code> from the template's default branch. Changes are
-            committed and pushed as <code>chore: update Squadron</code>; if nothing changed, it does nothing.
+            Run <em>Actions → Squadron Update → Run workflow</em> to copy the latest Squadron files from the
+            template's default branch:
           </p>
+          <ol>
+            <li>The workflow first compares its own file with the template's. If it changed, it commits the new version as <code>chore: update Squadron update workflow</code>, relaunches itself and stops; the relaunched run does the update.</li>
+            <li>Otherwise it copies the files listed in the workflow (the Squadron issue forms, scripts, skills and workflows under <code>.github/</code>, plus <code>SQUADRON.md</code>, <code>SQUADRON-CHANGELOG.md</code> and <code>USAGE.md</code>), then commits and pushes them as <code>chore: update Squadron</code>. If nothing changed, it does nothing.</li>
+          </ol>
           <div class="callout callout--warn">
-            <p>The whole <code>.github/</code> directory and both documents are replaced, so customizations there will be overwritten. Other files, including <code>README.md</code>, are left unchanged.</p>
+            <p>The listed files are overwritten, so customizations in them will be lost. Your own files under <code>.github/</code> and <code>README.md</code> are left unchanged, and files removed from the template aren't deleted from your repository.</p>
           </div>
           <p>See the <a href="https://github.com/TeddyGandon/squadron/blob/main/SQUADRON-CHANGELOG.md" target="_blank" rel="noopener noreferrer">changelog</a> for what each update brings.</p>
         </section>
@@ -429,6 +499,7 @@
             <li>Fork pull requests and pull requests from other branches never get the automation credentials.</li>
             <li>Helper scripts always run from a checkout of the default branch, never from the pull request under review.</li>
             <li>Agent changes under <code>.github/workflows</code> are discarded before publishing.</li>
+            <li>The coder only follows Squadron comments posted with <code>SQUADRON_GITHUB_TOKEN</code>, and merges only on a <code>Squadron tester passed</code> comment from that token, and only the commit it names. Other users' comments or later pushes can't trigger a merge of untested code.</li>
             <li>The review is model-generated: treat it as automation feedback, not a substitute for required human review.</li>
             <li>An issue becomes <code>status:done</code> only after its pull request actually merges.</li>
           </ul>
@@ -446,12 +517,14 @@
             <table>
               <thead><tr><th>File</th><th>Role</th></tr></thead>
               <tbody>
-                <tr><td><code>.github/workflows/coder.yml</code></td><td>The only event listener (workflow <em>Squadron</em>). Routes each label or merge event to one job: <code>coder</code>, <code>coder-fix</code>, <code>reviewer</code>, <code>tester</code> or <code>mark-done</code>.</td></tr>
+                <tr><td><code>.github/workflows/coder.yml</code></td><td>The only event listener (workflow <em>Squadron</em>). Routes each issue or pull request event to one job: <code>claim</code> then <code>coder</code>, <code>coder-fix</code> (fixes, or merges after a pass), <code>reviewer</code>, <code>tester</code>, <code>mark-done</code>, <code>release</code> (Squadron pull request closed without merging) or <code>issue-closed</code>. Claims share one concurrency group, so two issues can never both take an empty pipeline.</td></tr>
                 <tr><td><code>.github/workflows/reviewer.yml</code></td><td>Reusable reviewer workflow, called by <code>coder.yml</code>.</td></tr>
                 <tr><td><code>.github/workflows/tester.yml</code></td><td>Reusable tester workflow, called by <code>coder.yml</code>.</td></tr>
                 <tr><td><code>.github/workflows/setup.yml</code></td><td>Manual, one-time: labels and secret checks.</td></tr>
-                <tr><td><code>.github/workflows/update.yml</code></td><td>Manual: syncs the template files.</td></tr>
-                <tr><td><code>.github/scripts/set-issue-status-label.sh</code></td><td>Replaces the issue's <code>status:*</code> label.</td></tr>
+                <tr><td><code>.github/workflows/update.yml</code></td><td>Manual: updates itself, then syncs the listed template files.</td></tr>
+                <tr><td><code>.github/scripts/set-issue-status-label.sh</code></td><td>Replaces the issue's <code>status:*</code> label, or removes it.</td></tr>
+                <tr><td><code>.github/scripts/claim-next-issue.sh</code></td><td>The claim: starts at most one issue and comments on the other queued ones.</td></tr>
+                <tr><td><code>.github/scripts/start-next-issue.sh</code></td><td>When the pipeline is free, re-applies <code>status:todo</code> to the oldest queued issue to start it.</td></tr>
                 <tr><td><code>.github/scripts/set-agent-label.sh</code></td><td>Clears <code>agent:*</code> labels and optionally adds one, which starts the next agent.</td></tr>
                 <tr><td><code>.github/scripts/extract-requirements-report.py</code></td><td>Extracts the requirements verdict and renders the questions comment.</td></tr>
                 <tr><td><code>.github/scripts/extract-review-report.py</code></td><td>Extracts the review verdict and renders the review comment.</td></tr>
@@ -470,10 +543,24 @@
           <ul>
             <li><strong>Quality drifts across tickets.</strong> Agents don't remember previous issues or share a picture of the system. In my runs, quality had visibly degraded by the fifth ticket.</li>
             <li><strong>The tester only protects the current issue.</strong> Nothing re-checks what earlier issues assumed unless their tests still cover it.</li>
+            <li><strong>One issue at a time.</strong> The queue avoids conflicting pull requests, but a failed issue blocks the others until someone handles it.</li>
             <li><strong>No questions mid-way.</strong> Apart from the requirements check up front, agents fill gaps with their own guesses.</li>
             <li><strong>npm-oriented.</strong> Dependency installation and test setup assume an npm project; other stacks need a custom <code>SQUADRON_TEST_COMMAND</code> and may need workflow changes.</li>
           </ul>
           <p>More on this in <a href="/articles/squadron">Squadron, or why agents don't fix poor requirements</a>.</p>
+        </section>
+
+        <!-- Badge -->
+        <section id="badge">
+          <h2>Badge</h2>
+          <p>Built something with Squadron? Add the badge to your <code>README.md</code>.</p>
+          <p class="badge-preview">
+            <a href="https://teddygandon.github.io/squadron/"><img src="/squadron/badge.svg" alt="Made with Squadron" width="163" height="20" /></a>
+          </p>
+          <p>Markdown:</p>
+<pre class="codeblock"><code>[![Made with Squadron](https://teddygandon.github.io/squadron/badge.svg)](https://teddygandon.github.io/squadron/)</code></pre>
+          <p>HTML:</p>
+<pre class="codeblock"><code>&lt;a href="https://teddygandon.github.io/squadron/"&gt;&lt;img src="https://teddygandon.github.io/squadron/badge.svg" alt="Made with Squadron" width="163" height="20" /&gt;&lt;/a&gt;</code></pre>
         </section>
 
         <!-- FAQ -->
@@ -485,7 +572,7 @@
           </details>
           <details class="faq">
             <summary>The coder asked questions. Where do I answer?</summary>
-            <p>In the issue body. Agents don't read comments. Then remove and re-apply <code>status:todo</code>.</p>
+            <p>In the issue body. Agents don't read comments. Then add <code>status:todo</code> again.</p>
           </details>
           <details class="faq">
             <summary>Will it touch pull requests I open myself?</summary>
@@ -497,7 +584,11 @@
           </details>
           <details class="faq">
             <summary>Can I customize the workflows?</summary>
-            <p>Yes, but the update workflow replaces <code>.github/</code>. Keep customizations elsewhere, or don't run updates.</p>
+            <p>Yes, but the update workflow overwrites the Squadron files it lists. Keep customizations in your own files, or don't run updates.</p>
+          </details>
+          <details class="faq">
+            <summary>I labeled an issue and nothing happened.</summary>
+            <p>Another issue is probably in progress or testing: yours got a queue comment and will start on its own. If that other issue has failed, retry it or close it to free the queue.</p>
           </details>
           <details class="faq">
             <summary>My project doesn't use npm.</summary>
