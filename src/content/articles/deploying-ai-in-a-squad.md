@@ -1,6 +1,6 @@
 ---
 title: Deploying AI in a squad, without forgetting the brains
-date: 2026-11-23
+date: 2026-11-30
 excerpt: Rolling out AI tools in a squad is usually treated as a tooling project. It's a human one. Engineers won't embrace something they feel threatened by, and the fatigue that comes with it is individual, quiet, and something no dashboard will show you.
 tags: [ai, management, mental-health]
 ---
