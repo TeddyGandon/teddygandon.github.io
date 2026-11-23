@@ -57,6 +57,29 @@ body {
   min-height: 100vh;
   // Base text size for the whole site, the size articles were set in.
   font-size: 1.08rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+// Headings break into even lines; running text avoids lone last words.
+h1,
+h2,
+h3,
+h4,
+.hero-title,
+.card-title {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+// One calm focus ring for every keyboard-reachable element.
+:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 3px;
 }
 
 // Fixed to the viewport (not the document) so the wash stays put regardless
@@ -211,8 +234,11 @@ a {
 .site-nav {
   position: sticky;
   top: 0;
-  padding: 1.75rem 1.5rem;
-  background: var(--ink);
+  padding: 1.5rem 1.5rem;
+  // Translucent, so the page's wash shows faintly through as it scrolls under.
+  background: rgb(from var(--ink) r g b / 0.82);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  backdrop-filter: blur(12px) saturate(1.2);
   border-bottom: 1px solid var(--ink-line);
   transition: border-color vars.$speed-slower vars.$easing-calm;
   z-index: 30;
@@ -397,7 +423,8 @@ a {
 
 .hero-title {
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
 }
 
 .hero-lede {
@@ -596,7 +623,8 @@ a {
 
 .stat-item__value {
   font-family: vars.$bulma-family;
-  font-size: 2.5rem;
+  font-size: 2.6rem;
+  font-variant-numeric: lining-nums tabular-nums;
   color: var(--gold);
   line-height: 1.2;
 }
@@ -649,7 +677,10 @@ a {
 
 .surface-card {
   display: block;
-  background: var(--ink-raised);
+  // A faint gold sheen at the top edge, fading into the raised surface.
+  background:
+    linear-gradient(180deg, rgb(from var(--gold) r g b / 0.035), transparent 40%),
+    var(--ink-raised);
   border: 1px solid var(--ink-line);
   border-radius: vars.$radius-medium;
   padding: 2rem 2.25rem;
@@ -722,9 +753,10 @@ a:hover .card-cta__arrow {
   display: inline-flex;
   align-items: center;
   color: var(--gold);
-  border: 1px solid rgb(from var(--gold) r g b / 0.35);
+  background: rgb(from var(--gold) r g b / 0.06);
+  border: 1px solid rgb(from var(--gold) r g b / 0.3);
   border-radius: vars.$radius-pill;
-  padding: 0.1rem 0.7rem;
+  padding: 0.12rem 0.75rem;
   font-size: 0.8rem;
   line-height: 1.5;
   letter-spacing: 0.02em;
@@ -792,6 +824,7 @@ a.pill.is-active,
   border-radius: 50%;
   background: var(--ink);
   border: 1px solid var(--gold);
+  box-shadow: 0 0 0 4px var(--gold-soft);
 }
 
 .timeline-item__period {
@@ -922,6 +955,7 @@ a.pill.is-active,
   height: 8px;
   border-radius: 50%;
   background: var(--ink-line);
+  @include transition(background-color);
 }
 
 .skill-meter__dot.is-filled {
@@ -1295,16 +1329,22 @@ a.pill.is-active,
 
 .prose a {
   color: var(--gold);
-  border-bottom: 1px solid rgb(from var(--gold) r g b / 0.35);
+  text-decoration: underline;
+  text-decoration-color: rgb(from var(--gold) r g b / 0.35);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  @include transition(color, text-decoration-color);
 }
 
 .prose a:hover {
-  border-bottom-color: var(--gold);
+  text-decoration-color: var(--gold);
 }
 
 .prose blockquote {
   border-left: 2px solid var(--gold);
-  padding-left: 1.25rem;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(90deg, var(--gold-soft), transparent 70%);
+  border-radius: 0 vars.$radius-small vars.$radius-small 0;
   color: var(--paper-muted);
   font-style: italic;
   margin: 1.5rem 0;
@@ -1319,6 +1359,7 @@ a.pill.is-active,
 
 .prose pre {
   background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
   padding: 1.25rem;
   border-radius: vars.$radius;
   overflow-x: auto;

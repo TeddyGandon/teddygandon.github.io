@@ -32,13 +32,14 @@
   transition: $list;
 }
 
-// Lifts a card and turns its border gold on hover.
+// Lifts a card, turns its border gold and casts a soft warm shadow on hover.
 @mixin hover-lift {
-  @include transition(transform, border-color);
+  @include transition(transform, border-color, box-shadow);
 
   &:hover {
     transform: translateY(-3px);
-    border-color: var(--gold);
+    border-color: rgb(from var(--gold) r g b / 0.7);
+    box-shadow: 0 18px 40px -24px rgb(from var(--gold) r g b / 0.35);
   }
 }
 
@@ -46,7 +47,7 @@
 @mixin eyebrow {
   color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
 }
 
 // Small muted capitals: dates, periods, reading times.
