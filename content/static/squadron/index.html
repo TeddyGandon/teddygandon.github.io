@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="/squadron/style.css" />
   </head>
   <body>
-    <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="aurora" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
     <div class="grid-bg" aria-hidden="true"></div>
     <a class="skip-link" href="#content">Skip to content</a>
 
@@ -38,8 +38,8 @@
       <section class="hero" id="top">
         <div class="wrap hero__inner">
           <p class="badge"><span class="badge__dot"></span>An experiment · Open-source GitHub template</p>
-          <h1>
-            A squad <span class="gradient-text">of agents</span>
+          <h1 style="text-transform: uppercase;">
+            A squad of <span class="gradient-text">agents</span>
           </h1>
           <p class="hero__sub">
             Squadron is an experiment, not a product. A coder, a reviewer and a tester agent try to take a GitHub
@@ -94,15 +94,24 @@
                 <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                   <path d="M0 0 L10 5 L0 10 z" class="diagram__arrowhead" />
                 </marker>
+                <marker id="arrow-todo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" class="diagram__arrowhead diagram__arrowhead--todo" />
+                </marker>
+                <marker id="arrow-review" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" class="diagram__arrowhead diagram__arrowhead--review" />
+                </marker>
+                <marker id="arrow-test" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" class="diagram__arrowhead diagram__arrowhead--test" />
+                </marker>
                 <marker id="arrow-back" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                   <path d="M0 0 L10 5 L0 10 z" class="diagram__arrowhead diagram__arrowhead--back" />
                 </marker>
               </defs>
 
-              <line x1="138" y1="120" x2="222" y2="120" class="diagram__edge" marker-end="url(#arrow)" />
-              <line x1="358" y1="120" x2="432" y2="120" class="diagram__edge" marker-end="url(#arrow)" />
-              <line x1="568" y1="120" x2="642" y2="120" class="diagram__edge" marker-end="url(#arrow)" />
-              <polyline points="778,120 800,120 800,34 845,34" class="diagram__edge" marker-end="url(#arrow)" />
+              <line x1="138" y1="120" x2="222" y2="120" class="diagram__edge diagram__edge--todo" marker-end="url(#arrow-todo)" />
+              <line x1="358" y1="120" x2="432" y2="120" class="diagram__edge diagram__edge--review" marker-end="url(#arrow-review)" />
+              <line x1="568" y1="120" x2="642" y2="120" class="diagram__edge diagram__edge--test" marker-end="url(#arrow-test)" />
+              <polyline points="778,120 800,120 800,34 845,34" class="diagram__edge diagram__edge--test" marker-end="url(#arrow-test)" />
 
               <text x="180" y="78" class="diagram__label">status:todo</text>
               <text x="180" y="98" class="diagram__label">queued</text>
@@ -125,12 +134,12 @@
                 <text x="290" y="117">Coder</text>
                 <text x="290" y="136" class="diagram__sub">implements, merges</text>
               </g>
-              <g class="diagram__node">
+              <g class="diagram__node diagram__node--reviewer">
                 <rect x="432" y="88" width="136" height="64" rx="14" />
                 <text x="500" y="117">Reviewer</text>
                 <text x="500" y="136" class="diagram__sub">reads, posts verdict</text>
               </g>
-              <g class="diagram__node">
+              <g class="diagram__node diagram__node--tester">
                 <rect x="642" y="88" width="136" height="64" rx="14" />
                 <text x="710" y="117">Tester</text>
                 <text x="710" y="136" class="diagram__sub">tests the issue</text>
@@ -195,38 +204,40 @@
                 <li>Never weakens tests or touches product code</li>
               </ul>
             </article>
-            <article class="tile tile--wide">
+            <!--
+            <article class="tile tile--wide tile--reqs">
               <p class="kicker">Requirements check</p>
               <h3>Questions before code.</h3>
               <p>If the issue leaves doubt, the coder comments what's missing and removes its status, so it leaves the queue. Answer in the issue body and add <code>status:todo</code> again. An issue that needs a GitHub Actions workflow is sent back too: agents can't change those files.</p>
             </article>
-            <article class="tile">
+            <article class="tile tile--queue">
               <p class="kicker">Queue</p>
               <h3>One at a time.</h3>
               <p>A new <code>status:todo</code> issue waits while another is in progress or testing, then starts on its own, oldest first.</p>
             </article>
-            <article class="tile tile--wide">
+            <article class="tile tile--wide tile--merge">
               <p class="kicker">Merge</p>
               <h3>Conflicts go back through review.</h3>
               <p>Before merging, the coder checks the pull request against its base branch. If it conflicts, it resolves the conflicts, pushes a merge commit and sends the pull request back to the reviewer and the tester. Conflicts in <code>.github/workflows</code> are left to a person.</p>
             </article>
-            <article class="tile">
+            <article class="tile tile--retry">
               <p class="kicker">Retry</p>
               <h3>One label away.</h3>
               <p>Every failure comments a run link and the label to re-apply. A failed issue holds the queue until it's retried or closed.</p>
             </article>
+            -->
           </div>
         </div>
       </section>
 
       <!-- ============ SETUP ============ -->
       <section class="block" id="setup">
+        <header class="block__head">
+          <p class="kicker">03 · Setup</p>
+          <h2>Want to try it?</h2>
+        </header>
         <div class="wrap setup">
           <div>
-            <header class="block__head block__head--left">
-              <p class="kicker">03 · Setup</p>
-              <h2>Want to try it?</h2>
-            </header>
             <ol class="setup__steps">
               <li><b>Create your repo</b> from the <a href="https://github.com/TeddyGandon/squadron/generate" target="_blank" rel="noopener noreferrer">Squadron template</a>.</li>
               <li><b>Add two secrets</b>: a Copilot token, and a fine-grained token with Contents, Pull requests, Issues and Workflows in read and write.</li>
