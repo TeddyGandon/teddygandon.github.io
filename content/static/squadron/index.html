@@ -39,7 +39,7 @@
         <div class="wrap hero__inner">
           <p class="badge"><span class="badge__dot"></span>An experiment · Open-source GitHub template</p>
           <h1 style="text-transform: uppercase;">
-            A squad of <span class="gradient-text">agents</span>
+            A squad of <span class="gradient-text">agents</span><span class="hero__mark" aria-hidden="true"><span></span></span>
           </h1>
           <p class="hero__sub">
             Squadron is an experiment, not a product. A coder, a reviewer and a tester agent try to take a GitHub
@@ -164,6 +164,12 @@
             <span class="label label--agent">agent:reviewer</span>
             <span class="label label--agent">agent:tester</span>
           </div>
+
+          <div class="labels">
+            <p class="labels__title">Directives</p>
+            <span class="label label--directive">directive:skip-requirements-check</span>
+            <span class="label label--directive">directive:use-model-…</span>
+          </div>
         </div>
       </section>
 
@@ -223,7 +229,7 @@
             <article class="tile tile--retry">
               <p class="kicker">Retry</p>
               <h3>One label away.</h3>
-              <p>Every failure comments a run link and the label to re-apply. A failed issue holds the queue until it's retried or closed.</p>
+              <p>Every failure comments a run link and the label to re-apply. Once its pull request is open, a failed issue holds the queue until it's retried or closed.</p>
             </article>
             -->
           </div>
@@ -241,10 +247,10 @@
             <ol class="setup__steps">
               <li><b>Create your repo</b> from the <a href="https://github.com/TeddyGandon/squadron/generate" target="_blank" rel="noopener noreferrer">Squadron template</a>.</li>
               <li><b>Add two secrets</b>: a Copilot token, and a fine-grained token with Contents, Pull requests, Issues and Workflows in read and write.</li>
-              <li><b>Run</b> <em>Actions → Squadron Setup</em> once. It creates the labels and checks the secrets.</li>
+              <li><b>Run</b> <em>Actions → Squadron Setup</em>. It creates the labels and checks the secrets, and it's safe to run again.</li>
               <li><b>Open an issue</b> from a form, and add <code>status:todo</code> when it's ready.</li>
             </ol>
-            <p class="setup__note">Later, <em>Actions → Squadron Update</em> pulls the latest Squadron workflows, scripts, skills and docs from the template, and leaves your own <code>.github/</code> files alone. <a href="/squadron/docs/">Read the full docs →</a></p>
+            <p class="setup__note">Later, <em>Actions → Squadron Update</em> pulls the latest Squadron workflows, scripts, skills and docs from the template, leaves your own <code>.github/</code> files alone, and re-runs the setup to sync the labels. <a href="/squadron/docs/">Read the full docs →</a></p>
             <p class="setup__note">Shipped something with it? <a href="/squadron/docs/#badge"><img class="setup__badge" src="/squadron/badge.svg" alt="Made with Squadron" width="163" height="20" /></a> <a href="/squadron/docs/#badge">Get the badge →</a></p>
           </div>
 

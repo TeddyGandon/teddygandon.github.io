@@ -209,19 +209,27 @@ p { margin: 0 0 1em; }
 /* ---------- Hero ---------- */
 .hero { padding: 5rem 0 4rem; text-align: center; }
 .hero__inner { display: flex; flex-direction: column; align-items: center; }
-.hero__mark { position: relative; margin-bottom: 1.75rem; animation: float 7s ease-in-out infinite; }
-.hero__mark::before {
-  content: '';
-  position: absolute;
-  inset: -30%;
-  border-radius: 50%;
-  background: conic-gradient(from var(--angle), #0369a1, #38bdf8, #bae6fd, #818cf8, #0369a1);
-  filter: blur(40px);
-  opacity: 0.55;
-  animation: spin 8s linear infinite;
-  z-index: -1;
+/* Squadron mark after "agents": floats, and its fill flows through the same gradient as the word. */
+@keyframes mark-float { 50% { transform: translateY(-0.12em); } }
+.hero__mark {
+  display: inline-block;
+  width: 0.82em;
+  height: 0.7em; /* mark.svg is 280 × 240 */
+  margin-left: 0.22em;
+  vertical-align: -0.02em;
+  animation: mark-float 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 0.14em rgba(129, 140, 248, 0.45));
 }
-.hero__mark img { display: block; width: 120px; height: auto; }
+.hero__mark span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--grad);
+  background-size: 300% 100%;
+  animation: flow 9s linear infinite;
+  -webkit-mask: url('/squadron/mark.svg') center / contain no-repeat;
+  mask: url('/squadron/mark.svg') center / contain no-repeat;
+}
 
 .badge {
   display: inline-flex;
@@ -338,6 +346,7 @@ p { margin: 0 0 1em; }
 .label--testing { color: var(--violet); border-color: rgba(129, 140, 248, 0.45); background: rgba(129, 140, 248, 0.1); }
 .label--done { color: var(--mint); border-color: rgba(52, 211, 153, 0.45); background: rgba(52, 211, 153, 0.1); }
 .label--agent { color: var(--text); border-color: var(--line); background: rgba(30, 41, 59, 0.7); }
+.label--directive { color: #f0abfc; border-color: rgba(216, 118, 227, 0.45); background: rgba(216, 118, 227, 0.1); }
 
 /* ---------- Bento ---------- */
 .bento { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
@@ -627,6 +636,10 @@ p { margin: 0 0 1em; }
 .form-card__prefix { margin-bottom: 0.8rem; }
 .form-card ul { list-style: none; padding: 0; margin: 0; font-size: 0.88rem; }
 .form-card li { padding: 0.3rem 0; border-top: 1px solid var(--line); margin: 0; display: flex; justify-content: space-between; gap: 0.5rem; }
+.cost { font-family: var(--mono); font-size: 0.78rem; font-weight: 700; padding: 0.1rem 0.6rem; border-radius: 999px; border: 1px solid; }
+.cost--low { color: var(--mint); border-color: rgba(52, 211, 153, 0.45); }
+.cost--medium { color: var(--amber); border-color: rgba(251, 191, 36, 0.45); }
+.cost--high { color: var(--rose); border-color: rgba(251, 113, 133, 0.45); }
 .req { font-family: var(--mono); font-size: 0.68rem; color: var(--amber); white-space: nowrap; padding-top: 0.2rem; }
 
 .role-tag { display: inline-block; font-size: 0.85rem; padding: 0.35rem 0.9rem; border-radius: 999px; border: 1px solid var(--line); background: rgba(30, 41, 59, 0.6); }

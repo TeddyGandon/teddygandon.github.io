@@ -9,7 +9,7 @@
     <title>Docs · Squadron · by Teddy Gandon</title>
     <meta
       name="description"
-      content="Squadron documentation: setup, issue forms, the requirements check, the coder, reviewer and tester agents, labels, the issue queue, configuration, failures, updates and security boundaries."
+      content="Squadron documentation: setup, issue forms, the requirements check, the coder, reviewer and tester agents, labels, issue directives, the issue queue, configuration, failures, updates and security boundaries."
       id="meta-description"
     />
     <link rel="canonical" href="https://teddygandon.github.io/squadron/docs/" id="meta-canonical" />
@@ -55,6 +55,7 @@
               <a href="#issue-forms">Issue forms</a>
               <a href="#requirements-check">Requirements check</a>
               <a href="#requirements-helper">Requirements helper</a>
+              <a href="#directives">Issue directives</a>
             </details>
             <details class="toc__section">
               <summary class="toc__group">Agents</summary>
@@ -134,7 +135,7 @@
           <ol class="steps-list">
             <li>Create your product repository from the template: <a href="https://github.com/TeddyGandon/squadron/generate" target="_blank" rel="noopener noreferrer">Use this template</a>.</li>
             <li>Add the <code>COPILOT_GITHUB_TOKEN</code> and <code>SQUADRON_GITHUB_TOKEN</code> <a href="#secrets">secrets</a>.</li>
-            <li>Run <em>Actions → Squadron Setup → Run workflow</em> once.</li>
+            <li>Run <em>Actions → Squadron Setup → Run workflow</em>. It's safe to run again at any time.</li>
             <li>Open an issue from the Feature, Technical task or Bug form, then add <code>status:todo</code>.</li>
           </ol>
           <p>
@@ -170,15 +171,17 @@
         <section id="setup-workflow">
           <h2>Setup workflow</h2>
           <p>
-            Run <em>Actions → Squadron Setup → Run workflow</em> once after adding the secrets. It:
+            Run <em>Actions → Squadron Setup → Run workflow</em> after adding the secrets. It's safe to run any number
+            of times, and the <a href="#updating">update workflow</a> runs it automatically after every update. It:
           </p>
           <ul>
-            <li>creates or refreshes the <code>status:*</code> and <code>agent:*</code> <a href="#labels">labels</a>;</li>
+            <li>creates the <code>status:*</code>, <code>agent:*</code> and <code>directive:*</code> <a href="#labels">labels</a>, or updates the color and description of existing ones;</li>
+            <li>creates one model label per line of <code>.github/squadron-models.txt</code>, and deletes model labels that are no longer listed (which also removes them from issues);</li>
             <li>checks that both secrets are present;</li>
             <li>checks that <code>SQUADRON_GITHUB_TOKEN</code> can write to the repository.</li>
           </ul>
           <div class="callout callout--warn">
-            <p>Run the setup before labeling your first issue. If you set Squadron up before November 19, 2026, run it again after updating, to refresh the <code>status:todo</code> label description.</p>
+            <p>Run the setup before labeling your first issue.</p>
           </div>
         </section>
 
@@ -302,6 +305,7 @@
     }
   ]
 }</code></pre>
+          <p>To skip the check for one issue, add <code>directive:skip-requirements-check</code> before it starts: see <a href="#directives">issue directives</a>.</p>
         </section>
 
         <!-- Requirements helper -->
@@ -316,12 +320,53 @@
           </p>
         </section>
 
+        <!-- Directives -->
+        <section id="directives">
+          <h2>Issue directives</h2>
+          <p>
+            Add <code>directive:*</code> labels to an issue, before it starts, to change how the agents handle it.
+            Every agent reads them from the issue, including on later review, test and fix runs.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Label</th><th>Effect</th></tr></thead>
+              <tbody>
+                <tr><td><span class="label label--directive">directive:skip-requirements-check</span></td><td>The coder implements the issue directly, without the <a href="#requirements-check">requirements check</a>.</td></tr>
+                <tr><td><span class="label label--directive">directive:use-model-&lt;model&gt;-cost-&lt;tier&gt;</span></td><td>Every agent (coder, reviewer and tester) runs Copilot with that model instead of the default.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Available models</h3>
+          <p>
+            The models come from <code>.github/squadron-models.txt</code>, which lists models included in Copilot Pro.
+            The cost tier is the model's relative price per 1M output tokens, from GitHub's pricing: <strong>low</strong>
+            under $2, <strong>medium</strong> $2 to $8, <strong>high</strong> over $8.
+          </p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Label</th><th>Model</th><th>Cost</th></tr></thead>
+              <tbody>
+                <tr><td><span class="label label--directive">directive:use-model-gpt-5.6-luna-cost-low</span></td><td><code>gpt-5.6-luna</code></td><td><span class="cost cost--low">low</span></td></tr>
+                <tr><td><span class="label label--directive">directive:use-model-claude-haiku-5.5-cost-low</span></td><td><code>claude-haiku-5.5</code></td><td><span class="cost cost--low">low</span></td></tr>
+                <tr><td><span class="label label--directive">directive:use-model-claude-haiku-4.5-cost-medium</span></td><td><code>claude-haiku-4.5</code></td><td><span class="cost cost--medium">medium</span></td></tr>
+                <tr><td><span class="label label--directive">directive:use-model-claude-sonnet-5-cost-high</span></td><td><code>claude-sonnet-5</code></td><td><span class="cost cost--high">high</span></td></tr>
+                <tr><td><span class="label label--directive">directive:use-model-claude-sonnet-4.6-cost-high</span></td><td><code>claude-sonnet-4.6</code></td><td><span class="cost cost--high">high</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul>
+            <li>Use one model label per issue. If several are set, the first in alphabetical order is used.</li>
+            <li>A model label that isn't in the list is ignored, with a warning in the run.</li>
+            <li>The <a href="#setup-workflow">setup workflow</a> creates one label per line of the list and deletes model labels it no longer lists. The <a href="#updating">update workflow</a> replaces the list with the template's.</li>
+          </ul>
+        </section>
+
         <!-- Coder -->
         <section id="coder">
           <h2>Coder</h2>
           <p class="role-tag role-tag--coder">Triggered by <code>status:todo</code> on an issue, or <code>agent:coder</code> on a pull request</p>
           <ul>
-            <li>When the issue's turn comes in the <a href="#queue">queue</a>, it becomes <code>status:in-progress</code> and the coder runs the <a href="#requirements-check">requirements check</a>.</li>
+            <li>When the issue's turn comes in the <a href="#queue">queue</a>, it becomes <code>status:in-progress</code> and the coder runs the <a href="#requirements-check">requirements check</a>, unless the issue has <code>directive:skip-requirements-check</code>.</li>
             <li>Implements the issue, updates the affected documentation, and opens a pull request from <code>squadron/issue-&lt;number&gt;</code> whose body contains <code>Closes #&lt;number&gt;</code>.</li>
             <li>Queues the review by applying <code>agent:reviewer</code> to the pull request.</li>
             <li>On <code>agent:coder</code>, fixes the same pull request using the latest review or tester comment, pushes, and re-applies <code>agent:reviewer</code>. It only follows comments posted with <code>SQUADRON_GITHUB_TOKEN</code>, so other people's comments can't steer it.</li>
@@ -377,10 +422,12 @@
                 <tr><td><span class="label label--agent">agent:coder</span></td><td>Pull request</td><td>Queues the coder to fix the pull request, or to merge it after a passing test run.</td></tr>
                 <tr><td><span class="label label--agent">agent:reviewer</span></td><td>Pull request</td><td>Queues a review.</td></tr>
                 <tr><td><span class="label label--agent">agent:tester</span></td><td>Pull request</td><td>Queues testing.</td></tr>
+                <tr><td><span class="label label--directive">directive:skip-requirements-check</span></td><td>Issue</td><td>The coder skips the requirements check.</td></tr>
+                <tr><td><span class="label label--directive">directive:use-model-…</span></td><td>Issue</td><td>All agents use that model for the issue. See <a href="#directives">issue directives</a>.</td></tr>
               </tbody>
             </table>
           </div>
-          <p>An issue has one <code>status:*</code> label at a time; a pull request has at most one <code>agent:*</code> label. Unrelated labels are preserved.</p>
+          <p>An issue has one <code>status:*</code> label at a time; a pull request has at most one <code>agent:*</code> label. <code>directive:*</code> labels are yours to add or remove, and all share one color. Unrelated labels are preserved.</p>
         </section>
 
         <!-- Lifecycle -->
@@ -418,11 +465,13 @@
           </ul>
           <p>
             The pipeline frees up when the pull request merges, when a Squadron pull request is closed without merging,
-            when the issue is closed, or when the requirements check sends it back. The oldest queued issue then
-            starts automatically. Labeling several issues at once is fine: each claim processes the whole queue.
+            when the issue is closed, when the requirements check sends it back, or when the coder fails before opening
+            a pull request. A <code>next-issue</code> job runs at the end of every Squadron run and whenever an issue
+            closes, so the oldest queued issue starts as soon as the pipeline is free, whatever freed it. Labeling
+            several issues at once is fine: each claim processes the whole queue.
           </p>
           <div class="callout callout--warn">
-            <p>A failed issue keeps the pipeline busy on purpose: it needs a person, and other issues would conflict with its pull request. Retry it with the label named in the failure comment, or free the queue by closing the issue or its pull request.</p>
+            <p>Once its pull request exists, a failed issue keeps the pipeline busy on purpose: it needs a person, and other issues would conflict with its pull request. Retry it with the label named in the failure comment, or free the queue by closing the pull request. If the coder fails before opening a pull request, nothing can conflict yet, so the issue leaves the queue instead: add <code>status:todo</code> to retry it.</p>
           </div>
         </section>
 
@@ -436,7 +485,7 @@
             <table>
               <thead><tr><th>To retry</th><th>Re-apply</th></tr></thead>
               <tbody>
-                <tr><td>The coder, from the issue</td><td><code>status:todo</code> on the issue</td></tr>
+                <tr><td>The coder, before a pull request exists</td><td><code>status:todo</code> on the issue</td></tr>
                 <tr><td>A fix on the pull request</td><td><code>agent:coder</code> on the pull request</td></tr>
                 <tr><td>The review</td><td><code>agent:reviewer</code> on the pull request</td></tr>
                 <tr><td>Testing</td><td><code>agent:tester</code> on the pull request</td></tr>
@@ -451,8 +500,10 @@
             remaining findings yourself, or update the issue, then re-apply <code>agent:reviewer</code>.
           </p>
           <p>
-            While an issue is failed, the <a href="#queue">queue</a> waits. Closing a Squadron pull request without
-            merging removes its issue's status; add <code>status:todo</code> to queue it again.
+            If the coder fails before opening a pull request, the issue loses its status and the next queued issue
+            starts. Once a pull request exists, a failed issue holds the <a href="#queue">queue</a> until its pull
+            request merges or closes. Closing a Squadron pull request without merging removes its issue's status;
+            add <code>status:todo</code> to queue it again.
           </p>
           <p>Only pull requests from <code>squadron/issue-&lt;number&gt;</code> branches in the same repository are automated. Pull requests you open yourself are left alone.</p>
         </section>
@@ -482,7 +533,8 @@
           </p>
           <ol>
             <li>The workflow first compares its own file with the template's. If it changed, it commits the new version as <code>chore: update Squadron update workflow</code>, relaunches itself and stops; the relaunched run does the update.</li>
-            <li>Otherwise it copies the files listed in the workflow (the Squadron issue forms, scripts, skills and workflows under <code>.github/</code>, plus <code>SQUADRON.md</code>, <code>SQUADRON-CHANGELOG.md</code> and <code>USAGE.md</code>), then commits and pushes them as <code>chore: update Squadron</code>. If nothing changed, it does nothing.</li>
+            <li>Otherwise it copies the files listed in the workflow (the Squadron issue forms, scripts, skills and workflows under <code>.github/</code>, plus <code>SQUADRON.md</code>, <code>SQUADRON-CHANGELOG.md</code> and <code>USAGE.md</code>), then commits and pushes them as <code>chore: update Squadron</code>. If nothing changed, it commits nothing.</li>
+            <li>It then starts the <a href="#setup-workflow">setup workflow</a>, even when nothing changed, so the labels follow the updated template, including removing model labels the template no longer lists.</li>
           </ol>
           <div class="callout callout--warn">
             <p>The listed files are overwritten, so customizations in them will be lost. Your own files under <code>.github/</code> and <code>README.md</code> are left unchanged, and files removed from the template aren't deleted from your repository.</p>
@@ -500,6 +552,7 @@
             <li>Helper scripts always run from a checkout of the default branch, never from the pull request under review.</li>
             <li>Agent changes under <code>.github/workflows</code> are discarded before publishing.</li>
             <li>The coder only follows Squadron comments posted with <code>SQUADRON_GITHUB_TOKEN</code>, and merges only on a <code>Squadron tester passed</code> comment from that token, and only the commit it names. Other users' comments or later pushes can't trigger a merge of untested code.</li>
+            <li>Agents only switch to models listed in <code>.github/squadron-models.txt</code>; other model labels are ignored.</li>
             <li>The review is model-generated: treat it as automation feedback, not a substitute for required human review.</li>
             <li>An issue becomes <code>status:done</code> only after its pull request actually merges.</li>
           </ul>
@@ -517,14 +570,16 @@
             <table>
               <thead><tr><th>File</th><th>Role</th></tr></thead>
               <tbody>
-                <tr><td><code>.github/workflows/coder.yml</code></td><td>The only event listener (workflow <em>Squadron</em>). Routes each issue or pull request event to one job: <code>claim</code> then <code>coder</code>, <code>coder-fix</code> (fixes, or merges after a pass), <code>reviewer</code>, <code>tester</code>, <code>mark-done</code>, <code>release</code> (Squadron pull request closed without merging) or <code>issue-closed</code>. Claims share one concurrency group, so two issues can never both take an empty pipeline.</td></tr>
+                <tr><td><code>.github/workflows/coder.yml</code></td><td>The only event listener (workflow <em>Squadron</em>). Routes each issue or pull request event to one job: <code>claim</code> then <code>coder</code>, <code>coder-fix</code> (fixes, or merges after a pass), <code>reviewer</code>, <code>tester</code>, <code>mark-done</code> or <code>release</code> (Squadron pull request closed without merging). The <code>next-issue</code> job runs after every one of them and when an issue closes. Claims share one concurrency group, so two issues can never both take an empty pipeline.</td></tr>
                 <tr><td><code>.github/workflows/reviewer.yml</code></td><td>Reusable reviewer workflow, called by <code>coder.yml</code>.</td></tr>
                 <tr><td><code>.github/workflows/tester.yml</code></td><td>Reusable tester workflow, called by <code>coder.yml</code>.</td></tr>
-                <tr><td><code>.github/workflows/setup.yml</code></td><td>Manual, one-time: labels and secret checks.</td></tr>
-                <tr><td><code>.github/workflows/update.yml</code></td><td>Manual: updates itself, then syncs the listed template files.</td></tr>
+                <tr><td><code>.github/workflows/setup.yml</code></td><td>Manual and safe to re-run: creates or updates labels, deletes unlisted model labels, checks the secrets. Also started by the update workflow.</td></tr>
+                <tr><td><code>.github/workflows/update.yml</code></td><td>Manual: updates itself, syncs the listed template files, then starts the setup.</td></tr>
                 <tr><td><code>.github/scripts/set-issue-status-label.sh</code></td><td>Replaces the issue's <code>status:*</code> label, or removes it.</td></tr>
                 <tr><td><code>.github/scripts/claim-next-issue.sh</code></td><td>The claim: starts at most one issue and comments on the other queued ones.</td></tr>
                 <tr><td><code>.github/scripts/start-next-issue.sh</code></td><td>When the pipeline is free, re-applies <code>status:todo</code> to the oldest queued issue to start it.</td></tr>
+                <tr><td><code>.github/scripts/read-issue-directives.sh</code></td><td>Reads the issue's <code>directive:*</code> labels for every job that runs Copilot.</td></tr>
+                <tr><td><code>.github/squadron-models.txt</code></td><td>The models agents can switch to, with their cost tier. The single source for the model labels.</td></tr>
                 <tr><td><code>.github/scripts/set-agent-label.sh</code></td><td>Clears <code>agent:*</code> labels and optionally adds one, which starts the next agent.</td></tr>
                 <tr><td><code>.github/scripts/extract-requirements-report.py</code></td><td>Extracts the requirements verdict and renders the questions comment.</td></tr>
                 <tr><td><code>.github/scripts/extract-review-report.py</code></td><td>Extracts the review verdict and renders the review comment.</td></tr>
@@ -589,6 +644,10 @@
           <details class="faq">
             <summary>I labeled an issue and nothing happened.</summary>
             <p>Another issue is probably in progress or testing: yours got a queue comment and will start on its own. If that other issue has failed, retry it or close it to free the queue.</p>
+          </details>
+          <details class="faq">
+            <summary>Can I use a different model?</summary>
+            <p>Yes, per issue: add one of the <code>directive:use-model-…</code> labels before the issue starts, and all three agents use that model for it. See <a href="#directives">issue directives</a>.</p>
           </details>
           <details class="faq">
             <summary>My project doesn't use npm.</summary>
