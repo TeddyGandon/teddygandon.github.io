@@ -7,7 +7,7 @@ export const linkedinPosts = [
     "url": "https://www.linkedin.com/posts/teddygandon_believe-engineering-musictech-activity-7529548147992223744-hc2L",
     "image": "https://media.licdn.com/dms/image/v2/D5622AQF71YUKAeIszQ/feedshare-shrink_800/B56aH5T6ROKUAs-/0/1795184108875?e=2147483647&v=beta&t=yw4h9qjPtKIsWnJF3bNcIKjkb46loOmeullqctc1j3s",
     "reactions": {
-      "total": 42,
+      "total": 44,
       "types": [
         "LIKE",
         "EMPATHY",
